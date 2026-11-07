@@ -1,5 +1,6 @@
 import { Blocks, CalendarClock } from "lucide-react";
 import { TID_AUTOMATIONS_OPEN } from "@zcode/shared/test-ids";
+import { ZBILL_PRODUCT } from "@zcode/shared/env";
 import type { ProjectSidebarProps } from "@/project-sidebar/contract.js";
 import { Button } from "@/components/ui/button.js";
 import { NewTaskButtonGroup } from "@/NewTaskButtonGroup.js";
@@ -33,7 +34,8 @@ export function ProjectSidebarNavigation({
       {deviceNavigation ? <WebRemoteControlDeviceHeader navigation={deviceNavigation} /> : null}
       <NewTaskButtonGroup onCreateTask={onCreate} />
       {/* 远控主视图会把自动化和插件市场重置为聊天；入口必须一同隐藏，避免点击无效。 */}
-      {!props.isWebRemoteControl && props.onOpenAutomations ? (
+      {/* ZBill 产品模式不展示通用 coding-agent 入口（自动化、插件市场）。 */}
+      {!ZBILL_PRODUCT && !props.isWebRemoteControl && props.onOpenAutomations ? (
         <Button
           variant="ghost"
           size="lg"
@@ -47,7 +49,7 @@ export function ProjectSidebarNavigation({
           {intl.formatMessage({ id: "workspace.openScheduledSettings" })}
         </Button>
       ) : null}
-      {!props.isWebRemoteControl ? (
+      {!ZBILL_PRODUCT && !props.isWebRemoteControl ? (
         <Button
           variant="ghost"
           size="lg"
