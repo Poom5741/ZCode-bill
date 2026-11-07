@@ -6102,3 +6102,18 @@ CLI 定向回归已通过：V4 两种投递模式的并发 workspace 隔离、�
 桌面/手机交互沿用 HF01–02 和 SLR 综合候选。本轮实跑 covered：`desktop-e2e-20261102054133648-p182647-caa0869ba42a5410`，Linux Electron 与 390×844 触屏 Chromium，2 spec / 3 test 全通过，无 skipped 或自动重试。没有新增 UI 行为，既有 case 断言保持不变；不自动晋升 formal/CI。
 
 已就绪实例 identity 预检补全回归（2026-11-02）：CLI 协议验证仅替换/删除 identity 的 ensureReady/restart 均拒绝，原实例不关闭且 generation 不变；3 文件 183 项通过。正常 HF01–02 / SLR 交互 covered：`desktop-e2e-20261102060952670-p190384-9867bbf844a8e3cd`，Linux Electron 与触屏 Chromium，2 spec / 3 test 全通过，无自动重试。矛盾 identity 参数由协议回归覆盖，不宣称原生 SSH/WSL E2E。
+
+## RDUX15 场景映射（2026-11-07，rdux15-project-device-separation maker T1）
+
+Super-SpecKit feature .super-speckit/features/rdux15-project-device-separation/（spec/plan/tasks/grill 见该目录）。
+权威场景清单：[ticket 15 接受场景](../issues/remote-connection-ux/15-project-device-selection-and-connection-management.md)
+RDUX15-01..25 + [#21](../issues/remote-connection-ux/21-chat-settings-round-trip.md) RDUX21-01..24。
+
+本轮完成：25 条场景与 REQ-01..20、里程碑切片 M1-M6 的映射（见 feature 目录 plan.md/tasks.md/matrix.md）；
+测试切入点按 ticket Testing Decisions：三真实入口 Desktop E2E 为主，时序类补 UI 集成，真实 SSH/WSL/Docker 链
+按 .super-speckit/verification/verification-harness.md 能力矩阵执行（本机 WSL2 Ubuntu / Docker 29.9.2 可真实跑，
+SSH 测试主机未配置 → 相关场景在提供前如实记 not-verified）。
+
+未完成（如实记录）：RDUX15-01/02/03/06/08 的红测试骨架尚未落文件——需先读当前项目创建前置屏组件与
+选择器（investigation-notes.md 开放问题 1），按 conversation-session-ssh-remote-three-screen.test.ts
+的既有组织方式编写；不伪造用例文件。下一 maker 会话第一件事即补骨架并跑红。
