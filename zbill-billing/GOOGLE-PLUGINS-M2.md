@@ -13,11 +13,19 @@ current candidate stays contained (Super-SpecKit: changed candidates invalidate 
 | gcalendar | Calendar API v3 (OAuth read-only) | Match charging sessions to trips/meetings (business-purpose proof) |
 | gsheets | Sheets API v4 (OAuth read-only) | Employee/vehicle registry → per-person allowance limits |
 
-## Auth strategy (customer-facing, differs from our dev shortcut)
+## Auth strategy (DECIDED 2026-11-07, user feedback)
 
-- Product default: Google OAuth per org account (customers won't share app passwords).
-- Our own dev machines may keep the IMAP app-password path (user preference).
-- OAuth client per deployment; tokens stored client-side in app data dir, never in repo.
+**User verdict: nobody will do the "create your own Google Cloud project" dance — it's too hard.**
+Product rule: the customer never opens Google Cloud Console.
+
+- **ZBill ships its own OAuth client**: we create ONE Google Cloud project + consent screen
+  once (vendor-side); customers only click "Sign in with Google" and pick their account.
+- OAuth client per deployment is NOT required; vendor-hosted client covers all customers.
+- Gmail scope is "restricted" at Google → plan for OAuth verification lead time (or start
+  with unverified-test-mode limited to pilot customers while in review).
+- **App password stays as fallback** ("advanced connection" option) — power users who
+  prefer it, and as a working path if Google verification is still pending.
+- Tokens stored client-side in app data dir, never in the repo.
 
 ## Entry point in M2
 
