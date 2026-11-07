@@ -98,6 +98,10 @@
   },
   "globals": {},
   "ignorePatterns": [
+    // ZBill: vendored Super-SpecKit kit + local billing tooling (not product code)
+    ".super-speckit",
+    ".specify",
+    "zbill-billing",
     "dist-release",
     "packages/ui/src/components/ui",
     "packages/ui/src/components/ai-elements",
