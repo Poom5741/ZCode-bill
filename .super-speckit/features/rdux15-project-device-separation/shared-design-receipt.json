@@ -1,0 +1,20 @@
+{
+  "investigation_digest": "0590b119c3702cdac07ea815e8f48294d3b227155e3d55b56ec3d6f2842d7c6f",
+  "observed": "远程连接完成分派 seam 已存在（remote-connection-flow contract）；三入口分散、创建表单带本地/远程前置屏、草稿不跨设置往返（investigation-notes.md）。",
+  "proposed": "直接创建表单+设备下拉（仅已添加设备）；设置分类添加窗口统一三入口；完成意图按 origin 分派复用现有 seam；单一草稿 owner；迟到结果惰性。",
+  "invariants": [
+    "单一草稿 owner，跨往返保留",
+    "选择设备不发起连接",
+    "完成意图按 origin 分派，不统一落入目录屏",
+    "无第二套连接向导/管理 API"
+  ],
+  "verification_plan": "T1 先红：三入口 E2E/集成骨架（RDUX15 场景）；实现后同 seam 重跑；独立 QA clone + journey UX（真实运行应用）。",
+  "view": {
+    "renderer": "mermaid",
+    "source": ".super-speckit/features/rdux15-project-device-separation/design-view.mmd",
+    "source_digest": "45e25bf902e1f626a69b9fccf8c88e3ca421ad452c692b80d81a8e9cbf1cc17f",
+    "artifact": ".super-speckit/features/rdux15-project-device-separation/design-view.md",
+    "artifact_digest": "250fdb2aeba4fa81a84401279bc00970f99e4469972d4efab6cd8577f4834342",
+    "limitation": "Archify 未运行；静态 Mermaid fallback，图核验不证明产品行为。"
+  }
+}

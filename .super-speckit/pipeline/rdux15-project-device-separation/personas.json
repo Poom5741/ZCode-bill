@@ -1,0 +1,33 @@
+{
+  "route": "normal",
+  "maker": "ade-lane-a5862aba",
+  "primary_persona": "senior-frontend-engineer",
+  "rationale": "Desktop UI restructuring in TypeScript/React with WebdriverIO E2E at real entries; frontend persona drives component/draft ownership design, TypeScript expert guards protocol/store typing at the completion-intent seam, E2E expert shapes the three-entry journey evidence.",
+  "intent": {
+    ".super-speckit/features/rdux15-project-device-separation/matrix.md": "9f87173c158beb27b9e598d9d0d1746f9bf425aa4006d66a465a5312dac51383",
+    ".super-speckit/features/rdux15-project-device-separation/spec.md": "e1ff59dc4ba61ca669c7e948a4823e8d47438c6052e6b5a8b38ec6b79deaaac4",
+    ".super-speckit/features/rdux15-project-device-separation/plan.md": "e9a0877862eb89f13572bcbb70649cd9d9bff777d036cf126ded5e14ed7974e0",
+    ".specify/memory/constitution.md": "82ca172ceaad2b395dc5c5ab1b63afb1df9fef93d3e36a56d38eed608a6c4f54"
+  },
+  "source_revision": "b41c7a6a40c4960d687779227137b25be585ef55",
+  "specialists": [
+    {
+      "id": "senior-frontend-engineer",
+      "category": "personas",
+      "source": "skills/personas/senior-frontend-engineer/SKILL.md",
+      "sha256": "ab5fa03a5569f6cbcd6c0c11473aee09fa7d1613521ca0f1152d25e74f1ad3e0"
+    },
+    {
+      "id": "typescript-expert",
+      "category": "stacks",
+      "source": "skills/stacks/typescript-expert/SKILL.md",
+      "sha256": "e5cc0cba7fcaf7b3b454e79faef1ac1427a18b075b423ba21d3bd1e3992b0e15"
+    },
+    {
+      "id": "playwright-expert",
+      "category": "stacks",
+      "source": "skills/stacks/playwright-expert/SKILL.md",
+      "sha256": "09906af8102713348da58254876be66a746c071f6916f37e983833cff63dc52e"
+    }
+  ]
+}

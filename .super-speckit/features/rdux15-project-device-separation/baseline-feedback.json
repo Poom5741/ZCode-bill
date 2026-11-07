@@ -1,0 +1,6 @@
+{
+  "loop": "E2E 先红（ticket Testing Decisions：先映射场景进 case 目录，补证明旧行为不满足新合同的交互测试，再改代码）；公共 seam = 三个真实入口（侧栏项目加号/聊天项目菜单/设置远程设备页）。",
+  "fail_before": "旧行为下 RDUX15-01（无前置屏直开表单）等场景断言失败。",
+  "pass_after": "实现后同断言经真实入口通过；独立 QA clone 重跑。",
+  "note": "反馈环依据 ticket 测试决策与 config feedback_loop_required。"
+}

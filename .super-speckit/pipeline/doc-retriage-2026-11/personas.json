@@ -1,0 +1,25 @@
+{
+  "route": "micro",
+  "maker": "ade-lane-a5862aba",
+  "primary_persona": "senior-technical-writer",
+  "rationale": "Evidence-based documentation verdicts: technical writer drives accurate status prose; code-reviewer specialist lens cross-checks claims against current source.",
+  "intent": {
+    ".super-speckit/features/doc-retriage-2026-11/matrix.md": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143",
+    ".super-speckit/features/doc-retriage-2026-11/playbook.md": "8ef824d1751f84e090547539cfb664ac7feb7e685c1f9a56db55896b251d8452"
+  },
+  "source_revision": "b41c7a6a40c4960d687779227137b25be585ef55",
+  "specialists": [
+    {
+      "id": "senior-technical-writer",
+      "category": "personas",
+      "source": "skills/personas/senior-technical-writer/SKILL.md",
+      "sha256": "f8c558821ea2156bdb23dff3b34da674451587b5f6382229fbce4d271fd77852"
+    },
+    {
+      "id": "senior-code-reviewer",
+      "category": "capabilities",
+      "source": "skills/capabilities/senior-code-reviewer/SKILL.md",
+      "sha256": "6e3616ef6795d22aa4539dab13a9ca4c5c0909bb35dc8a718d6daeb213217814"
+    }
+  ]
+}

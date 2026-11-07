@@ -1,6 +1,6 @@
 {
   "id": "rdux15-project-device-separation",
-  "state": "planned",
+  "state": "maker_running",
   "candidate_sha": null,
   "maker": "ade-lane-a5862aba",
   "checker": "independent-qa-clone",
@@ -17,18 +17,19 @@
     "decision": ".super-speckit\\purpose\\rdux15-project-device-separation\\decision.json"
   },
   "grill": {
-    "status": "not_started",
-    "artifact": null
+    "status": "complete",
+    "artifact": ".super-speckit/features/rdux15-project-device-separation/grill.json"
   },
   "route": {
     "kind": "normal",
     "rationale": "Milestone-scale interaction redesign: 52 user stories, 20 requirements across five UI modules, 25 E2E scenarios requiring real SSH/WSL/Docker environments; native Spec Kit planning per unified pipeline."
   },
   "atlas": {
-    "path": null
+    "path": ".super-speckit\\atlas\\README.md",
+    "graph": ".super-speckit\\atlas\\system-map.mmd"
   },
   "change_story": {
-    "path": null
+    "path": ".super-speckit\\atlas\\changes\\rdux15-project-device-separation\\change-story.md"
   },
   "handoff": {
     "path": null
@@ -37,7 +38,7 @@
     "path": null
   },
   "verification_harness": {
-    "path": null
+    "path": ".super-speckit/verification/verification-harness.md"
   },
   "static_review": {
     "artifact": null
@@ -50,11 +51,35 @@
   "pipeline_contract": "unified-v1",
   "delivery_contract": "knowledge-v2",
   "schema_version": 2,
-  "revision": 6,
+  "revision": 16,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": ".super-speckit/features/rdux15-project-device-separation/investigation-receipt.json",
       "digest": "0590b119c3702cdac07ea815e8f48294d3b227155e3d55b56ec3d6f2842d7c6f"
+    },
+    "personas": {
+      "artifact": ".super-speckit/pipeline/rdux15-project-device-separation/personas.json",
+      "digest": "8bce521236cf280c51eae12c653d777052d5dc1a0ef25ac83762f0e5e6f7b034"
+    },
+    "shared-design": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/shared-design-receipt.json",
+      "digest": "5d50c267101f89f426f1f036c72e573a07a839f3f3ff6e53205f1ad610d86815"
+    },
+    "baseline-feedback": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/baseline-feedback.json",
+      "digest": "295743850ab2ff137cf31507e1dedf7bd6e0d269baf12b10a976d0048523d72e"
+    },
+    "phase-contract": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/plan.md",
+      "digest": "e9a0877862eb89f13572bcbb70649cd9d9bff777d036cf126ded5e14ed7974e0"
+    },
+    "research": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/investigation-notes.md",
+      "digest": "206163a29cc238c892a8142456aa160e1b696be5814ad7d4ad063194fe4b1c77"
+    },
+    "architecture": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/architecture.md",
+      "digest": "e14d386ba15340c064af844b2593f5bfe1d5431452b7d03f8f1e8d1e4a0a53e9"
     }
   }
 }

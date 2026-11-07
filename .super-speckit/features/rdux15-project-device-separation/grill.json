@@ -1,0 +1,139 @@
+{
+  "spec": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+  "resolved_decisions": [
+    {
+      "id": "Q1",
+      "question": "入口与完成点如何划分",
+      "resolution": "项目入口负责设备/目录/项目选择；所有新增连接入口转设置；设备添加有独立完成点",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "WSL/Docker 是否同期实施",
+      "resolution": "三者一起实施，保留各自能力与平台限制",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "新建项目默认设备",
+      "resolution": "当前任务设备；无任务用本地；离线不自动替换",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "设备下拉数据源",
+      "resolution": "只列已添加设备含离线；发现候选留在添加窗口",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "添加窗口组织",
+      "resolution": "按类型分组默认 SSH，各类保留发现+手动",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "选择已有设备是否连接",
+      "resolution": "不连接；离线由连接并选择文件夹显式发起",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "切设备时目录如何处理",
+      "resolution": "有目录须确认；确认清目录留名称；取消全保留",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "添加主操作",
+      "resolution": "添加并连接；无仅保存模式",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "已有项目入口",
+      "resolution": "同弹窗列表，返回保留新建草稿",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "项目来源添加设备完成行为",
+      "resolution": "前台成功返回草稿并选新设备；已有目录须确认；取消恢复",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "聊天来源连接后",
+      "resolution": "每次必选远程文件夹并按 #21 进入项目；取消恢复原目标",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/21-chat-settings-round-trip.md",
+          "digest": "7500befa77b26b50060fc3eba3512ca9c53c62d42c9cd10f351726f533b1ad1c"
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "失败/取消/后台/关闭语义",
+      "resolution": "失败保留可重试；取消只撤本次；后台不抢导航；成功后关闭不断开",
+      "evidence": [
+        {
+          "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+          "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+        }
+      ]
+    }
+  ],
+  "open_questions": [],
+  "notes": "Q1-Q12 与 2026-10-14 聊天入口修订均为用户已确认决策（票据 provenance 行）；本 grill 记录其作为已解决对抗性审查，不重新讨论。"
+}
