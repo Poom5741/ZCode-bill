@@ -87,7 +87,7 @@ continuation:
 design:
   required_when_paths: ["**/*.tsx", "**/*.jsx", "**/*.vue", "**/*.svelte", "**/*.html", "**/*.css"]
   output_root: .super-speckit/design
-  design_system_sources: [] # local DESIGN.md, Figma export, or token file; never invent a brand system
+  design_system_sources: ["DESIGN.md"] # 本仓库设计规范（桌面/手机主题、语义色、组件尺度）
   optional_adapters: [html, v0, stitch, claude-design]
   require_decision_before_implementation: true
   accessibility_baseline: "WCAG 2.2 AA"
@@ -96,16 +96,16 @@ risk:
   critical_paths: ["auth/**", "payments/**", "migrations/**", "data-deletion/**"]
   high_requires: ["independent-runtime-qa", "security-review"]
 gates:
-  format: ""
-  lint: ""
-  unit: ""
-  integration: ""
-  build: ""
-  architecture: ""
-  types: ""
-  app_start: ""
-  app_url: "http://127.0.0.1:3000"
-  playwright: "" # 占位默认值已清空：本项目 E2E 使用 WebdriverIO（packages/desktop wdio），未配置 Playwright 套件；待真实引入时再填实际命令
+  format: "pnpm fmt:check"
+  lint: "pnpm lint"
+  unit: "pnpm test:engineering" # 根工程 Vitest 入口（AGENTS.md）；受影响场景用 pnpm test:engineering:affected
+  integration: "" # 无独立根命令；集成层为 packages/desktop test:e2e（见 playwright 说明）
+  build: "pnpm -r build"
+  architecture: "pnpm architecture:check --changed"
+  types: "pnpm typecheck"
+  app_start: "pnpm dev:desktop:test" # ZCODE_ENV=test 桌面开发态；桌面 E2E 由 wdio 自行启动应用实例
+  app_url: "" # 桌面 QA 不依赖 URL；Web 相关验证按需用 pnpm dev:web 并记录实际端口
+  playwright: "" # 占位默认值已清空：本项目 E2E 使用 WebdriverIO（packages/desktop wdio），真实入口为 pnpm test:e2e；待真实引入 Playwright 时再填
   api_assertions: ""
   db_assertions: ""
   ocr_review: "" # adapter command; writes an OCR findings artifact, never a pass verdict
