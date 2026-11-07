@@ -1,0 +1,9 @@
+{
+  "feature": "doc-retriage-2026-11",
+  "status": "confirmed",
+  "map": "purpose-map.md",
+  "visual": "purpose-map.html",
+  "confirmed_by": "repo user via ADE chat interactive option selection",
+  "confirmed_at": "2026-11-07",
+  "confirmation": "User selected: 'Re-triage in-progress docs (Recommended)' from evidence-backed candidate list (11 in-progress docs found in docs/issues); full question and options preserved in ADE chat transcript cc7b7010-71e1-4f93-9ae0-e51a808da100."
+}

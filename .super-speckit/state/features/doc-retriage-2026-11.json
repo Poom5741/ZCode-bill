@@ -1,0 +1,84 @@
+{
+  "id": "doc-retriage-2026-11",
+  "state": "maker_running",
+  "candidate_sha": null,
+  "maker": "ade-lane-a5862aba",
+  "checker": "independent-qa-clone",
+  "matrix": ".super-speckit/features/doc-retriage-2026-11/matrix.md",
+  "ui_change": false,
+  "journey_ux": {
+    "status": "not_required",
+    "report": null,
+    "candidate_sha": null
+  },
+  "purpose": {
+    "status": "confirmed",
+    "map": ".super-speckit\\purpose\\doc-retriage-2026-11\\purpose-map.md",
+    "decision": ".super-speckit\\purpose\\doc-retriage-2026-11\\decision.json"
+  },
+  "grill": {
+    "status": "not_started",
+    "artifact": null
+  },
+  "route": {
+    "kind": "micro",
+    "rationale": "Bounded mechanical verification of 11 documents against current code with established boundaries (verdict vocabulary, evidence citation rule, no code changes); no consequential product, data or security decisions; compact playbook + matrix is sufficient per playbook-delivery.md."
+  },
+  "atlas": {
+    "path": null
+  },
+  "change_story": {
+    "path": null
+  },
+  "handoff": {
+    "path": null
+  },
+  "decision_trail": {
+    "path": null
+  },
+  "verification_harness": {
+    "path": null
+  },
+  "static_review": {
+    "artifact": null
+  },
+  "corrective_enforcement": {
+    "artifact": null
+  },
+  "runs": [],
+  "bugs": [],
+  "delivery_contract": "knowledge-v2",
+  "pipeline_contract": "unified-v1",
+  "schema_version": 2,
+  "revision": 22,
+  "prerequisite_receipts": {
+    "investigation": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/investigation-receipt.json",
+      "digest": "1cadc921d2557478641ffee12bb94f4a6a320efa47f534bbe0382548cbd7a09d"
+    },
+    "shared-design": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/shared-design-receipt.json",
+      "digest": "daf936ba439f8cc808e5db195c66dc7e7a9ccc401f00ed067929b7ed0328d0ce"
+    },
+    "baseline-feedback": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/baseline-feedback.json",
+      "digest": "a38a1a10209c1d93b92e4e4739a4f0cf186926701c308933b0003b9db485df11"
+    },
+    "phase-contract": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/playbook.md",
+      "digest": "8ef824d1751f84e090547539cfb664ac7feb7e685c1f9a56db55896b251d8452"
+    },
+    "research": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/research.md",
+      "digest": "4ad7b8c8c28e276322c1845c03f122b8df99d02a0680055b169572994eb76d0a"
+    },
+    "architecture": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/architecture.md",
+      "digest": "00dc656500e1f7903781f686fc8112db80c2b712b6617290f615e5d0f43fc524"
+    },
+    "personas": {
+      "artifact": ".super-speckit/pipeline/doc-retriage-2026-11/personas.json",
+      "digest": "20cfb0b5f1a634780c69858842fba5235047c1190bb685dddb8c89dc1c8e92ad"
+    }
+  }
+}

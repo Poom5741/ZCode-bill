@@ -1,0 +1,6 @@
+{
+  "loop": "Status-marker grep over docs/issues is the public seam for this docs-only change: before the work, `Select-String -Pattern 'in-progress'` over the 11 files returns 10 explicit markers (03 has none in head, verified in scan evidence); after the work, each triaged file carries an updated verdict marker consistent with docs/issues/RETRIAGE-2026-11.md.",
+  "fail_before": "A doc cannot be flipped to done while its claims lack cited code evidence; running the verdict check on an untriaged doc fails (no evidence row exists).",
+  "pass_after": "A flipped doc shows a verdict marker whose cited evidence files exist and whose claims were re-read against current source during this feature.",
+  "note": "Docs-only delivery: no app seam exists; the marker grep plus evidence-citation check is the smallest loop that distinguishes correct from incorrect behavior, per orchestration.md section 2."
+}

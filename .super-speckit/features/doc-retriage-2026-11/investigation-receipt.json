@@ -1,0 +1,100 @@
+{
+  "base_sha": "a9fe401eede6e6e5e01be9048679c206fe6f02d9",
+  "playbook": "investigation",
+  "playbook_digest": "dc66bcf6af3a074fc7f67aa5e12b93ef571a4fb4d8e17f2f1af5ae5359f42e46",
+  "intent": "Determine, per docs/issues document still marked in-progress, whether the current v3.17.2 code already satisfies its claims; produce code-cited verdicts (done/still-open/obsolete) and consolidate them in docs/issues/RETRIAGE-2026-11.md.",
+  "flow": "Issue docs describe remote-connection UX, remote performance/startup triage, TTFT telemetry and the web-remote-control relay-v2 chain; their claims are verified against packages/server/src/remote, packages/desktop host/main, packages/ui and packages/shared protocol sources at HEAD a9fe401e.",
+  "scope_rationale": "Read-only investigation followed by narrowly scoped status-marker writes; 11 docs bounded by the initial scan; micro route per playbook-delivery.md (mechanical, established boundaries, no product/data/security decisions).",
+  "unknowns": [
+    "Whether September relay-v2 items were completed by the v3.17.2 upstream sync rather than by local work",
+    "Whether remote-performance/startup triage docs describe problems that were fixed upstream since 3.16"
+  ],
+  "unresolved_blockers": [],
+  "conventions": [
+    {
+      "id": "C1",
+      "rule": "Investigate with source/log/runtime evidence before concluding; separate confirmed causes from hypotheses",
+      "scope": "All triage verdicts",
+      "source": "AGENTS.md",
+      "plan_application": "Each verdict cites concrete files/lines; unverified claims stay explicitly labeled"
+    },
+    {
+      "id": "C2",
+      "rule": "Execute necessary verification; state honestly when verification was not run or the environment limited it",
+      "scope": "Status flips and the final report",
+      "source": "AGENTS.md",
+      "plan_application": "A doc status flips only when code evidence was actually executed/read; limitations are recorded in the report"
+    },
+    {
+      "id": "C3",
+      "rule": "Preserve unrelated local changes; touch only what the task needs",
+      "scope": "Repository writes",
+      "source": "AGENTS.md",
+      "plan_application": "Only the 11 doc status lines plus the new RETRIAGE report are written; no other files modified"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/matrix.md",
+      "digest": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143"
+    },
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/playbook.md",
+      "digest": "8ef824d1751f84e090547539cfb664ac7feb7e685c1f9a56db55896b251d8452"
+    },
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/scan-2026-11-07.md",
+      "digest": "5b9ac25afc0e48887fa385fb438c10a36f40e8f894d0aa2653dcdfc76dca6145"
+    },
+    {
+      "path": "AGENTS.md",
+      "digest": "7996d42efbe9632e11450478465bec248264787ce5759530e5b0a8b6ccb71890"
+    }
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "source_step": "1",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "docs/issues/RETRIAGE-2026-11.md",
+          "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "source_step": "2",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": ".super-speckit/features/doc-retriage-2026-11/playbook.md",
+          "digest": "73fb25ecf7d4c3dcaf0ab7df30933cd7c07a360431f4ee87b6312b94ae3e0ae0"
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "source_step": "3",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "docs/issues/RETRIAGE-2026-11.md",
+          "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "source_step": "4",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "docs/issues/RETRIAGE-2026-11.md",
+          "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "investigation_digest": "1cadc921d2557478641ffee12bb94f4a6a320efa47f534bbe0382548cbd7a09d",
+  "observed": "docs/issues holds 11 documents still marked in-progress (scan-2026-11-07.md); repo HEAD is the v3.17.2 upstream sync (a9fe401e); Super-SpecKit state had no prior features; typecheck cannot run because node_modules is absent (install running in background); doc status lines carry notes dated 2026-09-19/09-22, older than the latest source syncs.",
+  "proposed": "Per doc: extract concrete verifiable claims, cross-check each against current source (packages/server/src/remote, packages/desktop host/main, packages/ui, packages/shared), then assign done/still-open/obsolete with file:line citations; apply status-line edits only where evidence supports them; consolidate all verdicts into docs/issues/RETRIAGE-2026-11.md; have an independent checker re-verify a sample in a QA clone.",
+  "invariants": [
+    "No doc status line changes without cited current-code evidence",
+    "No product code files are modified by this feature",
+    "docs/issues/RETRIAGE-2026-11.md is the single consolidated verdict record",
+    "Every verdict states its evidence provenance (file read, command run) and keeps unverified claims labeled"
+  ],
+  "verification_plan": "Matrix rows R01-R12 resolve only with evidence citations; the cheap public-seam loop is a grep over status markers (before: in-progress; after: updated verdicts); independent checker re-reads cited evidence for a sample of verdicts in a disposable QA clone at the candidate commit.",
+  "view": {
+    "renderer": "mermaid",
+    "source": ".super-speckit/features/doc-retriage-2026-11/design-view.mmd",
+    "source_digest": "c52a8f7bc4d8854511f7c2a68e6805080ccc60d7caf3df1af1e35d751d8918ce",
+    "artifact": ".super-speckit/features/doc-retriage-2026-11/design-view.md",
+    "artifact_digest": "5b2ad5de35959698958dab3598f5122b1c0ea42cd2685c9743b12397262e3fe9",
+    "limitation": "Interactive Archify renderer not exercised; static Mermaid fallback recorded truthfully; diagram checks do not prove product behavior."
+  }
+}
