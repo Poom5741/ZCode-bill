@@ -3,13 +3,24 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "planning (native spec-kit artifacts)",
-    "next_action": "Author .super-speckit/features/rdux15-project-device-separation/spec.md, plan.md, tasks.md from ticket 15 + investigation-notes.md (open component questions 1-4), then record-grill (Q1-Q12 as resolved decisions), atlas-init + change story, select-personas (senior-frontend-engineer + typescript-expert), design-first (ui_change), then transition maker_running",
+    "stage": "maker_running (T1 red tests next)",
+    "next_action": "Execute T1: map RDUX15 scenarios into case catalog + coverage matrix, add failing E2E/integration skeletons at the three real entries (RDUX15-01/02/03/06/08), then M1 slices T2-T4 per plan.md; WSL/Docker real evidence available locally, SSH scenarios stay not-verified until a test host is provided",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [],
-    "unknowns": "Open component questions in investigation-notes.md; real SSH/WSL/Docker test environments and Rakazo unconfigured in this lane (RDUX15-07/10/18/21 need real remote evidence); push/forge authority not granted",
-    "updated_at": "2026-11-07T10:24:45.501880Z"
+    "unknowns": "SSH test host; Rakazo instance; design prototype HTML (design-first decision recorded, prototype is first design-gated maker step); push authority",
+    "updated_at": "2026-11-07T15:01:45.542954Z"
   },
-  "history": []
+  "history": [
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "planning (native spec-kit artifacts)",
+      "next_action": "Author .super-speckit/features/rdux15-project-device-separation/spec.md, plan.md, tasks.md from ticket 15 + investigation-notes.md (open component questions 1-4), then record-grill (Q1-Q12 as resolved decisions), atlas-init + change story, select-personas (senior-frontend-engineer + typescript-expert), design-first (ui_change), then transition maker_running",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "Open component questions in investigation-notes.md; real SSH/WSL/Docker test environments and Rakazo unconfigured in this lane (RDUX15-07/10/18/21 need real remote evidence); push/forge authority not granted",
+      "updated_at": "2026-11-07T10:24:45.501880Z"
+    }
+  ]
 }
