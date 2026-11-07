@@ -1,0 +1,60 @@
+{
+  "id": "ZBILL-M1",
+  "state": "planned",
+  "candidate_sha": null,
+  "maker": "zcode-main",
+  "checker": "zcode-independent",
+  "matrix": ".super-speckit/state/ZBILL-M1-matrix.md",
+  "ui_change": true,
+  "journey_ux": {
+    "status": "not_required",
+    "report": null,
+    "candidate_sha": null
+  },
+  "purpose": {
+    "status": "confirmed",
+    "map": ".super-speckit/purpose/ZBILL-M1/purpose-map.md",
+    "decision": ".super-speckit/purpose/ZBILL-M1/decision.json"
+  },
+  "grill": {
+    "status": "not_started",
+    "artifact": null
+  },
+  "route": {
+    "kind": "milestone",
+    "rationale": "Cross-boundary milestone: whole desktop monorepo build + embedded billing skill + runtime journey verification; not a bounded micro fix"
+  },
+  "atlas": {
+    "path": null
+  },
+  "change_story": {
+    "path": null
+  },
+  "handoff": {
+    "path": null
+  },
+  "decision_trail": {
+    "path": null
+  },
+  "verification_harness": {
+    "path": null
+  },
+  "static_review": {
+    "artifact": null
+  },
+  "corrective_enforcement": {
+    "artifact": null
+  },
+  "runs": [],
+  "bugs": [],
+  "delivery_contract": "knowledge-v2",
+  "pipeline_contract": "unified-v1",
+  "schema_version": 2,
+  "revision": 6,
+  "prerequisite_receipts": {
+    "investigation": {
+      "artifact": "evidence/ZBILL-M1/investigation.json",
+      "digest": "be0adf6b02cb46bb6f5b06ae1534ab16db3e3d008b267a07005b2b47a5862883"
+    }
+  }
+}

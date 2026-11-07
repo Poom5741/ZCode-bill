@@ -1,0 +1,117 @@
+{
+  "base_sha": "a9fe401eede6e6e5e01be9048679c206fe6f02d9",
+  "playbook": "feature",
+  "intent": "M1 proves the fork builds and runs as ZBill 3-panel shell with billing skill producing xlsx+PDF reports",
+  "flow": "mise install \u2192 bootstrap \u2192 dev:desktop:test launches Electron app; billing skill invoked in app workspace on fixture receipts; outputs open in right document panels",
+  "scope_rationale": "Milestone: whole-monorepo build + embedded skill + runtime journey verification across packages; not a bounded micro change",
+  "unknowns": [
+    "Electron download over npmmirror from Thailand network",
+    "native/ module build requirements on macOS arm64",
+    "desktop test env provider config (which LLM endpoint dev:desktop:test uses)"
+  ],
+  "conventions": [
+    {
+      "id": "C1",
+      "rule": "Use pinned toolchain via mise (node 24.14.0, pnpm 10.33.2), never global node",
+      "scope": "build",
+      "source": "mise.toml",
+      "plan_application": "All build/run commands go through mise exec"
+    },
+    {
+      "id": "C2",
+      "rule": "ZBill additions stay locally contained; no edits inside legacy modules (rpc/shared/provider/services)",
+      "scope": "architecture",
+      "source": "architecture-policy.yaml",
+      "plan_application": "Billing skill lands as new top-level directory + workspace config only"
+    },
+    {
+      "id": "C3",
+      "rule": "Desktop dev runs in isolated test env (ZCODE_DATA_BASE_DIR=~/.zcode-dev-home), never user real profile",
+      "scope": "runtime",
+      "source": "package.json",
+      "plan_application": "QA journeys use dev:desktop:test data dir"
+    }
+  ],
+  "unresolved_blockers": [],
+  "evidence": [
+    {
+      "path": "evidence/ZBILL-M1/investigation-build.md",
+      "digest": "404d0a896ff03c626e0df555fd74eec1c45cd47c3c5fd5d5b9f8dd62ed50ea05"
+    },
+    {
+      "path": "evidence/ZBILL-M1/investigation-desktop.md",
+      "digest": "778e02fe8629614e79ee0f7090cba137967366c09389efd22cc0db234f9dafb4"
+    },
+    {
+      "path": "evidence/ZBILL-M1/investigation-pipeline.md",
+      "digest": "c205fcebbf8fa10c7e34889c777b7be72c19121ab3265eb927be23998e778951"
+    },
+    {
+      "path": "evidence/ZBILL-M1-purpose.md",
+      "digest": "ef124825b7291bc7bfa7fa24baa6d249d6f8556a9866979e63a60c1f133820c1"
+    },
+    {
+      "path": "mise.toml",
+      "digest": "dc5b112795b9f847d2531f6cd2ef1fce49e217f51bb39821aa3eaf1c7d9ef522"
+    },
+    {
+      "path": "package.json",
+      "digest": "9f87f64339c3eb379e312cd626ccb8cfe08f321f403a88f466abd80a4a76a4a6"
+    },
+    {
+      "path": "architecture-policy.yaml",
+      "digest": "4e20e69280545ca8e3c8b0199d9d739631a7d3d4cba262988e42ebf3477a3b68"
+    }
+  ],
+  "playbook_digest": "3a62cc4a8cbcf144bb9dd05f05420a15be0d38b784d3b141bb730a5852f50a62",
+  "steps": [
+    {
+      "id": "F1-env",
+      "source_step": "1",
+      "status": "pending",
+      "note": "how over build subsystem: mise/pnpm/desktop"
+    },
+    {
+      "id": "F2-design",
+      "source_step": "2",
+      "status": "pending",
+      "note": "architecture: skill packaging + isolation approach"
+    },
+    {
+      "id": "F3-checkpoint",
+      "source_step": "3",
+      "status": "pending",
+      "note": "throughput checkpoint todos"
+    },
+    {
+      "id": "F4-implement",
+      "source_step": "4",
+      "status": "pending",
+      "note": "delegate build+skill embedding"
+    },
+    {
+      "id": "F5-verify",
+      "source_step": "5",
+      "status": "pending",
+      "note": "verify on running app surface"
+    },
+    {
+      "id": "F6-commits",
+      "source_step": "6",
+      "status": "pending",
+      "note": "small ordered commits"
+    },
+    {
+      "id": "F7-interrogate",
+      "source_step": "7",
+      "status": "pending",
+      "note": "only if design contested"
+    },
+    {
+      "id": "F8-handback",
+      "source_step": "8",
+      "status": "pending",
+      "note": "handback report; PR only with authority"
+    }
+  ]
+}

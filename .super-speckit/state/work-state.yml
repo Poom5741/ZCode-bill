@@ -1,0 +1,27 @@
+schema_version: 1
+authority: files-and-commands
+generated_from: .super-speckit/state/features/*.json
+features:
+  - id: "ZBILL-M1"
+    state: "planned"
+    candidate_sha: null
+    maker: "zcode-main"
+    checker: "zcode-independent"
+    matrix: ".super-speckit/state/ZBILL-M1-matrix.md"
+    purpose_status: "confirmed"
+    purpose_map: ".super-speckit/purpose/ZBILL-M1/purpose-map.md"
+    grill_status: "not_started"
+    grill_artifact: null
+    route: "milestone"
+    atlas: null
+    change_story: null
+    latest_handoff: null
+    decision_trail: null
+    verification_harness: null
+    static_review: null
+    corrective_enforcement: null
+    ui_change: true
+    journey_ux_status: "not_required"
+    journey_ux_report: null
+    runs: []
+    bugs: []

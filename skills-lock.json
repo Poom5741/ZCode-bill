@@ -20,6 +20,13 @@
       "source": "vercel-labs/agent-browser",
       "sourceType": "github",
       "computedHash": "9c6ee7f028f409be8ba695dd9a6493c7de9a3802ee538ee905baaceea419aba9"
+    },
+    "super-speckit-installer": {
+      "source": "Poom5741/super-speckit",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "installable/super-speckit/SKILL.md",
+      "computedHash": "58b10444dc8ddd2f7040db2490f87d3efb38a6261290b9ca1b8e52b846c8f655"
     }
   }
 }

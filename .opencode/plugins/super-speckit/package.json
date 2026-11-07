@@ -1,0 +1,10 @@
+{
+  "name": "super-speckit-managed-opencode-plugin",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./tui": "./tui.js",
+    "./rpc": "./rpc.js"
+  }
+}
