@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "authority": "super-speckit.yml merge.autonomous_when_ready=true; no human-gated overrides configured",
+  "forge_status": "merged",
+  "base_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "merged_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "evidence": ".super-speckit/features/doc-retriage-2026-11/merge-evidence.json"
+}

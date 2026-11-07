@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "status": "passed",
+  "personas_digest": "20cfb0b5f1a634780c69858842fba5235047c1190bb685dddb8c89dc1c8e92ad",
+  "lenses": [
+    {
+      "id": "pstack",
+      "summary": "Investigation-method lens: verdicts trace claims to concrete current-code evidence (10/10 checker checks passed in clean clone); scope stayed within the declared docs-only architecture contract; diff scope QA-01 confirms no product code touched.",
+      "findings": [
+        {
+          "disposition": "dismissed",
+          "reason": "Stale V1 comment at packages/shared/src/protocol.ts:427 is pre-existing upstream residue outside this feature's writable set; recorded as nit in the report for ticket 07's cleanup scope.",
+          "evidence": [
+            {
+              "path": "docs/issues/RETRIAGE-2026-11.md",
+              "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ]
+    },
+    {
+      "id": "lude-kit",
+      "summary": "Technical-writer lens: the report leads with the conclusion, states each verdict with cited evidence and next actions, uses plain declarative sentences, and records limitations (no flips without evidence); code-reviewer specialist confirms severity labels (no blocking findings; one nit, dismissed with reason).",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "docs/issues/RETRIAGE-2026-11.md",
+          "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+        }
+      ]
+    }
+  ],
+  "reconciliation": "Both lenses accept the candidate. Agreement: verdict evidence is code-cited and the diff obeys the docs-only contract. No disagreement to resolve; the single finding (stale V1 comment) is consistently dismissed as out-of-scope with the ticket 07 linkage recorded in the report."
+}

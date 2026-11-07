@@ -1,7 +1,7 @@
 {
   "id": "doc-retriage-2026-11",
-  "state": "maker_running",
-  "candidate_sha": null,
+  "state": "merged",
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
   "maker": "ade-lane-a5862aba",
   "checker": "independent-qa-clone",
   "matrix": ".super-speckit/features/doc-retriage-2026-11/matrix.md",
@@ -45,12 +45,131 @@
   "corrective_enforcement": {
     "artifact": null
   },
-  "runs": [],
+  "runs": [
+    {
+      "schema_version": 1,
+      "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+      "checker": "independent-qa-clone",
+      "attempt_id": "qa-doc-retriage-2",
+      "worktree": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage",
+      "matrix_digest": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143",
+      "environment": ".super-speckit/features/doc-retriage-2026-11/qa-environment-2.json",
+      "environment_digest": "2d4d79d04656c39391b4e9ef8c6bda729f739928afea01da004f97362be14e5e",
+      "requirements": [
+        {
+          "id": "REQ-01",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-02",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-03",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-04",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-05",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-06",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-07",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-08",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-09",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-10",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-11",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        },
+        {
+          "id": "REQ-12",
+          "kind": "public-behavior",
+          "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ],
+      "gates": [
+        {
+          "name": "qa-clone-evidence-verification",
+          "command": "python qa_checker.py against clean clone at candidate (10/10 checks passed; receipts bound in .super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json)",
+          "exit_code": 0,
+          "status": "passed",
+          "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ]
+    }
+  ],
   "bugs": [],
   "delivery_contract": "knowledge-v2",
   "pipeline_contract": "unified-v1",
   "schema_version": 2,
-  "revision": 24,
+  "revision": 34,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": ".super-speckit/features/doc-retriage-2026-11/investigation-receipt.json",
@@ -79,6 +198,167 @@
     "personas": {
       "artifact": ".super-speckit/pipeline/doc-retriage-2026-11/personas.json",
       "digest": "20cfb0b5f1a634780c69858842fba5235047c1190bb685dddb8c89dc1c8e92ad"
+    },
+    "lens-review": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/lens-review-receipt.json",
+      "digest": "83299af3a13ffe07554399c1e978be52bc624eb047932da6dcb3fbf2b4a468b9"
+    },
+    "engineering-review": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/engineering-review-receipt.json",
+      "digest": "7b059015939f85528d9e5d9c279289efcf472854b9ea8e28bf76efde2190e13a"
+    },
+    "shared-result": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/shared-result-receipt.json",
+      "digest": "3aeccfee7622f9699468954288ac7ade339f132c5d7c62c5bc4df2de3346f50c"
+    },
+    "convergence": {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/convergence-receipt.json",
+      "digest": "e0f680a8c64430ec195431dce608bb28518c593de429c206da78d0a4640422a8"
     }
+  },
+  "candidates": [
+    {
+      "sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+      "maker": "ade-lane-a5862aba",
+      "matrix_digest": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143"
+    }
+  ],
+  "qa_worktree": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage",
+  "qa_attempt": "qa-doc-retriage-2",
+  "attempt_history": [
+    "qa-doc-retriage-2"
+  ],
+  "proof": {
+    "schema_version": 1,
+    "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+    "checker": "independent-qa-clone",
+    "attempt_id": "qa-doc-retriage-2",
+    "worktree": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage",
+    "matrix_digest": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143",
+    "environment": ".super-speckit/features/doc-retriage-2026-11/qa-environment-2.json",
+    "environment_digest": "2d4d79d04656c39391b4e9ef8c6bda729f739928afea01da004f97362be14e5e",
+    "requirements": [
+      {
+        "id": "REQ-01",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-02",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-03",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-04",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-05",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-06",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-07",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-08",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-09",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-10",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-11",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      },
+      {
+        "id": "REQ-12",
+        "kind": "public-behavior",
+        "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads",
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      }
+    ],
+    "gates": [
+      {
+        "name": "qa-clone-evidence-verification",
+        "command": "python qa_checker.py against clean clone at candidate (10/10 checks passed; receipts bound in .super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json)",
+        "exit_code": 0,
+        "status": "passed",
+        "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+        "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+      }
+    ]
+  },
+  "convergence_history": [
+    {
+      "artifact": ".super-speckit/features/doc-retriage-2026-11/convergence-receipt.json",
+      "digest": "e0f680a8c64430ec195431dce608bb28518c593de429c206da78d0a4640422a8"
+    }
+  ],
+  "merge_receipt": {
+    "schema_version": 1,
+    "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+    "authority": "super-speckit.yml merge.autonomous_when_ready=true; no human-gated overrides configured",
+    "forge_status": "merged",
+    "base_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+    "merged_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+    "evidence": ".super-speckit/features/doc-retriage-2026-11/merge-evidence.json"
   }
 }

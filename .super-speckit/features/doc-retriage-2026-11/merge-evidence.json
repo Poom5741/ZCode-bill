@@ -1,0 +1,8 @@
+{
+  "observed": "Candidate commit 7d7e1d38 is the current HEAD of the working branch (candidate was committed directly on the lane branch, so the branch already contains the merged state; git merge-base --is-ancestor candidate HEAD holds trivially).",
+  "remote_push": "NOT performed: push to remote forge was not authorized in this lane session; forge_status records the local branch merge state only.",
+  "evidence_commands": [
+    "git rev-parse HEAD",
+    "git merge-base --is-ancestor 7d7e1d38 HEAD"
+  ]
+}

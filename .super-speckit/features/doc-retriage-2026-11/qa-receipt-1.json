@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "attempt_id": "qa-doc-retriage-1",
+  "clone": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage",
+  "status": "failed",
+  "method": "Independent re-verification of sampled report citations inside a disposable clean clone at the candidate SHA; diff-scope check enforces the docs-only architecture contract.",
+  "checks": [
+    {
+      "id": "QA-01",
+      "claim": "Candidate touches only docs/issues and .super-speckit feature/state/purpose paths (architecture contract)",
+      "passed": true,
+      "evidence": "17 changed files; violations: none",
+      "path": "git diff --name-only a9fe401e..7d7e1d3",
+      "line": null
+    },
+    {
+      "id": "QA-02",
+      "claim": "Consolidated report exists at candidate and covers REQ-01..REQ-12",
+      "passed": false,
+      "evidence": "report found=True, requirement rows matched=0",
+      "path": "docs/issues/RETRIAGE-2026-11.md",
+      "line": null
+    },
+    {
+      "id": "QA-03",
+      "claim": "relay-v2/02: shared V2 contract auth_init schema",
+      "passed": true,
+      "evidence": "'z.literal(\"auth_init\")' found at line 20",
+      "path": "packages/shared/src/web-remote-relay/contract.ts",
+      "line": 20
+    },
+    {
+      "id": "QA-04",
+      "claim": "relay-v2/02: V2 ws path constant",
+      "passed": true,
+      "evidence": "'\"/api/v1/remote/ws2\"' found at line 124",
+      "path": "packages/shared/src/web-remote-relay/contract.ts",
+      "line": 124
+    },
+    {
+      "id": "QA-05",
+      "claim": "relay-v2/03: desktop V2 transport auth_init send",
+      "passed": true,
+      "evidence": "'type: \"auth_init\"' found at line 130",
+      "path": "packages/desktop/src/main/web-remote-relay/webRemoteControlTransport.ts",
+      "line": 130
+    },
+    {
+      "id": "QA-06",
+      "claim": "perf/01 P0-1: identity dedup by connection generation",
+      "passed": true,
+      "evidence": "'远端身份登记按物理连接代际去重' found at line 410",
+      "path": "packages/services/src/project/index.ts",
+      "line": 410
+    },
+    {
+      "id": "QA-07",
+      "claim": "ttft/01: OTLP E2E fixture present",
+      "passed": false,
+      "evidence": "'def prepareTtftOtlpFixture' NOT found",
+      "path": "packages/desktop/test/e2e/helpers/ttft-otlp-fixture.ts",
+      "line": null
+    },
+    {
+      "id": "QA-08",
+      "claim": "relay-v2/06: last-device auto-connect keys present",
+      "passed": true,
+      "evidence": "LAST_DEVICE_KEY at line 28",
+      "path": "packages/web/src/web-remote-control/app/webRemoteControlEntry.ts",
+      "line": 28
+    },
+    {
+      "id": "QA-09",
+      "claim": "relay-v2/07 nit: stale V1 comment at protocol.ts line 427",
+      "passed": true,
+      "evidence": "line 427 contains stale comment: True",
+      "path": "packages/shared/src/protocol.ts",
+      "line": 427
+    },
+    {
+      "id": "QA-10",
+      "claim": "No doc status flipped by this candidate (all 11 still marked in-progress)",
+      "passed": false,
+      "evidence": "10/11 docs still carry in-progress markers",
+      "path": "docs/issues/*",
+      "line": null
+    }
+  ],
+  "limitations": "Docs-only delivery: no app runtime exists to drive; the public seam is the repository document content itself plus the cited code, verified by direct reads in the clone. No OCR, no browser journey (no UI change).",
+  "executed_commands": [
+    "git diff --name-only",
+    "git rev-parse HEAD",
+    "direct file reads in clone"
+  ]
+}

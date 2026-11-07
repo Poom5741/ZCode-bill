@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "design_digest": "1af2788d20c17fb1f653e32d4d05b1c0a11a4c74617e16a6e17f8c368906f3bd",
+  "status": "passed",
+  "summary": "Shared result verified in clean clone at exact candidate: report exists with 11 evidence-cited verdicts; all 11 docs correctly remain in-progress; sampled citations (7 code claims) reproduce; diff obeys docs-only contract; proposed triage flow executed as designed with one declared deviation (status-line writes skipped because no evidence supported a flip).",
+  "deviations": [
+    "Design step 'Update doc status line' produced zero edits: all 11 markers verified accurate, so the report alone carries verdicts (within the matrix rules declared in the design)."
+  ],
+  "conventions": [
+    {
+      "id": "C1",
+      "status": "preserved",
+      "reason": "Every verdict cites concrete code evidence read at the candidate SHA.",
+      "evidence": [
+        {
+          "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "status": "preserved",
+      "reason": "Honest limitation records: typecheck/lint not run (no code changed); QA method and its limits stated in receipts and report.",
+      "evidence": [
+        {
+          "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "status": "preserved",
+      "reason": "Candidate diff touches only the declared writable set (QA-01); no unrelated changes.",
+      "evidence": [
+        {
+          "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+          "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+      "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+    },
+    {
+      "path": "docs/issues/RETRIAGE-2026-11.md",
+      "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+    }
+  ],
+  "view": {
+    "renderer": "mermaid",
+    "source": ".super-speckit/features/doc-retriage-2026-11/design-view.mmd",
+    "source_digest": "c52a8f7bc4d8854511f7c2a68e6805080ccc60d7caf3df1af1e35d751d8918ce",
+    "artifact": ".super-speckit/features/doc-retriage-2026-11/design-view.md",
+    "artifact_digest": "5b2ad5de35959698958dab3598f5122b1c0ea42cd2685c9743b12397262e3fe9",
+    "limitation": "Interactive Archify renderer not exercised; static Mermaid fallback recorded truthfully; diagram checks do not prove product behavior."
+  }
+}

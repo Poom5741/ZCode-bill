@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "mode": "compact",
+  "outcome": "converged",
+  "remaining": [],
+  "invocation": "python .super-speckit/scripts/super_speckit.py status --strict --repo . ; python .super-speckit/scripts/super_speckit.py validate --repo . ; independent qa_checker.py in clean clone at candidate (10/10 passed)",
+  "summary": "Micro compact completion: all 12 matrix rows resolved (REQ-01..11 verdicts recorded in the report; REQ-12 report itself verified by the checker in a clean clone). Independent QA passed 10/10; both lenses reconciled with no blocking findings. Compact assessment of playbook.md and matrix: every requirement has evidence; no remaining tasks.",
+  "intent": {
+    ".super-speckit/features/doc-retriage-2026-11/matrix.md": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143",
+    ".super-speckit/features/doc-retriage-2026-11/playbook.md": "8ef824d1751f84e090547539cfb664ac7feb7e685c1f9a56db55896b251d8452"
+  },
+  "evidence": [
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+      "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+    },
+    {
+      "path": "docs/issues/RETRIAGE-2026-11.md",
+      "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+    }
+  ]
+}

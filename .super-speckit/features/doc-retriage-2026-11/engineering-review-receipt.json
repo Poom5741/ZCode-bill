@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "status": "passed",
+  "blocking_findings": [],
+  "observations": [
+    "Diff scope verified in clean clone: only docs/issues and .super-speckit feature/state/purpose paths (QA-01).",
+    "Report prose reviewed: conclusion first, per-doc evidence and next actions explicit, no unverifiable claims; one nit (stale V1 comment) already recorded under ticket 07 scope.",
+    "No dependency, schema or code changes to review; typecheck/lint not run for this candidate because no product code changed (recorded honestly per AGENTS.md)."
+  ],
+  "evidence": [
+    {
+      "path": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json",
+      "digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a",
+  "checker": "independent-qa-clone",
+  "attempt_id": "qa-doc-retriage-2",
+  "worktree": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage",
+  "git_version": "git version 2.55.0.windows.5",
+  "python_version": "3.12.10",
+  "os": "win32",
+  "clone_created_from": "super_speckit.py qa-clone --ref 7d7e1d3859625d5f8004fca70ef195edaea5c84a"
+}
