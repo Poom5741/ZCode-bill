@@ -1,0 +1,60 @@
+{
+  "id": "rdux15-project-device-separation",
+  "state": "planned",
+  "candidate_sha": null,
+  "maker": "ade-lane-a5862aba",
+  "checker": "independent-qa-clone",
+  "matrix": ".super-speckit/features/rdux15-project-device-separation/matrix.md",
+  "ui_change": true,
+  "journey_ux": {
+    "status": "not_required",
+    "report": null,
+    "candidate_sha": null
+  },
+  "purpose": {
+    "status": "confirmed",
+    "map": ".super-speckit\\purpose\\rdux15-project-device-separation\\purpose-map.md",
+    "decision": ".super-speckit\\purpose\\rdux15-project-device-separation\\decision.json"
+  },
+  "grill": {
+    "status": "not_started",
+    "artifact": null
+  },
+  "route": {
+    "kind": "normal",
+    "rationale": "Milestone-scale interaction redesign: 52 user stories, 20 requirements across five UI modules, 25 E2E scenarios requiring real SSH/WSL/Docker environments; native Spec Kit planning per unified pipeline."
+  },
+  "atlas": {
+    "path": null
+  },
+  "change_story": {
+    "path": null
+  },
+  "handoff": {
+    "path": null
+  },
+  "decision_trail": {
+    "path": null
+  },
+  "verification_harness": {
+    "path": null
+  },
+  "static_review": {
+    "artifact": null
+  },
+  "corrective_enforcement": {
+    "artifact": null
+  },
+  "runs": [],
+  "bugs": [],
+  "pipeline_contract": "unified-v1",
+  "delivery_contract": "knowledge-v2",
+  "schema_version": 2,
+  "revision": 6,
+  "prerequisite_receipts": {
+    "investigation": {
+      "artifact": ".super-speckit/features/rdux15-project-device-separation/investigation-receipt.json",
+      "digest": "0590b119c3702cdac07ea815e8f48294d3b227155e3d55b56ec3d6f2842d7c6f"
+    }
+  }
+}

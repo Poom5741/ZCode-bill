@@ -1,0 +1,122 @@
+{
+  "base_sha": "776437cace41f091b555d424d99a12e611f1a14a",
+  "playbook": "investigation",
+  "playbook_digest": "dc66bcf6af3a074fc7f67aa5e12b93ef571a4fb4d8e17f2f1af5ae5359f42e46",
+  "intent": "Map the current desktop modules that RDUX15 restructures (project create flow, device dropdown sources, settings add window, three entry points, connection completion dispatch) so native spec/plan/tasks rest on verified code seams, not ticket prose alone.",
+  "flow": "Project creation and connection entry live in packages/ui: project-sidebar (sidebar + composer menu), remote-connection-flow (Root-injected global connection wizard with completion-intent contract), data-sync settings section (device management + wizard return-target seam), app-shell (draft handoff types).",
+  "scope_rationale": "Read-only module mapping pass before native planning; deeper per-component reading continues during spec/plan authoring; normal route selected because 52 user stories and 25 real-environment E2E scenarios exceed micro by any honest reading.",
+  "unknowns": [
+    "Exact component hosting the current local/remote pre-screen and host list inside project creation (ticket replaces it; component not yet located)",
+    "Settings add-window component structure after the 10-14 batch (three-screen wizard was replaced; current categorized SSH/WSL/Docker window shape unverified)",
+    "i18n key currently used by the chat project-menu remote-connection entry",
+    "app-shell types.ts draft handoff shape (line 82 comment found; type not yet read)"
+  ],
+  "unresolved_blockers": [],
+  "conventions": [
+    {
+      "id": "C1",
+      "rule": "Components access services through hooks in src/hooks; components never take services or repos directly",
+      "scope": "All new/changed UI wiring",
+      "source": "packages/ui/AGENTS.md",
+      "plan_application": "New completion-intent dispatch and draft ownership live in hooks/store, not component-local service calls"
+    },
+    {
+      "id": "C2",
+      "rule": "Zustand state in src/store with StoreProvider; subscribe via selector; keep Provider dependency order",
+      "scope": "Draft retention across settings round trips (REQ-09/10)",
+      "source": "packages/ui/AGENTS.md",
+      "plan_application": "Single draft owner per ticket 15 decision 9; no per-entry draft copies"
+    },
+    {
+      "id": "C3",
+      "rule": "Interaction changes maintain E2E per the root verification matrix; visual changes get theme verification",
+      "scope": "RDUX15-01..25 evidence obligations",
+      "source": "packages/ui/AGENTS.md",
+      "plan_application": "Each REQ row binds to the ticket's declared E2E/integration seam; no PASS claims without runs"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/issues/remote-connection-ux/15-project-device-selection-and-connection-management.md",
+      "digest": "25d9f118df5447b3cfd4350b0a0be10514655467bb0e3f6b470ca4ced44d254a"
+    },
+    {
+      "path": "docs/issues/remote-connection-ux/21-chat-settings-round-trip.md",
+      "digest": "7500befa77b26b50060fc3eba3512ca9c53c62d42c9cd10f351726f533b1ad1c"
+    },
+    {
+      "path": "packages/ui/src/remote-connection-flow/contract.ts",
+      "digest": "2197c85c804eb41a4900b541c296676c4bfc414b54199e26a05c64e0f6ac4ee2"
+    },
+    {
+      "path": "packages/ui/src/project-sidebar/ProjectComposerMenu.tsx",
+      "digest": "6b892d1fe9ef31c55d597a9117f658fb36a5526ed73c624955dcb36baad2df7f"
+    },
+    {
+      "path": "packages/ui/src/data-sync/ui/DataSyncSection.tsx",
+      "digest": "4abcf1f9633e83f82f06e912d80dee726057cea84c42893bd1465a57fd5f6b62"
+    },
+    {
+      "path": "packages/ui/AGENTS.md",
+      "digest": "233e28d32085de1a50b5dbb04b7389a7248a2b2fd8399884f750234d0aadda89"
+    },
+    {
+      "path": ".super-speckit/features/rdux15-project-device-separation/investigation-notes.md",
+      "digest": "206163a29cc238c892a8142456aa160e1b696be5814ad7d4ad063194fe4b1c77"
+    }
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "source_step": "1",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "packages/ui/src/remote-connection-flow/contract.ts",
+          "digest": "2197c85c804eb41a4900b541c296676c4bfc414b54199e26a05c64e0f6ac4ee2"
+        },
+        {
+          "path": "packages/ui/src/data-sync/ui/DataSyncSection.tsx",
+          "digest": "4abcf1f9633e83f82f06e912d80dee726057cea84c42893bd1465a57fd5f6b62"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "source_step": "2",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": ".super-speckit/features/rdux15-project-device-separation/investigation-notes.md",
+          "digest": "206163a29cc238c892a8142456aa160e1b696be5814ad7d4ad063194fe4b1c77"
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "source_step": "3",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "packages/ui/src/project-sidebar/ProjectComposerMenu.tsx",
+          "digest": "6b892d1fe9ef31c55d597a9117f658fb36a5526ed73c624955dcb36baad2df7f"
+        },
+        {
+          "path": "packages/ui/src/project-sidebar/index.tsx",
+          "digest": "822019f1abfe9e3ad75dc001c8734b31d4955c44f58b80f1ed65be3c7e9d9a10"
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "source_step": "4",
+      "status": "completed",
+      "evidence": [
+        {
+          "path": "docs/issues/RETRIAGE-2026-11.md",
+          "digest": "24900428b2e707c17040ba251113ceed7ef5b63c592027fe343ec3012334897f"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "authority": "shared-repository-continuation",
+  "current": {
+    "feature": "rdux15-project-device-separation",
+    "stage": "planning (native spec-kit artifacts)",
+    "next_action": "Author .super-speckit/features/rdux15-project-device-separation/spec.md, plan.md, tasks.md from ticket 15 + investigation-notes.md (open component questions 1-4), then record-grill (Q1-Q12 as resolved decisions), atlas-init + change story, select-personas (senior-frontend-engineer + typescript-expert), design-first (ui_change), then transition maker_running",
+    "candidate_sha": null,
+    "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+    "evidence": [],
+    "unknowns": "Open component questions in investigation-notes.md; real SSH/WSL/Docker test environments and Rakazo unconfigured in this lane (RDUX15-07/10/18/21 need real remote evidence); push/forge authority not granted",
+    "updated_at": "2026-11-07T10:24:45.501880Z"
+  },
+  "history": []
+}

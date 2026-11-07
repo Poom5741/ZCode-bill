@@ -1,0 +1,9 @@
+{
+  "feature": "rdux15-project-device-separation",
+  "status": "confirmed",
+  "map": "purpose-map.md",
+  "visual": "purpose-map.html",
+  "confirmed_by": "repo owner via ADE chat instruction + ticket 15 confirmed product decisions",
+  "confirmed_at": "2026-11-07",
+  "confirmation": "User instructed 'continue work on' immediately after the lane's retriage identified ticket 15 (docs/issues/remote-connection-ux/15-*.md, Status ready-for-agent) as the next actionable user-confirmed task; Q1-Q12 product decisions and 2026-10-14 chat-entry revision were already confirmed in the ticket record (2026-10-12/2026-10-14 provenance lines)."
+}
