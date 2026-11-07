@@ -50,11 +50,15 @@
   "delivery_contract": "knowledge-v2",
   "pipeline_contract": "unified-v1",
   "schema_version": 2,
-  "revision": 6,
+  "revision": 7,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": "evidence/ZBILL-M1/investigation.json",
       "digest": "be0adf6b02cb46bb6f5b06ae1534ab16db3e3d008b267a07005b2b47a5862883"
+    },
+    "personas": {
+      "artifact": ".super-speckit/pipeline/ZBILL-M1/personas.json",
+      "digest": "47fac60364cc3117b3d3bb0d8dba08054d95712e0b6663e2de6abfebe1113544"
     }
   }
 }
