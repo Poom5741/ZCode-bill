@@ -3,13 +3,13 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "maker_running (T1 red tests next)",
-    "next_action": "Execute T1: map RDUX15 scenarios into case catalog + coverage matrix, add failing E2E/integration skeletons at the three real entries (RDUX15-01/02/03/06/08), then M1 slices T2-T4 per plan.md; WSL/Docker real evidence available locally, SSH scenarios stay not-verified until a test host is provided",
+    "stage": "maker_running (T1 partial: mapping committed 49110340)",
+    "next_action": "Locate current project-create pre-screen component (grep \u672a\u4e2d: \u5c1d\u8bd5 ProjectWizard/workspace dialog \u547d\u540d\u6216\u4ece sidebar \u9879\u76ee+\u6309\u94ae onClick \u987a\u85e4\u6478\u74dc), read it + settings add-window, then author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run them red, then T2-T4 (M1)",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [],
-    "unknowns": "SSH test host; Rakazo instance; design prototype HTML (design-first decision recorded, prototype is first design-gated maker step); push authority",
-    "updated_at": "2026-11-07T15:01:45.542954Z"
+    "unknowns": "SSH test host; Rakazo instance; design prototype HTML; push authority",
+    "updated_at": "2026-11-07T15:56:50.931503Z"
   },
   "history": [
     {
@@ -21,6 +21,16 @@
       "evidence": [],
       "unknowns": "Open component questions in investigation-notes.md; real SSH/WSL/Docker test environments and Rakazo unconfigured in this lane (RDUX15-07/10/18/21 need real remote evidence); push/forge authority not granted",
       "updated_at": "2026-11-07T10:24:45.501880Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "maker_running (T1 red tests next)",
+      "next_action": "Execute T1: map RDUX15 scenarios into case catalog + coverage matrix, add failing E2E/integration skeletons at the three real entries (RDUX15-01/02/03/06/08), then M1 slices T2-T4 per plan.md; WSL/Docker real evidence available locally, SSH scenarios stay not-verified until a test host is provided",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "SSH test host; Rakazo instance; design prototype HTML (design-first decision recorded, prototype is first design-gated maker step); push authority",
+      "updated_at": "2026-11-07T15:01:45.542954Z"
     }
   ]
 }
