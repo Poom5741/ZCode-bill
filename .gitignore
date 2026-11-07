@@ -75,3 +75,8 @@ packages/desktop/resources/macos-window-bounds/
 __pycache__/
 *.pyc
 .zcode-runtime
+# ZBill local artifacts (not committed)
+zbill-billing/.venv/
+zbill-billing/output/
+output/
+node_modules/

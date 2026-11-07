@@ -1,0 +1,27 @@
+{
+  "route": "milestone",
+  "maker": "zcode-main",
+  "primary_persona": "senior-frontend-engineer",
+  "rationale": "Desktop Electron shell + document panels (frontend persona); agent skill embedding for billing (AI agent engineer persona); billing pipeline itself is proven Python reused as-is",
+  "intent": {
+    ".super-speckit/state/ZBILL-M1-matrix.md": "7cca2e04493ea96c290392763a2a059db1c582026645338c6a80617424d4705d",
+    ".super-speckit/state/spec.md": "7bf12ddbe47c80e1fc474b71c0e45a4881e83d87bea8db6086d182bd3b25f47d",
+    ".super-speckit/state/plan.md": "848943f15c172c4fa3f7b3b36138584049ff8ba0a35c1a5cb90e0a518bb449d1",
+    ".specify/memory/constitution.md": "ce7549540fa45543cca797a150201d868e64495fdff39dc38246fb17bd4024b3"
+  },
+  "source_revision": "b41c7a6a40c4960d687779227137b25be585ef55",
+  "specialists": [
+    {
+      "id": "senior-frontend-engineer",
+      "category": "personas",
+      "source": "skills/personas/senior-frontend-engineer/SKILL.md",
+      "sha256": "ab5fa03a5569f6cbcd6c0c11473aee09fa7d1613521ca0f1152d25e74f1ad3e0"
+    },
+    {
+      "id": "senior-ai-agent-engineer",
+      "category": "personas",
+      "source": "skills/personas/senior-ai-agent-engineer/SKILL.md",
+      "sha256": "220fcb6b96cf84d6ba6da2d8ac9afac873444a27d3844fd633ec28f2ecac7916"
+    }
+  ]
+}
