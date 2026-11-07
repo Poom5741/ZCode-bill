@@ -50,15 +50,15 @@
   "delivery_contract": "knowledge-v2",
   "pipeline_contract": "unified-v1",
   "schema_version": 2,
-  "revision": 22,
+  "revision": 24,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": ".super-speckit/features/doc-retriage-2026-11/investigation-receipt.json",
-      "digest": "1cadc921d2557478641ffee12bb94f4a6a320efa47f534bbe0382548cbd7a09d"
+      "digest": "220a3f462e1e55903136189dbb503bfad726345e3e6ce7972cc161312b63aac6"
     },
     "shared-design": {
       "artifact": ".super-speckit/features/doc-retriage-2026-11/shared-design-receipt.json",
-      "digest": "daf936ba439f8cc808e5db195c66dc7e7a9ccc401f00ed067929b7ed0328d0ce"
+      "digest": "1af2788d20c17fb1f653e32d4d05b1c0a11a4c74617e16a6e17f8c368906f3bd"
     },
     "baseline-feedback": {
       "artifact": ".super-speckit/features/doc-retriage-2026-11/baseline-feedback.json",

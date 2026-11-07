@@ -1,5 +1,5 @@
 {
-  "investigation_digest": "1cadc921d2557478641ffee12bb94f4a6a320efa47f534bbe0382548cbd7a09d",
+  "investigation_digest": "220a3f462e1e55903136189dbb503bfad726345e3e6ce7972cc161312b63aac6",
   "observed": "docs/issues holds 11 documents still marked in-progress (scan-2026-11-07.md); repo HEAD is the v3.17.2 upstream sync (a9fe401e); Super-SpecKit state had no prior features; typecheck cannot run because node_modules is absent (install running in background); doc status lines carry notes dated 2026-09-19/09-22, older than the latest source syncs.",
   "proposed": "Per doc: extract concrete verifiable claims, cross-check each against current source (packages/server/src/remote, packages/desktop host/main, packages/ui, packages/shared), then assign done/still-open/obsolete with file:line citations; apply status-line edits only where evidence supports them; consolidate all verdicts into docs/issues/RETRIAGE-2026-11.md; have an independent checker re-verify a sample in a QA clone.",
   "invariants": [
