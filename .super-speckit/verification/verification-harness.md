@@ -27,8 +27,10 @@
 - SSH 客户端: OpenSSH for Windows 9.5p2 → **真实 SSH 远端主机未配置**：RDUX15-07/10/18/21 的
   真实远程 E2E 需要用户提供测试 SSH 主机（地址+凭据或 config 条目），在此之前这些场景如实记为
   not-verified（环境阻塞），不得用 mock PASS 冒充。
-- Rakazo（journey UX 独立审查）: instance_url/bot_url 未配置 → 首次 journey 前需用户提供实例，
-  或按 config 的 agent-led 模式由人工浏览器执行并如实标注 reviewer 身份。
+- Journey UX 执行者: **ADE computer-use surfaces**（用户指示 2026-11-08）。Electron dev build 优先
+  `ade app-control`（CDP，可断言 DOM/test-id，后台无指针）；无法附加 debug 端口时回退
+  `ade screen`（Windows 私有桌面 seat）。Rakazo 已跳过（config enabled=false）。
+  独立性限制如实记录：reviewer 为 ADE lane agent，非独立人类/第三方模型。
 - 手机真机 relay / macOS: 不可用 → 相关场景按 ticket 的"环境阻塞必须列出"规则记录。
 
 ## Real behavior proof

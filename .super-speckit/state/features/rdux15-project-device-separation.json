@@ -35,7 +35,7 @@
     "path": null
   },
   "decision_trail": {
-    "path": null
+    "path": ".super-speckit/features/rdux15-project-device-separation/decision-trail.json"
   },
   "verification_harness": {
     "path": ".super-speckit/verification/verification-harness.md"
@@ -51,7 +51,7 @@
   "pipeline_contract": "unified-v1",
   "delivery_contract": "knowledge-v2",
   "schema_version": 2,
-  "revision": 16,
+  "revision": 18,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": ".super-speckit/features/rdux15-project-device-separation/investigation-receipt.json",

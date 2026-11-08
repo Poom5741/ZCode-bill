@@ -4,12 +4,12 @@
   "current": {
     "feature": "rdux15-project-device-separation",
     "stage": "maker_running (T1 partial: mapping committed 49110340)",
-    "next_action": "Locate current project-create pre-screen component (grep \u672a\u4e2d: \u5c1d\u8bd5 ProjectWizard/workspace dialog \u547d\u540d\u6216\u4ece sidebar \u9879\u76ee+\u6309\u94ae onClick \u987a\u85e4\u6478\u74dc), read it + settings add-window, then author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run them red, then T2-T4 (M1)",
+    "next_action": "Locate current project-create pre-screen component (trace sidebar \u9879\u76ee+ onClick), read it + settings add-window, author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run red, then T2-T4 (M1)",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [],
-    "unknowns": "SSH test host; Rakazo instance; design prototype HTML; push authority",
-    "updated_at": "2026-11-07T15:56:50.931503Z"
+    "unknowns": "SSH test host (or approve sshd-in-WSL); design prototype HTML; push authority. Rakazo: SKIPPED per user 2026-11-08 \u2014 Journey UX executor = ADE computer-use (app-control primary, screen fallback)",
+    "updated_at": "2026-11-08T12:44:53.782275Z"
   },
   "history": [
     {
@@ -31,6 +31,16 @@
       "evidence": [],
       "unknowns": "SSH test host; Rakazo instance; design prototype HTML (design-first decision recorded, prototype is first design-gated maker step); push authority",
       "updated_at": "2026-11-07T15:01:45.542954Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "maker_running (T1 partial: mapping committed 49110340)",
+      "next_action": "Locate current project-create pre-screen component (grep \u672a\u4e2d: \u5c1d\u8bd5 ProjectWizard/workspace dialog \u547d\u540d\u6216\u4ece sidebar \u9879\u76ee+\u6309\u94ae onClick \u987a\u85e4\u6478\u74dc), read it + settings add-window, then author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run them red, then T2-T4 (M1)",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "SSH test host; Rakazo instance; design prototype HTML; push authority",
+      "updated_at": "2026-11-07T15:56:50.931503Z"
     }
   ]
 }

@@ -39,7 +39,7 @@ features:
     atlas: ".super-speckit\\atlas\\README.md"
     change_story: ".super-speckit\\atlas\\changes\\rdux15-project-device-separation\\change-story.md"
     latest_handoff: null
-    decision_trail: null
+    decision_trail: ".super-speckit/features/rdux15-project-device-separation/decision-trail.json"
     verification_harness: ".super-speckit/verification/verification-harness.md"
     static_review: null
     corrective_enforcement: null

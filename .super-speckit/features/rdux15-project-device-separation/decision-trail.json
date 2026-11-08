@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "feature": "rdux15-project-device-separation",
+  "entries": [
+    {
+      "id": "DT-RDUX15-01",
+      "date": "2026-11-08",
+      "decision": "Skip Rakazo as the Journey UX independent reviewer; use ADE computer-use to drive the real desktop app for Journey UX evidence instead.",
+      "provenance": "Repo owner directive in ADE chat cc7b7010 ('this app support computer use so skip rakazo and mark it as skip then use /ade-computer-use instead'), 2026-11-08.",
+      "rationale": "Rakazo instance was never configured (blocker); the app is a desktop Electron app drivable by computer use; journey_ux.mode was already agent-led-manual-browser, so the executor identity changes, not the required coverage or real-running-app gate.",
+      "consequences": [
+        "super-speckit.yml manual_journey_agent.enabled=false; journey_ux comment updated",
+        "verification-harness.md Rakazo section replaced with ADE computer-use executor note",
+        "Journey UX receipts record reviewer identity honestly as 'ADE lane agent via computer use', NOT an independent human or third-party model; no_release_with_blocked_journey still applies"
+      ],
+      "supersedes": [],
+      "evidence": [
+        {
+          "path": "super-speckit.yml",
+          "digest": "af54682d9359bef45648548c656f5f8031f5093575684f1943f27f8889cfbc02"
+        },
+        {
+          "path": ".super-speckit/verification/verification-harness.md",
+          "digest": "849278ed2e5b60cbe72d5492c1160271d3acac51cdebdcac64d9cced709866dc"
+        }
+      ]
+    }
+  ]
+}

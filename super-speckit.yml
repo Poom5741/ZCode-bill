@@ -148,7 +148,7 @@ skill_evaluation:
   require_observed_artifacts: true
 journey_ux:
   required_for_ui_changes: true
-  mode: agent-led-manual-browser
+  mode: agent-led-manual-browser # 2026-11-08：执行者为 ADE computer-use（Rakazo 经用户指示跳过）；reviewer 身份如实记录为 ADE lane agent
   require_real_running_app: true
   rerun_full_declared_set_after_fix: true
   capture: [screenshot, trace, video, sanitized-logs]
@@ -157,7 +157,7 @@ journey_ux:
   no_release_with_blocked_journey: true
 manual_journey_agent:
   provider: rakazo
-  enabled: true
+  enabled: false # 2026-11-08 用户指示跳过 Rakazo（本应用支持 computer use）；Journey UX 改由 ADE computer-use 执行，见 journey_ux.mode
   mode: persistent-browser-reviewer
   rakazo:
     # Optional bootstrap values; otherwise ask on first test use and remember in the local QA session.
