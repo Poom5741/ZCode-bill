@@ -56,3 +56,44 @@ per-wave import-graph mapping happens before each maker wave and updates this re
 - Zustand state in src/store; single owner per state; no duplicate write paths.
 - Deletions must keep typecheck/lint/architecture checks green; no dead exports (knip).
 - Docs (AGENTS.md/DESIGN.md/CONTEXT.md) updated in the same change as behavior removal.
+
+## Wave-1 module map (added 2026-11-10, evidence-linked)
+
+### Marketplace (delete surface, keep discovery)
+- Main view route: workspaceMainView === "plugin-store" in packages/ui/src/App.tsx (lines ~884-998:
+  handleNavigateToPluginStoreMain, pluginStoreOpenVersion, onNavigateToPluginStore wiring).
+- Page component: packages/ui/src/settings/PluginStorePage.tsx (imported by
+  packages/ui/src/app-shell/WorkspaceShellLayout.tsx:63).
+- Exclusive service RPCs: zcodeAgentService.addPluginMarketplace / updatePluginMarketplace
+  (App.tsx:844-846) - marketplace INSTALL/management calls; host side to be traced in maker work.
+- KEEP: packages/services/src/skills/skillsService.ts discoverSkills - reads workspace/repo skill
+  dirs and installed plugin roots independently of the marketplace UI (skillsService.ts:840,
+  1036, 1061); zbill-billing skill discovery must not regress.
+- Navigation lib: packages/ui/src/lib/pluginStoreNavigation.ts (addPluginStoreOpenListener).
+
+### Automations (delete surface)
+- Main view route: workspaceMainView === "automations" (App.tsx:881; WorkspaceShellLayout.tsx:
+  1454, 2159, 2338-2358, 2779-2799 render automations main + run-history navigation).
+- Entry: ProjectSidebarNavigation Automations button (already hidden under ZBILL_PRODUCT).
+- Run-history cross-workspace navigation logic in WorkspaceShellLayout.tsx:1527-1536 goes with it.
+
+### Coding-plan purchase (delete surface; KEEP provider connection)
+- Surfaces: packages/ui/src/settings/CodingPlanUpgradeDialog.tsx,
+  CodingPlanEmbeddedWebviewDialog.tsx (purchase webview + CodingPlanPurchaseCompletePayload),
+  model-provider-section Detail.tsx CodingPlanPurchaseChoiceBanners (:594,:878) and
+  onCodingPlanPurchaseComplete plumbing (:254,:303,:638,:755), ModelProviderSection.tsx
+  purchase-token refresh state (:380-609,:849,:1206).
+- KEEP: ModelProviderSection base provider add/edit/connection + API key management - the agent
+  runtime needs a configured provider for model access. Purchase-token auth
+  (codingPlanPurchaseAuth.js) and upgrade/discount UI go; connection/refresh of provider
+  credentials stays.
+- Services packages/services/src/coding-plan-subscription/* + usage-stats purchase providers:
+  audit in maker work; delete only members with no remaining UI/runtime callers.
+
+### Known blast radius (maker work refines)
+- i18n keys (workspace.openScheduledSettings, plugin-store.*, automations.*, coding plan
+  purchase strings) - remove keys only after last reference dies (knip will flag).
+- E2E: packages/desktop/test/e2e references purchase/marketplace/automations flows
+  (marketing-touch-*, coding-plan entitlement tests) - delete or rewrite with the surfaces.
+- App.tsx / WorkspaceShellLayout.tsx are shared shells; every removal must keep chat/task
+  main views, settings, and web-remote-control shell conditionals compiling.

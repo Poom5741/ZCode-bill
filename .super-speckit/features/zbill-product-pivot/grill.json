@@ -1,0 +1,82 @@
+{
+  "spec": ".super-speckit/features/zbill-product-pivot/matrix.md",
+  "resolved_decisions": [
+    {
+      "id": "Q1",
+      "question": "Does deleting the plugin marketplace break billing-skill discovery (REQ-103/104 depend on the zbill-billing skill being invocable)?",
+      "resolution": "No. Skill discovery (discoverSkills in packages/services/src/skills/skillsService.ts:840,1036,1061) reads workspace/repo skill dirs and installed plugin roots directly; the marketplace is only an install/management UI plus exclusive management RPCs (addPluginMarketplace/updatePluginMarketplace, App.tsx:844-846). Wave 1 deletes the UI surface and management RPCs, not skillsService.",
+      "classification": "proven",
+      "evidence": [
+        { "path": "packages/services/src/skills/skillsService.ts", "digest": "7fa9612d1c36ff3536a2a545c77e78f4e63b50c59d48c11297d75172e99ef336" },
+        { "path": "packages/ui/src/App.tsx", "digest": "73f13aaaf093a830619c7ef43a060e5c2e7e18822fa139a60128baee189c04dc" }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Where exactly is the purchase-UI vs provider-connection boundary so the agent keeps model access (REQ-107)?",
+      "resolution": "Delete: CodingPlanUpgradeDialog.tsx, CodingPlanEmbeddedWebviewDialog.tsx (purchase webview + completion payload), CodingPlanPurchaseChoiceBanners in model-provider-section/Detail.tsx (:594,:878), onCodingPlanPurchaseComplete plumbing (:254,:303,:638,:755), purchase-token refresh state in ModelProviderSection.tsx (:380-609,:849,:1206), codingPlanPurchaseAuth.js. Keep: ModelProviderSection base provider list/add/edit/connection and API key management.",
+      "classification": "proven",
+      "evidence": [
+        { "path": "packages/ui/src/settings/ModelProviderSection.tsx", "digest": "db58de85d7ebef5ef152240c4d9f0f4e83ef30ec02b25118522d2c653d5a4e24" },
+        { "path": "packages/ui/src/settings/model-provider-section/Detail.tsx", "digest": "74e8bae97218033dfe0aca4011f5376063dc252128a384a5f7452cbe18ab267b" },
+        { "path": "packages/ui/src/settings/CodingPlanEmbeddedWebviewDialog.tsx", "digest": "c698ffb7d34635be29dfbd78c0d4b531471a78da262f93d2f639026dd8c07a72" }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "Do automations/plugin-store deletions break the shared shells (App.tsx, WorkspaceShellLayout.tsx) or the web-remote-control shell?",
+      "resolution": "They are conditional routes on workspaceMainView ('automations' | 'plugin-store'); removal touches route values, navigation callbacks, and their i18n keys. Web-remote-control conditionals are separate (wave 2). Shared-shell edits must keep chat/task main views and settings compiling; typecheck is the gate per slice.",
+      "classification": "proven",
+      "evidence": [
+        { "path": "packages/ui/src/app-shell/WorkspaceShellLayout.tsx", "digest": "00562d272c6f9d1038723d04c12b959009455553cc97fe39a46fdc1862963851" }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Should the ZBILL_PRODUCT flag be retired after wave 1?",
+      "resolution": "Not yet. Wave 1 removes the wave-1 surfaces at code level; the flag still gates remaining agent-surface entry points until wave 2 finishes (web remote control, device management). Retire the flag in wave 2 when every gated surface is deleted.",
+      "classification": "inferred",
+      "evidence": [
+        { "path": "packages/ui/src/project-sidebar/ProjectSidebarNavigation.tsx", "digest": "0b74e560acc55b9ee34cdd514d6c4c747afd14d15a68a77f13a39fe5f971faec" }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Do existing e2e/engineering tests referencing deleted surfaces block the wave?",
+      "resolution": "No, if updated in the same slice: affected specs under packages/desktop/test/e2e (marketing-touch, coding-plan entitlement) are deleted or rewritten together with the surfaces; the affected-test selector is file-based and a deleted spec selects nothing. Coverage loss is recorded in the matrix row evidence, not silently.",
+      "classification": "inferred",
+      "evidence": [
+        { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a" }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Can the pipeline satisfy REQ-104 (non-EV ingestion without fabricated amounts) without new extraction intelligence?",
+      "resolution": "Yes for the wave scope: build_report.py already flags unknown formats and supports items.json per-file amount/date/detail overrides; a new bill class is added as parser config + fixture + items.json, with 'flag and ask' as the failure mode. Broader extraction intelligence stays out of scope.",
+      "classification": "proven",
+      "evidence": [
+        { "path": "zbill-billing/SKILL.md", "digest": "654ea6205807f8ee15488faa70daef03ef9eed97c7e6343d25555ba97475fc08" }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Where do archived reports live for REQ-106?",
+      "resolution": "ZBill keeps a workspace-local reports directory (under the opened workspace), browsable through the existing document panel; re-export re-runs the pipeline outputs. Exact directory name and panel integration point are resolved in maker work and recorded in the change story.",
+      "classification": "assumed",
+      "evidence": [
+        { "path": "evidence/ZBILL-M1/zbill-mode.md", "digest": "18bd49cd03c5700734a6f3e54c0e99cc12e2ce3e9d12ebb9304f10aef48b440e" }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Is deleting purchase code a payments/auth risk?",
+      "resolution": "No local payment processing exists; the purchase flow is an embedded webview dialog plus token refresh calls to the remote billing API. Deleting UI and callers cannot create a payment path; remaining host handlers are dead code removed in the same slice (verified by knip/typecheck).",
+      "classification": "proven",
+      "evidence": [
+        { "path": "packages/ui/src/settings/CodingPlanEmbeddedWebviewDialog.tsx", "digest": "c698ffb7d34635be29dfbd78c0d4b531471a78da262f93d2f639026dd8c07a72" }
+      ]
+    }
+  ],
+  "open_questions": [],
+  "notes": "Grill performed 2026-11-10 against the REQ-101..109 matrix after the wave-1 module-map investigation. Q7 remains assumed with a bounded maker-work resolution; it does not alter purpose, people, success signal, or non-goals."
+}

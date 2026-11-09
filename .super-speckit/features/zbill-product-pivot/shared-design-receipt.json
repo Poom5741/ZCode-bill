@@ -1,0 +1,22 @@
+{
+  "investigation_digest": "ca39ae2f261b3f97c110f4f707d24d0d09f0b781d81ed13e9c7c7e977ef25f0f",
+  "observed": "ZBill product mode is a build-time define (packages/desktop/vite.config.ts) surfacing as ZBILL_PRODUCT in packages/shared/src/env.ts, currently only hiding sidebar entries (ProjectSidebarNavigation.tsx). Surfaces to delete are conditional workspaceMainView routes ('automations', 'plugin-store') in App.tsx + WorkspaceShellLayout.tsx, the purchase stack (CodingPlanUpgradeDialog, CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners, purchase-token state in ModelProviderSection), and host marketplace RPCs (addPluginMarketplace/updatePluginMarketplace). Skill discovery (skillsService.discoverSkills) is independent of the marketplace. The bill pipeline (zbill-billing/) is a self-contained Python venv CLI with items.json overrides.",
+  "proposed": "Three verified deletion/feature waves on the shared shells: W1 removes purchase/marketplace/automations at route, component, RPC, i18n, and e2e level (provider connection base CRUD preserved); W2 removes remote-connection/device-management and web/mobile remote control per a keep-list investigation and retires ZBILL_PRODUCT; W3 adds bill features (second bill class, item review UI feeding items.json, single-owner archive index browsed via the document panel). The agent core (session runtime, host RPC, chat/file/document panels, provider config, skill discovery) is kept untouched except where a deletion removes its exclusive callers.",
+  "invariants": [
+    "Provider connection config (add/edit/connect + API keys) survives every wave — the agent needs model access",
+    "skillsService discovery keeps working after marketplace deletion (zbill-billing skill invocable)",
+    "The pipeline is the only writer of report files; UI edits flow through items.json, never hand-edited outputs",
+    "Archive index has exactly one owning store module once REQ-106 lands",
+    "Each wave leaves the repo building: typecheck/lint/architecture green before the next wave starts",
+    "No compatibility shims or flag-kept dead code for deleted surfaces (hard delete per owner)"
+  ],
+  "verification_plan": "Per slice: pnpm typecheck, pnpm lint, pnpm architecture:check --changed, knip for dead exports. REQ-103/104 via CLI runs on fixtures asserting output files and parsed totals. REQ-101/102/105/106/108 via ADE computer-use journeys on the real dev instance (view/cancel-only on user data) with screenshot receipts. Matrix rows carry the evidence.",
+  "view": {
+    "renderer": "mermaid",
+    "source": ".super-speckit/features/zbill-product-pivot/design-view.mmd",
+    "source_digest": "b7fbf4bc0e378ad7b37047ab760c86a0ece2b3c1303f2ef65dc890ea7ab8394b",
+    "artifact": ".super-speckit/features/zbill-product-pivot/design-view.md",
+    "artifact_digest": "36d702ae71b7b43127a7dc5b8551863f7158c8a5f1580677a3b4d933f7535920",
+    "limitation": "Archify renderer unavailable in this environment; Mermaid fallback carries the same factual content. Diagram is explanation, not product proof."
+  }
+}

@@ -7,7 +7,7 @@
       "date": "2026-11-09",
       "decision": "Overgoal pivot: transform ZCode into ZBill, a Windows-first desktop app for creating bill reports; keep the agent-chat core, expand bill features (any bill type, item review/edit, report history/archive, more outputs), and hard-delete most non-billing ZCode design and features from the codebase.",
       "provenance": "Repo owner directive in ADE chat session 10e5b846: 'the overgoal i want to transform zcode to not be zcode at all. it should be app for create bill report as i want but it need more than what feature is now. it also need to cut down most of design and feature of zcode', plus four structured scope answers (features/shell/cut/platform), 2026-11-09.",
-      "rationale": "The previous active plan (rdux15-project-device-separation) polished the remote-connection wizard UX Ã¢â‚¬â€ a domain the overgoal deletes. Continuing it would invest in code being removed. Purpose was re-gated with the owner before any further maker work.",
+      "rationale": "The previous active plan (rdux15-project-device-separation) polished the remote-connection wizard UX ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a domain the overgoal deletes. Continuing it would invest in code being removed. Purpose was re-gated with the owner before any further maker work.",
       "consequences": [
         "rdux15-project-device-separation transitions maker_running -> blocked with a durable handoff; artifacts and journey evidence preserved",
         "New feature zbill-product-pivot registered with confirmed purpose and milestone route",
@@ -17,11 +17,11 @@
       "evidence": [
         {
           "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md",
-          "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260"
+          "digest": "75eded17343faf4499a7deaabba275f7ac96367d728d7e6a530623afabf1da3d"
         },
         {
           "path": ".super-speckit/features/zbill-product-pivot/matrix.md",
-          "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a"
+          "digest": "66ec037b139a4f9424f53a24a7c7c0d282feb06cf694d5c5eff5829a3963659d"
         }
       ]
     },
@@ -48,7 +48,7 @@
         },
         {
           "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md",
-          "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216"
+          "digest": "e2d479c29b39e677907eaf8c1a8f6c6603435d37868509dc900d63950522604f"
         }
       ]
     },
@@ -56,7 +56,7 @@
       "id": "DT-ZPIVOT-03",
       "date": "2026-11-09",
       "decision": "Cut execution order: wave 1 removes coding-plan purchase panels, plugin marketplace, and automations surfaces; wave 2 removes remote-connection device management (SSH/WSL/Docker) and web/mobile remote-control modules; each wave is a verified slice (code + routes + docs + checks) with its import-graph investigation completed first (receipt steps S4/S5).",
-      "provenance": "Agent planning within owner-confirmed hard-delete decision, 2026-11-09; wave order follows dependency risk Ã¢â‚¬â€ wave 1 entries are already partially hidden by ZBill product mode, wave 2 deletions have wider coupling to the agent core.",
+      "provenance": "Agent planning within owner-confirmed hard-delete decision, 2026-11-09; wave order follows dependency risk ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â wave 1 entries are already partially hidden by ZBill product mode, wave 2 deletions have wider coupling to the agent core.",
       "rationale": "Hard delete in two waves keeps every candidate shippable and independently verifiable, per unified pipeline slice reassessment; single big-bang deletion would leave the repo unbuildable between steps.",
       "consequences": [
         "Matrix rows R-107/R-108 bind one wave each",
@@ -67,7 +67,7 @@
       "evidence": [
         {
           "path": ".super-speckit/features/zbill-product-pivot/investigation-receipt.json",
-          "digest": "fe1a7fd175e2683aa64c48721ff25b854dd622a6cf9a29f6fd6226c0485af8eb"
+          "digest": "ca39ae2f261b3f97c110f4f707d24d0d09f0b781d81ed13e9c7c7e977ef25f0f"
         }
       ]
     }

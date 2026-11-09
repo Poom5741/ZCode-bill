@@ -43,11 +43,17 @@
     { "path": "zbill-billing/GOOGLE-PLUGINS-M2.md", "digest": "0dbeb7ad036ba2497d1b250eca56546e5b41582159a8989262acc958bedfb095" },
     { "path": "evidence/ZBILL-M1/zbill-mode.md", "digest": "18bd49cd03c5700734a6f3e54c0e99cc12e2ce3e9d12ebb9304f10aef48b440e" },
     { "path": ".super-speckit/purpose/ZBILL-M1/purpose-map.md", "digest": "3b7b2c34b48350b97a717bc5adb1eb68a03d760eddb9b8bc88ffa85f466bd0c5" },
-    { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a" },
-    { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260" },
-    { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" },
+    { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "66ec037b139a4f9424f53a24a7c7c0d282feb06cf694d5c5eff5829a3963659d" },
+    { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "75eded17343faf4499a7deaabba275f7ac96367d728d7e6a530623afabf1da3d" },
+    { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "e2d479c29b39e677907eaf8c1a8f6c6603435d37868509dc900d63950522604f" },
     { "path": "AGENTS.md", "digest": "7996d42efbe9632e11450478465bec248264787ce5759530e5b0a8b6ccb71890" },
-    { "path": "packages/ui/AGENTS.md", "digest": "233e28d32085de1a50b5dbb04b7389a7248a2b2fd8399884f750234d0aadda89" }
+    { "path": "packages/ui/src/App.tsx", "digest": "73f13aaaf093a830619c7ef43a060e5c2e7e18822fa139a60128baee189c04dc" },
+    { "path": "packages/ui/src/app-shell/WorkspaceShellLayout.tsx", "digest": "00562d272c6f9d1038723d04c12b959009455553cc97fe39a46fdc1862963851" },
+    { "path": "packages/ui/src/settings/PluginStorePage.tsx", "digest": "f3695212861e51ac35cb09f844c0ae486c2d32e0dca4682a2aef7c2e48f418b3" },
+    { "path": "packages/ui/src/settings/ModelProviderSection.tsx", "digest": "db58de85d7ebef5ef152240c4d9f0f4e83ef30ec02b25118522d2c653d5a4e24" },
+    { "path": "packages/ui/src/settings/CodingPlanEmbeddedWebviewDialog.tsx", "digest": "c698ffb7d34635be29dfbd78c0d4b531471a78da262f93d2f639026dd8c07a72" },
+    { "path": "packages/ui/src/settings/model-provider-section/Detail.tsx", "digest": "74e8bae97218033dfe0aca4011f5376063dc252128a384a5f7452cbe18ab267b" },
+    { "path": "packages/services/src/skills/skillsService.ts", "digest": "7fa9612d1c36ff3536a2a545c77e78f4e63b50c59d48c11297d75172e99ef336" },    { "path": "packages/ui/AGENTS.md", "digest": "233e28d32085de1a50b5dbb04b7389a7248a2b2fd8399884f750234d0aadda89" }
   ],
   "steps": [
     {
@@ -55,7 +61,7 @@
       "source_step": "1",
       "status": "completed",
       "evidence": [
-        { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260" },
+        { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "75eded17343faf4499a7deaabba275f7ac96367d728d7e6a530623afabf1da3d" },
         { "path": "evidence/ZBILL-M1/zbill-mode.md", "digest": "18bd49cd03c5700734a6f3e54c0e99cc12e2ce3e9d12ebb9304f10aef48b440e" },
         { "path": "zbill-billing/SKILL.md", "digest": "654ea6205807f8ee15488faa70daef03ef9eed97c7e6343d25555ba97475fc08" }
       ]
@@ -65,7 +71,7 @@
       "source_step": "2",
       "status": "completed",
       "evidence": [
-        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" }
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "e2d479c29b39e677907eaf8c1a8f6c6603435d37868509dc900d63950522604f" }
       ]
     },
     {
@@ -73,8 +79,8 @@
       "source_step": "3",
       "status": "completed",
       "evidence": [
-        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" },
-        { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a" }
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "e2d479c29b39e677907eaf8c1a8f6c6603435d37868509dc900d63950522604f" },
+        { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "66ec037b139a4f9424f53a24a7c7c0d282feb06cf694d5c5eff5829a3963659d" }
       ]
     },
     {
@@ -82,7 +88,7 @@
       "source_step": "4",
       "status": "completed",
       "evidence": [
-        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" }
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "e2d479c29b39e677907eaf8c1a8f6c6603435d37868509dc900d63950522604f" }
       ]
     }
   ]

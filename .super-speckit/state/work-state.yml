@@ -49,18 +49,18 @@ features:
     runs: []
     bugs: []
   - id: "zbill-product-pivot"
-    state: "planned"
+    state: "maker_running"
     candidate_sha: null
     maker: "ade-lane-a5862aba"
     checker: "independent-qa-clone"
     matrix: ".super-speckit/features/zbill-product-pivot/matrix.md"
     purpose_status: "confirmed"
     purpose_map: ".super-speckit\\purpose\\zbill-product-pivot\\purpose-map.md"
-    grill_status: "not_started"
-    grill_artifact: null
+    grill_status: "complete"
+    grill_artifact: ".super-speckit/features/zbill-product-pivot/grill.json"
     route: "milestone"
-    atlas: null
-    change_story: null
+    atlas: ".super-speckit\\atlas\\README.md"
+    change_story: ".super-speckit\\atlas\\changes\\zbill-product-pivot\\change-story.md"
     latest_handoff: null
     decision_trail: ".super-speckit/features/zbill-product-pivot/decision-trail.json"
     verification_harness: null

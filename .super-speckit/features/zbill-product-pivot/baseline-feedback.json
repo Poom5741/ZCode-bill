@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "feature": "zbill-product-pivot",
+  "recorded_at": "2026-11-10",
+  "baseline": {
+    "workspace_freshness": "node scripts/check-workspace-freshness.mjs — main synced with origin/main, ahead 0 / behind 0 (2026-11-09, pre-pivot)",
+    "typecheck": "pnpm typecheck — clean after the zbill port (2026-11-09)",
+    "lint": "pnpm lint — 0 errors, 89 pre-existing warnings (2026-11-09)",
+    "architecture": "pnpm architecture:check via pre-push gate — OK, violations 0, baseline 0, new 0 (commit b973e411, 2026-11-09)",
+    "kit_state": "super_speckit.py validate — super-speckit state valid (2026-11-10)",
+    "engineering_tests": "158/158 selected at push, skipped as non-product change set (docs/state/zbill-billing only) — per run-affected-engineering-tests policy"
+  },
+  "feedback_loops": [
+    "Wave slices must re-run typecheck/lint/architecture before closing; knip after deletion batches for dead exports",
+    "Journey evidence via ADE computer-use (chromedriver Application-Control-blocked on this host); view/cancel-only on the real dev instance",
+    "Pipeline regression guard: EV fixtures must keep producing xlsx+PDF after every wave"
+  ],
+  "notes": "Baseline recorded before maker work starts; rdux15-project-device-separation blocked at the same baseline with durable handoff handoff-pivot-supersession.md."
+}

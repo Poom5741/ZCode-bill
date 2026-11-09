@@ -1,0 +1,33 @@
+{
+  "route": "milestone",
+  "maker": "ade-lane-a5862aba",
+  "primary_persona": "senior-frontend-engineer",
+  "rationale": "React/Electron surface deletions and bill-feature UI dominate the work (senior-frontend-engineer as maker); staff-software-architect governs the shared-shell coupling and keep-list boundaries across waves; senior-qa-test-engineer shapes the journey/check evidence obligations per matrix row.",
+  "intent": {
+    ".super-speckit/features/zbill-product-pivot/matrix.md": "66ec037b139a4f9424f53a24a7c7c0d282feb06cf694d5c5eff5829a3963659d",
+    ".super-speckit/features/zbill-product-pivot/spec.md": "e1f18f653a852dc3def83996cd8585e2118e71f4bbbc551150b28b64e9fc6d15",
+    ".super-speckit/features/zbill-product-pivot/plan.md": "f900f1aaabab409370931bfe006f15b5ba773987b687dbcc2efa32a6541df84f",
+    ".specify/memory/constitution.md": "82ca172ceaad2b395dc5c5ab1b63afb1df9fef93d3e36a56d38eed608a6c4f54"
+  },
+  "source_revision": "b41c7a6a40c4960d687779227137b25be585ef55",
+  "specialists": [
+    {
+      "id": "senior-frontend-engineer",
+      "category": "personas",
+      "source": "skills/personas/senior-frontend-engineer/SKILL.md",
+      "sha256": "ab5fa03a5569f6cbcd6c0c11473aee09fa7d1613521ca0f1152d25e74f1ad3e0"
+    },
+    {
+      "id": "staff-software-architect",
+      "category": "personas",
+      "source": "skills/personas/staff-software-architect/SKILL.md",
+      "sha256": "ad75a65c9d534bc9e5a9621bcc759628fca8d9a5f7ea7c733c4eaf3d8754a8f1"
+    },
+    {
+      "id": "senior-qa-test-engineer",
+      "category": "personas",
+      "source": "skills/personas/senior-qa-test-engineer/SKILL.md",
+      "sha256": "bc1fe88d399ce83c71f8571ddc1702ee670524c1bf579851ebdd7c82d3f0b45c"
+    }
+  ]
+}

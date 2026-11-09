@@ -1,0 +1,19 @@
+flowchart LR
+  Owner[Owner: confirmed scope answers 2026-11-09] --> Purpose[Purpose gate: ZBill pivot]
+  Purpose --> W1[Wave 1: delete purchase / marketplace / automations]
+  Purpose --> W2[Wave 2: delete remote connections / remote control]
+  Purpose --> W3[Wave 3: bill features]
+  subgraph Kept[Agent core kept]
+    Chat[Chat main view] --> Agent[Session runtime + host RPC]
+    Files[File tree panel] --> Agent
+    Doc[Document panel] --> Report[(Report files xlsx+PDF)]
+    Provider[Provider connection config] --> Agent
+    Skills[skillsService discoverSkills] --> Agent
+  end
+  W1 --> Kept
+  W2 --> Kept
+  W3 --> Pipeline[zbill-billing pipeline]
+  Pipeline --> Report
+  Review[Item review/edit UI] --> Items[(items.json overrides)]
+  Items --> Pipeline
+  Archive[Archive index store: single owner] --> Doc

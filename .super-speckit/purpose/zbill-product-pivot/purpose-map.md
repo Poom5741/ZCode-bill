@@ -18,11 +18,11 @@ zbill-billing pipeline); upstream ZCode users are no longer a target audience of
 
 ## Success signal
 The app builds and launches on Windows presenting as ZBill with a working agent-chat core
-(R-101/102); the proven EV pipeline still produces xlsx+PDF (R-103); at least one additional
-bill class ingests end-to-end without fabricated amounts (R-104); edited items appear in the
-generated report (R-105); past reports are archived, browsable and re-exportable in-app (R-106);
+(REQ-101/102); the proven EV pipeline still produces xlsx+PDF (REQ-103); at least one additional
+bill class ingests end-to-end without fabricated amounts (REQ-104); edited items appear in the
+generated report (REQ-105); past reports are archived, browsable and re-exportable in-app (REQ-106);
 the deleted surfaces are absent from both the running app and the product code with repo checks
-green (R-107/108); docs match the surviving product (R-109).
+green (REQ-107/108); docs match the surviving product (REQ-109).
 
 ## Non-goals
 Google OAuth plugins gmail/gdrive/gcalendar/gsheets (recorded M2 scope, later milestone);
