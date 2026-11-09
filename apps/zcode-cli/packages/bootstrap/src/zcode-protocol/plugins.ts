@@ -2,9 +2,6 @@ import {
   zcodePluginsConfigureParamsSchema,
   zcodePluginsResetConfigParamsSchema,
   zcodePluginsInstallParamsSchema,
-  zcodePluginsMarketplaceAddParamsSchema,
-  zcodePluginsMarketplaceRemoveParamsSchema,
-  zcodePluginsMarketplaceUpdateParamsSchema,
   zcodePluginsOverviewParamsSchema,
   zcodePluginsListParamsSchema,
   zcodePluginsSetEnabledParamsSchema,
@@ -23,7 +20,6 @@ import {
   type ZCodePluginsDescribeResult,
   type ZCodePluginsInstallResult,
   type ZCodePluginsListResult,
-  type ZCodePluginsMarketplaceMutationResult,
   type ZCodePluginsOverviewResult,
   type ZCodePluginsRestoreBuiltinResult,
   type ZCodePluginsSetEnabledResult,
@@ -32,19 +28,16 @@ import {
 } from "@zcode/shared";
 import type { PluginDiagnostic, PluginMetadata } from "@zcode/contracts";
 import {
-  addZCodePluginMarketplace,
   configureZCodePlugin,
   describeZCodePlugin,
   enrichCachedClaudeMarketplaceIconsForOverview,
   getZCodePluginsOverview,
   installZCodeMarketplacePlugin,
-  removeZCodePluginMarketplace,
   resolveZCodePlugins,
   resetZCodePluginConfig,
   restoreBuiltinPlugin as restoreBuiltinPluginCore,
   setZCodePluginEnabled,
   uninstallZCodeMarketplacePlugin,
-  updateZCodePluginMarketplace,
   validateZCodePlugin,
 } from "../plugins.js";
 import { listInstalledPluginRecords } from "@zcode/adapters/plugins";
@@ -291,61 +284,8 @@ export async function getPluginsOverview(
   };
 }
 
-export async function addPluginMarketplace(
-  context: ZCodeProtocolAgentServerContext,
-  rawParams: unknown,
-  abortSignal?: AbortSignal,
-): Promise<ZCodePluginsMarketplaceMutationResult> {
-  const params = parseParams(zcodePluginsMarketplaceAddParamsSchema, rawParams);
-  const pluginStorageRoot = resolvePluginStorageRoot(params.workspace.workspacePath);
-  const marketplace = await withPluginStorageLock(pluginStorageRoot, async () =>
-    addZCodePluginMarketplace({
-      abortSignal,
-      dryRun: params.dryRun,
-      logger: context.logger,
-      source: params.source,
-      workingDirectory: params.workspace.workspacePath,
-    }),
-  );
-  return { marketplace: toMarketplaceSummary(marketplace), diagnostics: [] };
-}
-
-export async function removePluginMarketplace(
-  context: ZCodeProtocolAgentServerContext,
-  rawParams: unknown,
-): Promise<ZCodePluginsMarketplaceMutationResult> {
-  const params = parseParams(zcodePluginsMarketplaceRemoveParamsSchema, rawParams);
-  const pluginStorageRoot = resolvePluginStorageRoot(params.workspace.workspacePath);
-  await withPluginStorageLock(pluginStorageRoot, async () =>
-    removeZCodePluginMarketplace({
-      logger: context.logger,
-      marketplace: params.marketplace,
-      workingDirectory: params.workspace.workspacePath,
-    }),
-  );
-  return { diagnostics: [] };
-}
-
-export async function updatePluginMarketplace(
-  context: ZCodeProtocolAgentServerContext,
-  rawParams: unknown,
-  abortSignal?: AbortSignal,
-): Promise<ZCodePluginsMarketplaceMutationResult> {
-  const params = parseParams(zcodePluginsMarketplaceUpdateParamsSchema, rawParams);
-  const pluginStorageRoot = resolvePluginStorageRoot(params.workspace.workspacePath);
-  const result = await withPluginStorageLock(pluginStorageRoot, async () =>
-    updateZCodePluginMarketplace({
-      abortSignal,
-      logger: context.logger,
-      marketplace: params.marketplace,
-      workingDirectory: params.workspace.workspacePath,
-    }),
-  );
-  return {
-    marketplaces: result.marketplaces.map(toMarketplaceSummary),
-    diagnostics: result.diagnostics.map(toPluginDiagnostic),
-  };
-}
+// Wave-1（ZBill 裁剪）：插件市场管理 RPC（marketplace add/remove/update）已随协议面一起移除；
+// install/uninstall/update 等插件操作保留（已安装插件的维护仍走这些方法）。
 
 export async function installPlugin(
   context: ZCodeProtocolAgentServerContext,

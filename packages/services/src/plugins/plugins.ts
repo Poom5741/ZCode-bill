@@ -1,8 +1,4 @@
-import type {
-  PluginScope,
-  PluginsOverviewResult,
-  ZCodePluginsMarketplaceMutationResult,
-} from "@zcode/shared";
+import type { PluginScope, PluginsOverviewResult } from "@zcode/shared";
 import { ServiceChannels } from "@zcode/shared";
 import { createServiceDescriptor } from "../descriptors.js";
 
@@ -11,21 +7,8 @@ export interface IPluginsService {
     workspacePath: string;
     workspaceIdentity?: string;
   }): Promise<PluginsOverviewResult>;
-  addMarketplace(params: {
-    workspacePath: string;
-    workspaceIdentity?: string;
-    source: string;
-  }): Promise<void>;
-  removeMarketplace(params: {
-    workspacePath: string;
-    workspaceIdentity?: string;
-    marketplace: string;
-  }): Promise<void>;
-  updateMarketplace(params: {
-    workspacePath: string;
-    workspaceIdentity?: string;
-    marketplace?: string;
-  }): Promise<ZCodePluginsMarketplaceMutationResult | void>;
+  // Wave-1（ZBill 裁剪）：addMarketplace / removeMarketplace / updateMarketplace 管理方法
+  // 已随插件市场 UI 与协议面一起删除；已安装插件的维护方法保留。
   installPlugin(params: {
     workspacePath: string;
     workspaceIdentity?: string;

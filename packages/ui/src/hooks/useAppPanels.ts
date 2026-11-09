@@ -41,7 +41,7 @@ import {
   openWorkflowWorkspaceSidePane,
   openWorkflowArtifactSidePane,
   activateDeveloperToolsSidePane,
-  activatePluginMarketSidePane,
+  activateGitSidePane,
   activateNewTabSidePane,
   openBrowserSidePane,
   openBrowserPermissionsSidePane,
@@ -53,7 +53,6 @@ import {
   BROWSER_USE_OPERATION_INDICATOR_DURATION_MS,
   openCodeViewerSidePane,
   openCodeViewerSidePanes,
-  activateGitSidePane,
   getActiveSidePaneTab,
   getVisibleSidePaneTabs,
   sidePaneOwnerKey,
@@ -335,7 +334,6 @@ export function useAppPanels(options: {
           launcher?.type !== "new-tab" ||
           !opened ||
           opened.type === "new-tab" ||
-          opened.type === "plugin-market" ||
           !isSidePaneTabVisibleInScope(launcher, scope) ||
           !isSidePaneTabVisibleInScope(opened, scope)
         )
@@ -899,11 +897,6 @@ export function useAppPanels(options: {
   const handleOpenNewSidePaneTab = useCallback(() => {
     revealSidePaneForCurrentOwner();
     commitOpenedSidePaneState(activateNewTabSidePane);
-  }, [commitOpenedSidePaneState, revealSidePaneForCurrentOwner]);
-
-  const handleOpenPluginMarket = useCallback(() => {
-    revealSidePaneForCurrentOwner();
-    commitOpenedSidePaneState(activatePluginMarketSidePane);
   }, [commitOpenedSidePaneState, revealSidePaneForCurrentOwner]);
 
   const handleOpenDeveloperTools = useCallback(() => {
@@ -1707,7 +1700,6 @@ export function useAppPanels(options: {
     handleOpenTreemapping,
     handleOpenWhiteboard,
     handleOpenDeveloperTools,
-    handleOpenPluginMarket,
     handleOpenNewSidePaneTab,
     handleOpenTerminalTab,
     handleOpenModelTrajectory,

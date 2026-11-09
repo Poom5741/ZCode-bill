@@ -34,7 +34,6 @@ import type {
   ZCodeWorkspaceMcpTrustResult,
   ZCodePluginsListResult,
   ZCodePluginsOverviewResult,
-  ZCodePluginsMarketplaceMutationResult,
   ZCodePluginsInstallResult,
   ZCodePluginsReferenceCatalogResult,
   ZCodeSkillsReferenceCatalogResult,
@@ -138,7 +137,6 @@ import { createServiceDescriptor } from "../descriptors.js";
 export * from "./zcodeAgentPluginParams.js";
 export * from "./zcodeAgentWorkflowParams.js";
 import type {
-  ZCodeAgentAddPluginMarketplaceParams,
   ZCodeAgentAutomationIdParams,
   ZCodeAgentCancelPluginOperationParams,
   ZCodeAgentConfigurePluginParams,
@@ -162,12 +160,10 @@ import type {
   ZCodeAgentCallMcpToolForUiParams,
   ZCodeAgentCancelMcpToolCallForUiParams,
   ZCodeAgentResolveSuggestedPluginReferenceParams,
-  ZCodeAgentRemovePluginMarketplaceParams,
   ZCodeAgentRestoreBuiltinPluginParams,
   ZCodeAgentSetPluginEnabledParams,
   ZCodeAgentSetAutomationEnabledParams,
   ZCodeAgentUninstallPluginParams,
-  ZCodeAgentUpdatePluginMarketplaceParams,
   ZCodeAgentUpdatePluginParams,
   ZCodeAgentUpdateAutomationParams,
   ZCodeAgentValidatePluginParams,
@@ -812,15 +808,6 @@ export interface IZCodeAgentService {
   collectLocalRuntimeChildProcesses(
     signal?: AbortSignal,
   ): Promise<ZCodeAgentLocalRuntimeChildProcesses[]>;
-  addPluginMarketplace(
-    params: ZCodeAgentAddPluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
-  removePluginMarketplace(
-    params: ZCodeAgentRemovePluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
-  updatePluginMarketplace(
-    params: ZCodeAgentUpdatePluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
   installPlugin(params: ZCodeAgentInstallPluginParams): Promise<ZCodePluginsInstallResult>;
   cancelPluginOperation(
     params: ZCodeAgentCancelPluginOperationParams,

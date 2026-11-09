@@ -20,9 +20,6 @@ export interface PluginManagementServiceDependencies {
     | "resolveSuggestedPluginReference"
     | "onDynamicPluginOperationProgress"
     | "getPluginsOverview"
-    | "addPluginMarketplace"
-    | "removePluginMarketplace"
-    | "updatePluginMarketplace"
     | "installPlugin"
     | "cancelPluginOperation"
     | "uninstallPlugin"
@@ -178,16 +175,6 @@ export function createPluginManagementService(
     onDynamicPluginOperationProgress: (operationId) =>
       agent.onDynamicPluginOperationProgress(operationId),
     getPluginsOverview: (params) => agent.getPluginsOverview(params),
-    addPluginMarketplace: (params) =>
-      observe("source_add", params, (clean) => agent.addPluginMarketplace(clean as typeof params)),
-    removePluginMarketplace: (params) =>
-      observe("source_remove", params, (clean) =>
-        agent.removePluginMarketplace(clean as typeof params),
-      ),
-    updatePluginMarketplace: (params) =>
-      observe("source_refresh", params, (clean) =>
-        agent.updatePluginMarketplace(clean as typeof params),
-      ),
     installPlugin: (params) =>
       observe("install", params, (clean) => agent.installPlugin(clean as typeof params)),
     cancelPluginOperation: (params) => agent.cancelPluginOperation(params),

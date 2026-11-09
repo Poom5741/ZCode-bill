@@ -193,8 +193,17 @@ describe("plugins protocol contracts", () => {
     expect(zcodeProtocolMethods.pluginsList).toBe("plugins/list");
     expect(zcodeProtocolMethods.pluginsSetEnabled).toBe("plugins/setEnabled");
     expect(zcodeProtocolMethods.pluginsOverview).toBe("plugins/overview");
-    expect(zcodeProtocolMethods.pluginsMarketplaceAdd).toBe("plugins/marketplace/add");
-    expect(zcodeProtocolMethods.pluginsMarketplaceUpdate).toBe("plugins/marketplace/update");
+    // Wave-1（ZBill 裁剪）：plugins/marketplace/add|update|remove 已从协议面移除，
+    // 这里显式断言它们不再存在，防止无意回加。
+    expect(
+      (zcodeProtocolMethods as Record<string, unknown>).pluginsMarketplaceAdd,
+    ).toBeUndefined();
+    expect(
+      (zcodeProtocolMethods as Record<string, unknown>).pluginsMarketplaceUpdate,
+    ).toBeUndefined();
+    expect(
+      (zcodeProtocolMethods as Record<string, unknown>).pluginsMarketplaceRemove,
+    ).toBeUndefined();
     expect(zcodeProtocolMethods.pluginsInstall).toBe("plugins/install");
     expect(zcodeProtocolMethods.pluginsCancelOperation).toBe("plugins/cancelOperation");
     expect(zcodeProtocolMethods.pluginsValidate).toBe("plugins/validate");

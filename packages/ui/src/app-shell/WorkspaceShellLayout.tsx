@@ -381,7 +381,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   handleOpenDeveloperTools,
   handleOpenFileManager,
   handleNavigateFileManager,
-  handleOpenPluginMarket,
   handleOpenTerminalTab,
   handleToggleGit,
   handleOpenGitReview,
@@ -2017,7 +2016,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
       onOpenDeveloperTools={handleOpenDeveloperTools}
       onOpenFileManager={handleOpenFileManager}
       onNavigateFileManager={handleNavigateFileManager}
-      onOpenPluginMarket={handleOpenPluginMarket}
       onCreateTask={handleCreateTaskInChat}
       isMacDesktop={isMacDesktop}
       onOpenTerminalTab={handleOpenTerminalTab}

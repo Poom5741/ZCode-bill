@@ -27,29 +27,8 @@ export function createPluginsService(_options?: PluginsServiceOptions): IPlugins
       return createRetiredOverview();
     },
 
-    async addMarketplace(_params: {
-      workspacePath: string;
-      workspaceIdentity?: string;
-      source: string;
-    }): Promise<void> {
-      throwRetiredPluginManagement();
-    },
-
-    async removeMarketplace(_params: {
-      workspacePath: string;
-      workspaceIdentity?: string;
-      marketplace: string;
-    }): Promise<void> {
-      throwRetiredPluginManagement();
-    },
-
-    async updateMarketplace(_params: {
-      workspacePath: string;
-      workspaceIdentity?: string;
-      marketplace?: string;
-    }): Promise<void> {
-      throwRetiredPluginManagement();
-    },
+    // Wave-1（ZBill 裁剪）：addMarketplace / removeMarketplace / updateMarketplace 桩已随
+    // IPluginsService 的市场管理方法一起删除。
 
     async installPlugin(_params: {
       workspacePath: string;

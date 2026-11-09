@@ -43,7 +43,6 @@ import { GitPane } from "@/GitPane.js";
 import { TreemappingPane } from "@/TreemappingPane.js";
 import { WhiteboardPane } from "@/WhiteboardPane.js";
 import { ModelTrajectoryPane } from "@/ModelTrajectoryPane.js";
-import { PluginStorePage } from "@/settings/PluginStorePage.js";
 import { DeveloperToolsPane } from "@/DeveloperToolsPane.js";
 import { cn } from "@/components/lib/utils.js";
 import { Button } from "@/components/ui/button.js";
@@ -116,7 +115,6 @@ import { getVisibleSidePaneTabs } from "@/lib/workspaceSidePane.js";
 import { useZCodeIntl } from "@/i18n/IntlProvider.js";
 import {
   BugIcon,
-  ChevronRightIcon,
   FileDiffIcon,
   FolderOpenIcon,
   EarthIcon,
@@ -309,7 +307,6 @@ export function AnimatedSidePanePanel({
   services,
   isDesktop,
   isWindowsDesktop,
-  isMacDesktop,
   isVisible,
   sidePaneState,
   recentClosedSidePaneTabs,
@@ -346,8 +343,7 @@ export function AnimatedSidePanePanel({
   onOpenDeveloperTools,
   onOpenFileManager,
   onNavigateFileManager,
-  onOpenPluginMarket,
-  onCreateTask,
+  onCreateTask: _onCreateTask,
   onOpenTerminalTab,
   onOpenReviewTab,
   onOpenSelectionSideConversation,
@@ -436,7 +432,6 @@ export function AnimatedSidePanePanel({
   onOpenDeveloperTools: () => void;
   onOpenFileManager: (target?: FileManagerTarget) => void;
   onNavigateFileManager: (tabId: string, source: CodeViewerSource) => void;
-  onOpenPluginMarket?: () => void;
   onCreateTask?: (request?: CreateTaskRequest) => void;
   onOpenTerminalTab: () => void;
   onOpenReviewTab: () => void;
@@ -516,16 +511,8 @@ export function AnimatedSidePanePanel({
     fullView?.onSelectSurface("side-pane");
     onActivateTab(tabId);
   };
-  const [marketReturnTarget, setMarketReturnTarget] = useState<{
-    workspaceKey: string;
-    ownerId: string | null;
-    tabId: string;
-  } | null>(null);
-  useEffect(() => {
-    if (!visibleTabs.some((tab) => tab.type === "plugin-market")) {
-      setMarketReturnTarget(null);
-    }
-  }, [visibleTabs]);
+  // Wave-1（ZBill 裁剪）：plugin-market 侧板 tab、市场入口按钮与 marketReturnTarget 回落
+  // 状态一并删除（该状态只服务市场分支的返回目标）。
   const hasVisibleTabs = visibleTabs.length > 0;
   const tabsScrollViewportRef = useRef<HTMLDivElement | null>(null);
   const tabsScrollContentRef = useRef<HTMLDivElement | null>(null);
@@ -914,25 +901,6 @@ export function AnimatedSidePanePanel({
                   <h2 className="pl-2 text-ui-lg font-semibold text-foreground">
                     {intl.formatMessage({ id: "settings.plugins.store.ui.title" })}
                   </h2>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="shrink-0 text-foreground-subtle"
-                    data-testid="side-pane-plugin-market"
-                    onClick={() => {
-                      if (!onOpenPluginMarket) return;
-                      setMarketReturnTarget({
-                        workspaceKey,
-                        ownerId: sidePaneOwnerId ?? null,
-                        tabId: visibleActiveTabId,
-                      });
-                      onOpenPluginMarket();
-                    }}
-                  >
-                    {intl.formatMessage({ id: "sidePane.launcher.viewAllPlugins" })}
-                    <ChevronRightIcon className="size-3.5" aria-hidden="true" />
-                  </Button>
                 </div>
                 <div className="mt-2 grid min-w-0 grid-cols-1 gap-x-8 gap-y-1 @min-[36rem]/launcher:grid-cols-2">
                   {onOpenPluginUi ? (
@@ -1414,39 +1382,6 @@ export function AnimatedSidePanePanel({
                           />
                         ) : tab.type === "new-tab" ? (
                           openTabLauncher
-                        ) : tab.type === "plugin-market" ? (
-                          <ServiceProvider services={services}>
-                            <div className="h-full min-w-0 overflow-y-auto p-4">
-                              <PluginStorePage
-                                onBack={
-                                  marketReturnTarget?.workspaceKey === workspaceKey &&
-                                  marketReturnTarget.ownerId === (sidePaneOwnerId ?? null)
-                                    ? () => {
-                                        const targetId = marketReturnTarget.tabId;
-                                        setMarketReturnTarget(null);
-                                        onCloseTab(tab.id);
-                                        if (visibleTabs.some((item) => item.id === targetId)) {
-                                          onActivateTab(targetId);
-                                        } else {
-                                          onOpenNewTab();
-                                        }
-                                      }
-                                    : undefined
-                                }
-                                embedded
-                                onCreateTask={onCreateTask}
-                                workspacePath={pluginUiTarget.workspacePath}
-                                workspaceIdentity={pluginUiTarget.workspaceIdentity}
-                                remoteSessionId={pluginUiTarget.remoteSessionId ?? undefined}
-                                sessionId={pluginUiTarget.sessionId}
-                                paneId={pluginUiTarget.paneId}
-                                isDesktop={isDesktop}
-                                isWindowsDesktop={isWindowsDesktop}
-                                isMacDesktop={isMacDesktop}
-                                isWebRemoteControl={mobileOverlay}
-                              />
-                            </div>
-                          </ServiceProvider>
                         ) : tab.type === "developer-tools" ? (
                           <ServiceProvider services={services}>
                             <DeveloperToolsPane

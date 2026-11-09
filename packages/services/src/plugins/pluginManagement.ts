@@ -15,7 +15,6 @@ import type {
   ZCodePluginsDescribeResult,
   ZCodePluginsInstallResult,
   ZCodePluginsListResult,
-  ZCodePluginsMarketplaceMutationResult,
   ZCodePluginsOverviewResult,
   ZCodePluginsReferenceCatalogResult,
   ZCodePluginsRestoreBuiltinResult,
@@ -26,7 +25,6 @@ import type {
 import { ServiceChannels } from "@zcode/shared";
 import { createServiceDescriptor } from "../descriptors.js";
 import type {
-  ZCodeAgentAddPluginMarketplaceParams,
   ZCodeAgentConfigurePluginParams,
   ZCodeAgentCancelPluginOperationParams,
   ZCodeAgentDescribePluginParams,
@@ -35,11 +33,9 @@ import type {
   ZCodeAgentResolveSuggestedPluginReferenceParams,
   ZCodeAgentResetPluginConfigParams,
   ZCodeAgentPluginViewParams,
-  ZCodeAgentRemovePluginMarketplaceParams,
   ZCodeAgentRestoreBuiltinPluginParams,
   ZCodeAgentSetPluginEnabledParams,
   ZCodeAgentUninstallPluginParams,
-  ZCodeAgentUpdatePluginMarketplaceParams,
   ZCodeAgentUpdatePluginParams,
   ZCodeAgentValidatePluginParams,
 } from "../zcode-agent/zcodeAgentPluginParams.js";
@@ -61,15 +57,6 @@ export interface IPluginManagementService {
     operationId: string,
   ): Event<ZCodePluginOperationProgressNotification>;
   getPluginsOverview(params: ZCodeAgentPluginViewParams): Promise<ZCodePluginsOverviewResult>;
-  addPluginMarketplace(
-    params: ZCodeAgentAddPluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
-  removePluginMarketplace(
-    params: ZCodeAgentRemovePluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
-  updatePluginMarketplace(
-    params: ZCodeAgentUpdatePluginMarketplaceParams,
-  ): Promise<ZCodePluginsMarketplaceMutationResult>;
   installPlugin(params: ZCodeAgentInstallPluginParams): Promise<ZCodePluginsInstallResult>;
   cancelPluginOperation(
     params: ZCodeAgentCancelPluginOperationParams,
@@ -98,9 +85,6 @@ export function withPluginTelemetry(
   telemetry: NonNullable<ZCodeAgentInstallPluginParams["telemetry"]>,
 ): IPluginManagementService {
   const mutations = new Set<PropertyKey>([
-    "addPluginMarketplace",
-    "removePluginMarketplace",
-    "updatePluginMarketplace",
     "installPlugin",
     "uninstallPlugin",
     "updatePlugin",

@@ -37,21 +37,6 @@ export interface ZCodeAgentListMcpServerStatusesParams extends ZCodeAgentWorkspa
   mode?: ZCodeMcpListMode;
 }
 
-export interface ZCodeAgentAddPluginMarketplaceParams extends ZCodeAgentPluginMutationTarget {
-  dryRun?: boolean;
-  operationId?: string;
-  source: string;
-}
-
-export interface ZCodeAgentRemovePluginMarketplaceParams extends ZCodeAgentPluginMutationTarget {
-  marketplace: string;
-}
-
-export interface ZCodeAgentUpdatePluginMarketplaceParams extends ZCodeAgentPluginMutationTarget {
-  marketplace?: string;
-  operationId?: string;
-}
-
 export interface ZCodeAgentInstallPluginParams extends ZCodeAgentPluginMutationTarget {
   dryRun?: boolean;
   marketplace: string;

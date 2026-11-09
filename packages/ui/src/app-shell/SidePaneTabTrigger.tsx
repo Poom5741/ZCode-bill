@@ -4,7 +4,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
   FolderOpenIcon,
-  PuzzleIcon,
   BotIcon,
   BotMessageSquareIcon,
   BugIcon,
@@ -338,8 +337,6 @@ export function SidePaneTabIcon({ tab }: { tab: WorkspaceSidePaneTab }) {
   }
 
   if (tab.type === "new-tab") return <FileIcon className="size-3.5" />;
-  if (tab.type === "plugin-market") return <PuzzleIcon className="size-3.5" />;
-
   if (tab.type === "developer-tools") {
     return <BugIcon className="size-3.5" />;
   }
@@ -553,7 +550,6 @@ export function getSidePaneTabTitle(
   }
 
   if (tab.type === "new-tab") return formatMessage({ id: "sidePane.newTab" });
-  if (tab.type === "plugin-market") return formatMessage({ id: "workspace.openPluginsSettings" });
 
   if (tab.type === "developer-tools") {
     return formatMessage({ id: "developerTools.title" });

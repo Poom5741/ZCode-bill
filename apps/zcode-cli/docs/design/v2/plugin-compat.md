@@ -52,6 +52,12 @@ maintains a plugin within the ZCode marketplace. It does not grant trust or
 change installation identity, paths, or user/workspace configuration. Personal
 marketplaces remain personal regardless of their self-declared publisher type.
 
+ZBill fork note (Wave-1, 2026-11-10): the desktop-facing marketplace-management
+RPC methods `plugins/marketplace/add|remove|update` were removed from the
+protocol surface together with the plugin-store UI. CLI-internal marketplace
+machinery (source resolution for `plugins/install` / `plugins/update` and the
+plugin reference catalog) is unchanged; installed plugins keep working.
+
 Catalog `componentTypes` may advertise `ui` before installation. Installed UI
 capability comes from validated manifest `ui.surfaces`, including when disabled;
 `plugins/listUiSurfaces` continues to return only enabled entries. Store listing

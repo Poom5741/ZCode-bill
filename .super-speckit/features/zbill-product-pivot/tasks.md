@@ -22,12 +22,36 @@ matrix; every REQ row needs its verification before the slice closes.
       Remaining for T2: v4 onOpenAutomationsMain plumbing (SessionPane/V4ChatPane/
       V4WorkspaceChatArea/WorkbenchPane — inert, button hidden) + AutomationsSection.tsx +
       AutomationsMainBreadcrumbFrame.tsx + AutomationsPageTitleSwitch.tsx file deletions.
-- [ ] T3 Delete plugin-store surface files + services marketplace RPCs (zcodeAgentService /
-      zcodeAgent / pluginManagementService / pluginManagement) + protocol methods
-      (pluginsMarketplaceAdd/Remove/Update) + CLI handler side; pluginStoreNavigation.ts,
-      PluginStorePage.tsx deletions.
-- [ ] T4 Delete coding-plan purchase surface: CodingPlanUpgradeDialog,
-      CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners,
+- [x] T3 (protocol+services+CLI layer, 2026-11-10) marketplace RPC chain removed end-to-end:
+      shared protocol method constants pluginsMarketplaceAdd/Remove/Update + params schemas +
+      ZCodePluginsMarketplaceMutationResult deleted (zcode-protocol/index.ts); zcodeAgentService
+      client methods deleted; zcodeAgent.ts interface members deleted; pluginManagementService
+      wrapper entries + mutation allowlist (pluginManagement.ts) trimmed; CLI bootstrap server
+      switch cases + zcode-protocol/plugins.ts functions deleted; plugins-protocol.test.ts now
+      asserts the methods are ABSENT. Core implementations (addZCodePluginMarketplace etc. in
+      bootstrap/src/plugins.ts) KEPT — installPlugin/updatePlugin + plugin-reference-catalog
+      resolve marketplace sources through them internally.
+      Remaining for T3 (UI layer): PluginStorePage.tsx + pluginStoreNavigation.ts deletions
+      blocked on extra consumers discovered 2026-11-10 — AnimatedSidePanePanel renders
+      PluginStorePage in a side-pane branch (:46/:1420); pluginStoreNavigation consumers:
+      WorkspacePluginPreview (:19), MarketingTouchProvider (:15), SettingsPage (:134);
+      e2e specs packages/desktop/test/e2e/plugins/plugin-store-*.test.ts. Handle with T4
+      (marketing touch is purchase-stack surface) + T6 (e2e).
+- [x] T3 (UI layer, 2026-11-10) plugin-store UI removed: PluginStorePage.tsx deleted
+      (incl. AnimatedSidePanePanel side-pane branch + plugin-market side-pane tab type
+      across workspaceSidePane/useAppPanels/SidePaneTabTrigger/sidePaneTabPresentation +
+      new-tab launcher entry + handleOpenPluginMarket thread through App/types/layout),
+      pluginStore.ts + pluginManagementStore.ts marketplace-mutation actions removed
+      (overview/list data kept for composer mentions), IPluginsService marketplace methods
+      removed (retired pluginsService stubs trimmed), marketplacePluginSync prepareSource
+      removed (install fails honestly when target marketplace unregistered; syncOptions kept).
+      pluginStoreNavigation.ts KEPT — frozen consumer MarketingTouchProvider (PINNED, no
+      historical record) imports requestPluginStoreOpen; request/event is a no-op broadcast
+      after shell-cut listener removal.
+- [ ] T4 Delete coding-plan purchase surface: CodingPlanUpgradeDialog +
+      CodingPlanUpgradeDialogProvider ecosystem (consumers mapped 2026-11-10: Root mount,
+      MarketingTouchProvider, SessionPane :325/:1947, OffPeakNewTaskEntry, SettingsPage :77/:636,
+      V4ComposerToolbar :99/:471), CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners,
       codingPlanPurchaseAuth.js, purchase-token refresh state; keep provider base CRUD.
 - [ ] T5 Audit packages/services/src/coding-plan-subscription/* and usage-stats purchase
       providers: delete members with no remaining callers (knip-verified).

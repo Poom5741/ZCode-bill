@@ -92,7 +92,6 @@ import {
   zcodePluginsConfigureResultSchema,
   zcodePluginsInstallResultSchema,
   zcodePluginsListResultSchema,
-  zcodePluginsMarketplaceMutationResultSchema,
   zcodePluginsOverviewResultSchema,
   zcodeProcessChildProcessesResultSchema,
   type ZCodeProcessChildProcess,
@@ -220,7 +219,6 @@ import type {
   ZCodeAgentBackgroundBashOutputParams,
   ZCodeAgentAppRuntimePreferences,
   ZCodeAgentRuntimeLifecycleEvent,
-  ZCodeAgentAddPluginMarketplaceParams,
   ZCodeAgentAppUsageParams,
   ZCodeAgentCancelPluginOperationParams,
   ZCodeAgentCompactParams,
@@ -239,7 +237,6 @@ import type {
   ZCodeAgentReadSessionEventsParams,
   ZCodeAgentReadSessionMessagesParams,
   ZCodeAgentReadSessionParams,
-  ZCodeAgentRemovePluginMarketplaceParams,
   ZCodeAgentRespondProviderRuntimeHeadersParams,
   ZCodeAgentRespondSessionRuntimePreferencesParams,
   ZCodeAgentResumeSessionParams,
@@ -280,7 +277,6 @@ import type {
   ZCodeAgentUninstallPluginParams,
   ZCodeAgentUpdatePluginParams,
   ZCodeAgentRestoreBuiltinPluginParams,
-  ZCodeAgentUpdatePluginMarketplaceParams,
   ZCodeAgentValidatePluginParams,
   ZCodeAgentDescribePluginParams,
   ZCodeAgentListMcpServerStatusesParams,
@@ -5489,48 +5485,6 @@ export function createZCodeAgentService(
           ...(params.configScope ? { configScope: params.configScope } : {}),
         },
         zcodePluginsOverviewResultSchema,
-        { timeoutMs: PLUGIN_MANAGEMENT_REQUEST_TIMEOUT_MS },
-      );
-    },
-
-    async addPluginMarketplace(params: ZCodeAgentAddPluginMarketplaceParams) {
-      const client = await getPluginManagementClient();
-      return client.request(
-        zcodeProtocolMethods.pluginsMarketplaceAdd,
-        {
-          workspace: buildWorkspaceRef(params),
-          source: params.source,
-          ...(params.dryRun !== undefined ? { dryRun: params.dryRun } : {}),
-          ...(params.operationId ? { operationId: params.operationId } : {}),
-        },
-        zcodePluginsMarketplaceMutationResultSchema,
-        { timeoutMs: PLUGIN_MANAGEMENT_REQUEST_TIMEOUT_MS },
-      );
-    },
-
-    async removePluginMarketplace(params: ZCodeAgentRemovePluginMarketplaceParams) {
-      const client = await getPluginManagementClient();
-      return client.request(
-        zcodeProtocolMethods.pluginsMarketplaceRemove,
-        {
-          workspace: buildWorkspaceRef(params),
-          marketplace: params.marketplace,
-        },
-        zcodePluginsMarketplaceMutationResultSchema,
-        { timeoutMs: PLUGIN_MANAGEMENT_REQUEST_TIMEOUT_MS },
-      );
-    },
-
-    async updatePluginMarketplace(params: ZCodeAgentUpdatePluginMarketplaceParams) {
-      const client = await getPluginManagementClient();
-      return client.request(
-        zcodeProtocolMethods.pluginsMarketplaceUpdate,
-        {
-          workspace: buildWorkspaceRef(params),
-          ...(params.marketplace ? { marketplace: params.marketplace } : {}),
-          ...(params.operationId ? { operationId: params.operationId } : {}),
-        },
-        zcodePluginsMarketplaceMutationResultSchema,
         { timeoutMs: PLUGIN_MANAGEMENT_REQUEST_TIMEOUT_MS },
       );
     },

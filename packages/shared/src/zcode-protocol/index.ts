@@ -3765,37 +3765,9 @@ export const zcodePluginsOverviewResultSchema = z
   .strict();
 export type ZCodePluginsOverviewResult = z.infer<typeof zcodePluginsOverviewResultSchema>;
 
-export const zcodePluginsMarketplaceAddParamsSchema = z
-  .object({
-    workspace: zcodeWorkspaceRefSchema,
-    source: nonEmptyString,
-    dryRun: z.boolean().optional(),
-    operationId: nonEmptyString.optional(),
-  })
-  .strict();
-export const zcodePluginsMarketplaceRemoveParamsSchema = z
-  .object({
-    workspace: zcodeWorkspaceRefSchema,
-    marketplace: nonEmptyString,
-  })
-  .strict();
-export const zcodePluginsMarketplaceUpdateParamsSchema = z
-  .object({
-    workspace: zcodeWorkspaceRefSchema,
-    marketplace: nonEmptyString.optional(),
-    operationId: nonEmptyString.optional(),
-  })
-  .strict();
-export const zcodePluginsMarketplaceMutationResultSchema = z
-  .object({
-    marketplace: zcodePluginMarketplaceSummarySchema.optional(),
-    marketplaces: z.array(zcodePluginMarketplaceSummarySchema).optional(),
-    diagnostics: z.array(zcodePluginDiagnosticSchema).optional(),
-  })
-  .strict();
-export type ZCodePluginsMarketplaceMutationResult = z.infer<
-  typeof zcodePluginsMarketplaceMutationResultSchema
->;
+// Wave-1（ZBill 裁剪）：插件市场管理 RPC（marketplace add/remove/update）已随
+// 插件市场 UI 一起移除；协议面不再暴露这三个方法与对应 schema。
+// `zcodePluginMarketplaceSummarySchema` 仍被 pluginsOverview 使用，保留。
 
 export const zcodePluginsInstallParamsSchema = z
   .object({
@@ -4348,9 +4320,6 @@ export const zcodeProtocolMethods = {
   pluginsResolveSuggestedReference: "plugins/resolveSuggestedReference",
   pluginsSetEnabled: "plugins/setEnabled",
   pluginsOverview: "plugins/overview",
-  pluginsMarketplaceAdd: "plugins/marketplace/add",
-  pluginsMarketplaceRemove: "plugins/marketplace/remove",
-  pluginsMarketplaceUpdate: "plugins/marketplace/update",
   pluginsInstall: "plugins/install",
   pluginsCancelOperation: "plugins/cancelOperation",
   pluginsUninstall: "plugins/uninstall",

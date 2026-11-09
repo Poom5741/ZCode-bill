@@ -70,7 +70,6 @@ export function getSidePaneTabSearchHint(tab: WorkspaceSidePaneTab): string {
   if (tab.type === "model-trajectory") {
     return `${tab.title ?? ""} ${tab.taskId} model trajectory call io`;
   }
-  if (tab.type === "plugin-market") return "plugin marketplace store plugins";
   if (tab.type === "developer-tools") {
     return "developer tools token debug network status request response headers";
   }

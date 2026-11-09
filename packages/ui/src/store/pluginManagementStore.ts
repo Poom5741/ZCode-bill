@@ -9,7 +9,6 @@ import type {
   ZCodePluginScope,
   ZCodePluginsDescribeResult,
 } from "@zcode/shared";
-import { CLAUDE_OFFICIAL_PLUGIN_MARKETPLACE_ID } from "@zcode/shared";
 import type { IPluginManagementService } from "@zcode/services";
 import { logger } from "@/logger.js";
 import {
@@ -70,15 +69,8 @@ export interface PluginManagementState {
     pluginService?: IPluginManagementService,
     options?: { background?: boolean },
   ) => Promise<void>;
-  addMarketplace: (source: string, pluginService: IPluginManagementService) => Promise<boolean>;
-  updateMarketplace: (
-    marketplace: string | null,
-    pluginService: IPluginManagementService,
-  ) => Promise<boolean>;
-  removeMarketplace: (
-    marketplace: string,
-    pluginService: IPluginManagementService,
-  ) => Promise<void>;
+  // Wave-1（ZBill 裁剪）：addMarketplace / updateMarketplace / removeMarketplace 状态成员
+  // 已随插件市场 UI 删除。
   installPlugin: (
     pluginName: string,
     marketplace: string,
@@ -239,71 +231,8 @@ export const createPluginManagementStore = (initialService?: IPluginManagementSe
         });
     },
 
-    async addMarketplace(source, pluginService) {
-      return runWorkspaceOperation(
-        set,
-        get,
-        pluginService,
-        `marketplace:add:${source}`,
-        async (workspace) => {
-          await pluginService.addPluginMarketplace({
-            ...workspace,
-            source,
-          });
-        },
-      );
-    },
-
-    async updateMarketplace(marketplace, pluginService) {
-      let refreshError: string | null = null;
-      const succeeded = await runWorkspaceOperation(
-        set,
-        get,
-        pluginService,
-        `marketplace:update:${marketplace ?? "__all__"}`,
-        async (workspace) => {
-          const result = await pluginService.updatePluginMarketplace({
-            ...workspace,
-            ...(marketplace ? { marketplace } : {}),
-          });
-          // 刷新允许部分成功，因此仍要 reload overview 保留成功来源；但仅 warn
-          // 并返回 true，桌面与手机 Web 都会把旧快照误报成刷新成功。先记住错误，reload 后再写入
-          // 共用 store 的可见错误态，同时返回 false，让所有入口获得一致的部分失败语义。
-          const blockingDiagnostic = result.diagnostics?.find(
-            (diagnostic) =>
-              diagnostic.severity === "error" &&
-              diagnostic.pluginId !== CLAUDE_OFFICIAL_PLUGIN_MARKETPLACE_ID,
-          );
-          if (blockingDiagnostic) {
-            refreshError = blockingDiagnostic.message;
-            logger.warn("[plugins] marketplace refresh partially failed", {
-              diagnostics: result.diagnostics,
-            });
-          }
-        },
-      );
-      if (succeeded && refreshError) {
-        // 列表刷新失败无插件目标，归属清空（不指向任何插件）。
-        set({ error: refreshError, lastFailedPluginId: null });
-        return false;
-      }
-      return succeeded;
-    },
-
-    async removeMarketplace(marketplace, pluginService) {
-      await runWorkspaceOperation(
-        set,
-        get,
-        pluginService,
-        `marketplace:remove:${marketplace}`,
-        async (workspace) => {
-          await pluginService.removePluginMarketplace({
-            ...workspace,
-            marketplace,
-          });
-        },
-      );
-    },
+    // Wave-1（ZBill 裁剪）：addMarketplace / updateMarketplace / removeMarketplace 管理动作
+    // 已随插件市场 UI 与协议面一起删除；无 UI 调用方。
 
     async installPlugin(pluginName, marketplace, pluginService, scope = "user") {
       return runWorkspaceOperation(

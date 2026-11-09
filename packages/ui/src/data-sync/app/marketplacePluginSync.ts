@@ -299,12 +299,10 @@ export function createMarketplacePluginDataSyncService(
         ...workspace,
         configScope: USER_SCOPE,
       });
-      const catalog = new Set(overview.availablePlugins.map((plugin) => plugin.id));
       const installedBefore = new Map(
         overview.installedPlugins.map((plugin) => [plugin.id, plugin]),
       );
       const payloadByKey = new Map(payload.items.map((item) => [item.key, item]));
-      const preparedMarketplaces = new Set<string>();
 
       /** 远端 add / install 期间该行可「停止」：发出 cancelPluginOperation，该项立即结束。 */
       async function runStoppable<T>(key: string, run: (operationId: string) => Promise<T>) {
@@ -331,23 +329,9 @@ export function createMarketplacePluginDataSyncService(
         }
       }
 
-      async function prepareSource(item: MarketplacePluginSyncPayload["items"][number]) {
-        const source = payload.sources[item.marketplace];
-        if (!source) throw new Error(`marketplace source is not available: ${item.marketplace}`);
-        if (source.kind === "unavailable") throw new Error(source.error);
-        if (source.kind === "official") return;
-        let input = source.kind === "network" ? source.input : "";
-        if (source.kind === "mirror") {
-          input = (
-            await services.pluginSyncService.importMarketplaceSourceArchive({
-              archive: source.archive,
-            })
-          ).path;
-        }
-        await runStoppable(item.key, (operationId) =>
-          management.addPluginMarketplace({ ...workspace, source: input, operationId }),
-        );
-      }
+      // Wave-1（ZBill 裁剪）：plugins/marketplace/add RPC 已移除，prepareSource（远端
+      // marketplace 注册）随之删除。目标机未注册对应 marketplace 时 installPlugin 会以
+      // marketplace 解析失败自然报错，该项按失败上报，不再静默注册来源。
 
       async function syncOptions(item: MarketplacePluginSyncPayload["items"][number]) {
         if (Object.keys(item.options).length === 0) return;
@@ -372,11 +356,6 @@ export function createMarketplacePluginDataSyncService(
         if (!item)
           return { key: importItem.key, status: "failed", error: "missing export payload" };
         const update = importItem.mode === "overwrite";
-        // 目标端 catalog 没有该插件时先准备来源（远端没有这个 marketplace，或 catalog 尚未包含它）。
-        if (!update && !catalog.has(item.pluginId) && !preparedMarketplaces.has(item.marketplace)) {
-          await prepareSource(item);
-          preparedMarketplaces.add(item.marketplace);
-        }
         const result = await runStoppable(item.key, (operationId) =>
           management.installPlugin({
             ...workspace,

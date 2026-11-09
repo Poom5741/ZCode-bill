@@ -229,7 +229,6 @@ export function App({
     handleOpenDeveloperTools,
     handleOpenFileManager,
     handleNavigateFileManager,
-    handleOpenPluginMarket,
     handleOpenTerminalTab,
     handleOpenSubagentSession,
     handleOpenBackgroundBash,
@@ -1218,7 +1217,6 @@ export function App({
           handleOpenDeveloperTools={handleOpenDeveloperTools}
           handleOpenFileManager={handleOpenFileManager}
           handleNavigateFileManager={handleNavigateFileManager}
-          handleOpenPluginMarket={handleOpenPluginMarket}
           handleOpenTerminalTab={handleOpenTerminalTabIfWritable}
           handleToggleGit={handleToggleGitIfWritable}
           handleToggleSidePane={handleToggleSidePane}

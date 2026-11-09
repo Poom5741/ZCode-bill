@@ -110,14 +110,6 @@ export interface ModelTrajectorySidePaneTab {
   title?: string | null;
 }
 
-export interface PluginMarketSidePaneTab {
-  id: "plugin-market";
-  type: "plugin-market";
-  ownerTaskId?: string | null;
-  workspaceKey?: string | null;
-  openedAt?: number;
-}
-
 export interface DeveloperToolsSidePaneTab {
   id: "developer-tools";
   type: "developer-tools";
@@ -573,7 +565,6 @@ export type WorkspaceSidePaneTab =
   | TreemappingSidePaneTab
   | WhiteboardSidePaneTab
   | ModelTrajectorySidePaneTab
-  | PluginMarketSidePaneTab
   | DeveloperToolsSidePaneTab
   | TerminalSidePaneTab
   | BrowserUseSidePaneTab
@@ -1178,7 +1169,6 @@ export function isSidePaneTabVisibleInScope(
   switch (tab.type) {
     case "git":
     case "developer-tools":
-    case "plugin-market":
     case "treemapping":
       return true;
     case "browser-use":
@@ -1204,6 +1194,9 @@ export function isSidePaneTabVisibleInScope(
     case "new-tab":
     case "terminal":
       return sidePaneOwnerKey(tab.ownerTaskId) === sidePaneOwnerKey(scope.ownerTaskId);
+    // Wave-1：plugin-market tab 类型已删除；未知类型按不可见处理，保持穷尽性。
+    default:
+      return false;
   }
 }
 
@@ -1834,12 +1827,6 @@ export function openModelTrajectorySidePane(
   },
 ): WorkspaceSidePaneState {
   return activateSidePaneTab(current, createModelTrajectorySidePaneTab(options));
-}
-
-export function activatePluginMarketSidePane(
-  current: WorkspaceSidePaneState | null,
-): WorkspaceSidePaneState {
-  return activateSidePaneTab(current, { id: "plugin-market", type: "plugin-market" });
 }
 
 export function activateDeveloperToolsSidePane(

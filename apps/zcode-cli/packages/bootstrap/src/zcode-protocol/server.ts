@@ -72,19 +72,16 @@ import {
   testProviderModelConnectivity,
 } from "./workspace-model-runtime.js";
 import {
-  addPluginMarketplace,
   configurePlugin,
   describePlugin,
   getPluginsOverview,
   installPlugin,
   listPlugins,
-  removePluginMarketplace,
   resetPluginConfig,
   restoreBuiltinPlugin,
   setPluginEnabled,
   uninstallPlugin,
   updatePlugin,
-  updatePluginMarketplace,
   validatePlugin,
 } from "./plugins.js";
 import {
@@ -904,16 +901,6 @@ export class ZCodeProtocolAgentServer {
           genUiContext: true,
         };
       }
-      case zcodeProtocolMethods.pluginsMarketplaceAdd:
-        return await this.withPluginOperationSignal(request, (signal) =>
-          addPluginMarketplace(this.context, request.params, signal),
-        );
-      case zcodeProtocolMethods.pluginsMarketplaceRemove:
-        return await removePluginMarketplace(this.context, request.params);
-      case zcodeProtocolMethods.pluginsMarketplaceUpdate:
-        return await this.withPluginOperationSignal(request, (signal) =>
-          updatePluginMarketplace(this.context, request.params, signal),
-        );
       case zcodeProtocolMethods.pluginsInstall:
         return await this.withPluginOperationSignal(request, (signal) =>
           installPlugin(this.context, request.params, signal),

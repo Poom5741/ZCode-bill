@@ -5,10 +5,17 @@ import { dirname, join } from "node:path";
 import {
   type ZCodePluginsInstallResult,
   type ZCodePluginsListResult,
-  type ZCodePluginsMarketplaceMutationResult,
   type ZCodePluginsOverviewResult,
   type ZCodePluginsReferenceCatalogResult,
 } from "@zcode/shared";
+// Wave-1（ZBill 裁剪）：plugins/marketplace/add|update RPC 已移除；addMarketplaceSourceThroughAgent /
+// updateMarketplaceThroughAgent 转为本地结构类型。依赖它们做 fixture 的 specs（plugin-no-git、
+// conversation-session-plugin-*）的 marketplace 设置路径待 T6 重做（本地 fixture 直写或 CLI 预注册）。
+interface MarketplaceMutationResultLike {
+  marketplace?: unknown;
+  marketplaces?: { id: string }[];
+  diagnostics: { severity: string; message: string }[];
+}
 import {
   TID_PLUGIN_STORE_BROWSE,
   TID_SETTINGS_PAGE,
@@ -22,7 +29,6 @@ import {
   getE2EAppDataPaths,
   setCurrentElectronRendererContentSize,
   setInputValueByTestIdDom,
-  waitForDefaultWorkspaceReady,
   waitForTestIdByDom,
   waitForWorkspaceApp,
 } from "./desktop-app.js";
@@ -900,7 +906,7 @@ export async function getPluginOverview(
 export async function addMarketplaceSourceThroughAgent(
   source: string,
   workspacePath = DEFAULT_WORKSPACE,
-): Promise<ZCodePluginsMarketplaceMutationResult> {
+): Promise<MarketplaceMutationResultLike> {
   return callPluginTestAction("addPluginMarketplace", {
     source,
     workspacePath,
@@ -910,7 +916,7 @@ export async function addMarketplaceSourceThroughAgent(
 export async function updateMarketplaceThroughAgent(
   marketplace: string,
   workspacePath = DEFAULT_WORKSPACE,
-): Promise<ZCodePluginsMarketplaceMutationResult> {
+): Promise<MarketplaceMutationResultLike> {
   return callPluginTestAction("updatePluginMarketplace", {
     marketplace,
     workspacePath,

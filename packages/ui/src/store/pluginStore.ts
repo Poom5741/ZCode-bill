@@ -43,21 +43,7 @@ interface PluginStoreState {
     workspaceIdentity?: string,
   ) => Promise<void>;
   refresh: (pluginsService: IPluginsService, workspaceIdentity?: string) => Promise<void>;
-  addMarketplace: (
-    source: string,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) => Promise<boolean>;
-  removeMarketplace: (
-    marketplace: string,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) => Promise<boolean>;
-  updateMarketplace: (
-    marketplace: string | null,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) => Promise<boolean>;
+  // Wave-1（ZBill 裁剪）：marketplace 管理动作（add/remove/update）已随插件市场 UI 删除。
   installPlugin: (
     pluginName: string,
     marketplace: string,
@@ -218,100 +204,8 @@ export const usePluginStore = create<PluginStoreState>((set, get) => ({
       });
     }
   },
-  async addMarketplace(
-    source: string,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) {
-    const workspacePath = get().workspacePath;
-    const trimmedSource = source.trim();
-    if (!workspacePath || !trimmedSource) {
-      return false;
-    }
-    const workspaceIdentityFromState =
-      workspaceIdentity?.trim() || get().workspaceIdentity || undefined;
-    set({ error: null, addingMarketplaceSource: trimmedSource });
-    try {
-      await pluginsService.addMarketplace({
-        workspacePath,
-        ...(workspaceIdentityFromState ? { workspaceIdentity: workspaceIdentityFromState } : {}),
-        source: trimmedSource,
-      });
-      await get().refresh(pluginsService, workspaceIdentityFromState);
-      return true;
-    } catch (error) {
-      set({ error: error instanceof Error ? error.message : String(error) });
-      return false;
-    } finally {
-      set({ addingMarketplaceSource: null });
-    }
-  },
-  async removeMarketplace(
-    marketplace: string,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) {
-    const workspacePath = get().workspacePath;
-    if (!workspacePath) {
-      return false;
-    }
-    const workspaceIdentityFromState =
-      workspaceIdentity?.trim() || get().workspaceIdentity || undefined;
-    set({ error: null, removingMarketplaceName: marketplace });
-    try {
-      await pluginsService.removeMarketplace({
-        workspacePath,
-        ...(workspaceIdentityFromState ? { workspaceIdentity: workspaceIdentityFromState } : {}),
-        marketplace,
-      });
-      await get().refresh(pluginsService, workspaceIdentityFromState);
-      return true;
-    } catch (error) {
-      set({ error: error instanceof Error ? error.message : String(error) });
-      return false;
-    } finally {
-      set({ removingMarketplaceName: null });
-    }
-  },
-  async updateMarketplace(
-    marketplace: string | null,
-    pluginsService: IPluginsService,
-    workspaceIdentity?: string,
-  ) {
-    const workspacePath = get().workspacePath;
-    if (!workspacePath) {
-      return false;
-    }
-    const workspaceIdentityFromState =
-      workspaceIdentity?.trim() || get().workspaceIdentity || undefined;
-    set({
-      error: null,
-      updatingMarketplaceName: marketplace ?? "__all__",
-    });
-    try {
-      const result = await pluginsService.updateMarketplace({
-        workspacePath,
-        ...(workspaceIdentityFromState ? { workspaceIdentity: workspaceIdentityFromState } : {}),
-        marketplace: marketplace || undefined,
-      });
-      await get().refresh(pluginsService, workspaceIdentityFromState);
-      // legacy usePlugins 入口虽已退役，仍是公开 hook；它必须与 PluginManagementStore
-      // 共用部分成功语义，不能在 Agent 返回 error diagnostic 后无条件报告成功。
-      const blockingDiagnostic = result?.diagnostics?.find(
-        (diagnostic) => diagnostic.severity === "error",
-      );
-      if (blockingDiagnostic) {
-        set({ error: blockingDiagnostic.message });
-        return false;
-      }
-      return true;
-    } catch (error) {
-      set({ error: error instanceof Error ? error.message : String(error) });
-      return false;
-    } finally {
-      set({ updatingMarketplaceName: null });
-    }
-  },
+  // Wave-1（ZBill 裁剪）：addMarketplace / removeMarketplace / updateMarketplace 三个管理动作
+  // 已随插件市场 UI 删除；overview/列表数据保留（composer @ 插件提及与已安装插件维护仍需要）。
   async installPlugin(
     pluginName: string,
     marketplace: string,
