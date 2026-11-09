@@ -6114,6 +6114,13 @@ RDUX15-01..25 + [#21](../issues/remote-connection-ux/21-chat-settings-round-trip
 按 .super-speckit/verification/verification-harness.md 能力矩阵执行（本机 WSL2 Ubuntu / Docker 29.9.2 可真实跑，
 SSH 测试主机未配置 → 相关场景在提供前如实记 not-verified）。
 
+2026-11-09 真实应用 journey 证据②（RDUX15-04/05 的 Windows 范围，同一 CDP 执行面）：设置 → 远程设备 →
+「New connection」打开分类添加窗口：kind 选项实测 ssh（默认 active）/ server / wsl / docker（TID_REMOTE_KIND_*），
+SSH 屏（ssh-dialog）直出；切到 WSL 后实测「2 distributions detected on this device」（本机真实发现 Ubuntu）＋
+Default distribution / Linux user 字段；Esc 取消关闭、未发起连接。证据 06-09*.png + journey-rdux15-wsl.mjs。
+范围注：真实验证本机 WSL 发现 UI；未点「添加并连接」（view/cancel-only），安装/连接链路由既有 wdio 用例覆盖
+（chromedriver 环境阻塞见 harness）。
+
 2026-11-09 真实应用 journey 证据（RDUX15-01/02/03/09，reviewer＝ADE lane agent 经 CDP 直驱，
 chromedriver 被策略拦截后的替代执行面；view/cancel-only，未创建项目）：侧栏「项目+」直接打开
 合并表单（virtual-project-name / virtual-project-device / 目录浏览同屏，标题 Create project，

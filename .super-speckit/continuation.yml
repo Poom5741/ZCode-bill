@@ -3,8 +3,8 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "maker_running (T2 journey evidence: RDUX15-01/02/03/09 PASS on real app)",
-    "next_action": "Journey RDUX15-01/02/03/09 recorded PASS in matrix (6117 area, commit pending push). Next: WSL add-window journey (settings → remote devices → WSL section, RDUX15-04/05 scope on this host), then remaining view-only journeys (chat entry, settings round-trip view states). Keep view/cancel-only on the real dev instance (9229), one-session rule: launch pnpm dev:desktop:test via app-control, connect via direct CDP driver .super-speckit/qa/journey-rdux15-01.mjs pattern (app-control session port mismatch due to swallowed debug flag).",
+    "stage": "maker_running (journey②: RDUX15-04/05 Windows-scope PASS — add window categorized, WSL live discovery)",
+    "next_action": "Next journeys: chat-entry view states (RDUX21 view layer, view/cancel-only), settings round-trip view states (RDUX15-04/11/12/13 UI parts); or pivot to Docker E2E container route (pnpm test:e2e:container) for the wdio assertion matrix. All on the documented CDP driver pattern; keep view/cancel-only on real dev instance.",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [
@@ -14,7 +14,7 @@
       "dev desktop app verified running end-to-end (host RPC logs + renderer config traces) in the first app-control session before it was replaced"
     ],
     "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
-    "updated_at": "2026-11-09T18:00:00Z"
+    "updated_at": "2026-11-09T19:00:00Z"
   },
   "history": [
     {
@@ -61,6 +61,19 @@
       ],
       "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
       "updated_at": "2026-11-09T18:00:00Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "journey② RDUX15-04/05 Windows PASS (categorized add window, WSL discovery live)",
+      "next_action": "Next journeys: chat-entry view states (RDUX21 view layer, view/cancel-only), settings round-trip view states (RDUX15-04/11/12/13 UI parts); or pivot to Docker E2E container route (pnpm test:e2e:container) for the wdio assertion matrix. All on the documented CDP driver pattern; keep view/cancel-only on real dev instance.",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [
+        ".super-speckit/qa/rdux15-journey/06-09*.png",
+        "journey-rdux15-wsl.mjs"
+      ],
+      "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
+      "updated_at": "2026-11-09T19:00:00Z"
     }
   ]
 }
