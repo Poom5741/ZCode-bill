@@ -1,0 +1,9 @@
+{
+  "feature": "ZBILL-M1",
+  "status": "confirmed",
+  "map": "purpose-map.md",
+  "visual": "purpose-map.html",
+  "confirmed_by": "Poom (user instruction 2026-11-07: start the process after fork decision)",
+  "confirmed_at": "2026-11-07",
+  "confirmation": "Build ZBill M1 per purpose map; evidence evidence/ZBILL-M1-purpose.md"
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "feature": "zbill-product-pivot",
+  "entries": [
+    {
+      "id": "DT-ZPIVOT-01",
+      "date": "2026-11-09",
+      "decision": "Overgoal pivot: transform ZCode into ZBill, a Windows-first desktop app for creating bill reports; keep the agent-chat core, expand bill features (any bill type, item review/edit, report history/archive, more outputs), and hard-delete most non-billing ZCode design and features from the codebase.",
+      "provenance": "Repo owner directive in ADE chat session 10e5b846: 'the overgoal i want to transform zcode to not be zcode at all. it should be app for create bill report as i want but it need more than what feature is now. it also need to cut down most of design and feature of zcode', plus four structured scope answers (features/shell/cut/platform), 2026-11-09.",
+      "rationale": "The previous active plan (rdux15-project-device-separation) polished the remote-connection wizard UX Ã¢â‚¬â€ a domain the overgoal deletes. Continuing it would invest in code being removed. Purpose was re-gated with the owner before any further maker work.",
+      "consequences": [
+        "rdux15-project-device-separation transitions maker_running -> blocked with a durable handoff; artifacts and journey evidence preserved",
+        "New feature zbill-product-pivot registered with confirmed purpose and milestone route",
+        "ZBILL-M1 (branch zbill/m1-scaffold) purpose absorbed; Windows-first replaces macOS-first"
+      ],
+      "supersedes": ["DT-RDUX15-01", "DT-RDUX15-02"],
+      "evidence": [
+        {
+          "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md",
+          "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260"
+        },
+        {
+          "path": ".super-speckit/features/zbill-product-pivot/matrix.md",
+          "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a"
+        }
+      ]
+    },
+    {
+      "id": "DT-ZPIVOT-02",
+      "date": "2026-11-09",
+      "decision": "Adopt the zbill/m1-scaffold product work by PORTING its product bits onto main (38 files: ZBill product mode defines, sidebar entry hiding, dev-task env, zbill-billing pipeline + fixtures, Google-plugins M2 scope record, ZBILL-M1 history) instead of merging the branch; branch keeps the stale vendored kit copies and remains the historical record.",
+      "provenance": "Agent decision within owner-confirmed pivot direction, 2026-11-09; overlap analysis showed 855+ vendored .super-speckit files changed on both sides since fork point a9fe401e, making a raw merge conflict-heavy with no product value.",
+      "rationale": "Main's kit, gates, and journey config are strictly newer (filled lint/format/unit gates, journey-ux executor config); the scaffold's copies predate them. Port avoids regressing verification infrastructure while preserving every ZBill product artifact.",
+      "consequences": [
+        "zbill-billing/ and ZBill product mode now exist on main; typecheck clean, lint 0 errors after port",
+        "Branch zbill/m1-scaffold is retained unmerged as provenance; do not delete without owner approval",
+        "Ported packages/shared/package.json keeps a trailing newline (fmt convention) unlike the branch copy"
+      ],
+      "supersedes": [],
+      "evidence": [
+        {
+          "path": "packages/desktop/vite.config.ts",
+          "digest": "1a102e9bdcd2aea794e8e966ccb32b9018b1ed66fddd94db08fcae80442fbc86"
+        },
+        {
+          "path": "zbill-billing/SKILL.md",
+          "digest": "654ea6205807f8ee15488faa70daef03ef9eed97c7e6343d25555ba97475fc08"
+        },
+        {
+          "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md",
+          "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216"
+        }
+      ]
+    },
+    {
+      "id": "DT-ZPIVOT-03",
+      "date": "2026-11-09",
+      "decision": "Cut execution order: wave 1 removes coding-plan purchase panels, plugin marketplace, and automations surfaces; wave 2 removes remote-connection device management (SSH/WSL/Docker) and web/mobile remote-control modules; each wave is a verified slice (code + routes + docs + checks) with its import-graph investigation completed first (receipt steps S4/S5).",
+      "provenance": "Agent planning within owner-confirmed hard-delete decision, 2026-11-09; wave order follows dependency risk Ã¢â‚¬â€ wave 1 entries are already partially hidden by ZBill product mode, wave 2 deletions have wider coupling to the agent core.",
+      "rationale": "Hard delete in two waves keeps every candidate shippable and independently verifiable, per unified pipeline slice reassessment; single big-bang deletion would leave the repo unbuildable between steps.",
+      "consequences": [
+        "Matrix rows R-107/R-108 bind one wave each",
+        "S4 must separate 'purchase UI' from 'provider connection config' the agent core still needs",
+        "Docs (AGENTS.md/DESIGN.md/CONTEXT.md) update in the same change as each wave"
+      ],
+      "supersedes": [],
+      "evidence": [
+        {
+          "path": ".super-speckit/features/zbill-product-pivot/investigation-receipt.json",
+          "digest": "fe1a7fd175e2683aa64c48721ff25b854dd622a6cf9a29f6fd6226c0485af8eb"
+        }
+      ]
+    }
+  ]
+}

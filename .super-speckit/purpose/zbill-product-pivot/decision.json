@@ -1,0 +1,9 @@
+{
+  "feature": "zbill-product-pivot",
+  "status": "confirmed",
+  "map": "purpose-map.md",
+  "visual": "purpose-map.html",
+  "confirmed_by": "repo owner via ADE chat scope answers",
+  "confirmed_at": "2026-11-09",
+  "confirmation": "Owner declared the overgoal (ZCode becomes ZBill bill-report app; cut most ZCode design/features) and answered four scope questions: features=any bill type + item review/edit + history/archive + more outputs; shell=keep agent chat core; cut=hard-delete modules; platform=Windows first. Purpose map written from those answers; gate refreshed in same chat."
+}

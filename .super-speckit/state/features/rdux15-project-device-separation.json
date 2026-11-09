@@ -1,6 +1,6 @@
 {
   "id": "rdux15-project-device-separation",
-  "state": "maker_running",
+  "state": "blocked",
   "candidate_sha": null,
   "maker": "ade-lane-a5862aba",
   "checker": "independent-qa-clone",
@@ -32,7 +32,10 @@
     "path": ".super-speckit\\atlas\\changes\\rdux15-project-device-separation\\change-story.md"
   },
   "handoff": {
-    "path": null
+    "path": ".super-speckit/features/rdux15-project-device-separation/handoff-pivot-supersession.md",
+    "transfer": "same-environment",
+    "stage": "pivot-supersession",
+    "attempt_id": "handoff-pivot-1"
   },
   "decision_trail": {
     "path": ".super-speckit/features/rdux15-project-device-separation/decision-trail.json"
@@ -51,7 +54,7 @@
   "pipeline_contract": "unified-v1",
   "delivery_contract": "knowledge-v2",
   "schema_version": 2,
-  "revision": 18,
+  "revision": 20,
   "prerequisite_receipts": {
     "investigation": {
       "artifact": ".super-speckit/features/rdux15-project-device-separation/investigation-receipt.json",

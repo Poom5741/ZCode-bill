@@ -1,0 +1,60 @@
+{
+  "id": "zbill-product-pivot",
+  "state": "planned",
+  "candidate_sha": null,
+  "maker": "ade-lane-a5862aba",
+  "checker": "independent-qa-clone",
+  "matrix": ".super-speckit/features/zbill-product-pivot/matrix.md",
+  "ui_change": true,
+  "journey_ux": {
+    "status": "not_required",
+    "report": null,
+    "candidate_sha": null
+  },
+  "purpose": {
+    "status": "confirmed",
+    "map": ".super-speckit\\purpose\\zbill-product-pivot\\purpose-map.md",
+    "decision": ".super-speckit\\purpose\\zbill-product-pivot\\decision.json"
+  },
+  "grill": {
+    "status": "not_started",
+    "artifact": null
+  },
+  "route": {
+    "kind": "milestone",
+    "rationale": "Whole-product pivot: five UI/service module groups plus a Python bill pipeline, hard deletions across packages with per-wave import-graph investigation; exceeds normal planning depth and requires milestone slices with reassessment between waves (unified pipeline native Spec Kit planning)."
+  },
+  "atlas": {
+    "path": null
+  },
+  "change_story": {
+    "path": null
+  },
+  "handoff": {
+    "path": null
+  },
+  "decision_trail": {
+    "path": ".super-speckit/features/zbill-product-pivot/decision-trail.json"
+  },
+  "verification_harness": {
+    "path": null
+  },
+  "static_review": {
+    "artifact": null
+  },
+  "corrective_enforcement": {
+    "artifact": null
+  },
+  "runs": [],
+  "bugs": [],
+  "delivery_contract": "knowledge-v2",
+  "pipeline_contract": "unified-v1",
+  "schema_version": 2,
+  "revision": 9,
+  "prerequisite_receipts": {
+    "investigation": {
+      "artifact": ".super-speckit/features/zbill-product-pivot/investigation-receipt.json",
+      "digest": "761863203a0a741cf6288f1adfba2a091cf431c95949d26b436cb585f13a9dcc"
+    }
+  }
+}

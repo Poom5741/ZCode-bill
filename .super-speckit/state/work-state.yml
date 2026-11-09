@@ -26,7 +26,7 @@ features:
     runs: [{"schema_version": 1, "candidate_sha": "7d7e1d3859625d5f8004fca70ef195edaea5c84a", "checker": "independent-qa-clone", "attempt_id": "qa-doc-retriage-2", "worktree": "C:\\Users\\FiveM\\AppData\\Local\\Temp\\opencode\\qa-clone-doc-retriage", "matrix_digest": "c2e37f195338d962b096886185dabbfa51e9a72fe3035b61cf66de3d0cbe6143", "environment": ".super-speckit/features/doc-retriage-2026-11/qa-environment-2.json", "environment_digest": "2d4d79d04656c39391b4e9ef8c6bda729f739928afea01da004f97362be14e5e", "requirements": [{"id": "REQ-01", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-02", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-03", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-04", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-05", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-06", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-07", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-08", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-09", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-10", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-11", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}, {"id": "REQ-12", "kind": "public-behavior", "public_seam": "docs/issues/RETRIAGE-2026-11.md verdict row verified against clean-clone code reads", "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}], "gates": [{"name": "qa-clone-evidence-verification", "command": "python qa_checker.py against clean clone at candidate (10/10 checks passed; receipts bound in .super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json)", "exit_code": 0, "status": "passed", "evidence": ".super-speckit/features/doc-retriage-2026-11/qa-receipt-2.json", "evidence_digest": "9959c4e6ac4882b978ce203fed6ffb8cda543d164b2d11e9b52f6dda7eb19a42"}]}]
     bugs: []
   - id: "rdux15-project-device-separation"
-    state: "maker_running"
+    state: "blocked"
     candidate_sha: null
     maker: "ade-lane-a5862aba"
     checker: "independent-qa-clone"
@@ -38,9 +38,32 @@ features:
     route: "normal"
     atlas: ".super-speckit\\atlas\\README.md"
     change_story: ".super-speckit\\atlas\\changes\\rdux15-project-device-separation\\change-story.md"
-    latest_handoff: null
+    latest_handoff: ".super-speckit/features/rdux15-project-device-separation/handoff-pivot-supersession.md"
     decision_trail: ".super-speckit/features/rdux15-project-device-separation/decision-trail.json"
     verification_harness: ".super-speckit/verification/verification-harness.md"
+    static_review: null
+    corrective_enforcement: null
+    ui_change: true
+    journey_ux_status: "not_required"
+    journey_ux_report: null
+    runs: []
+    bugs: []
+  - id: "zbill-product-pivot"
+    state: "planned"
+    candidate_sha: null
+    maker: "ade-lane-a5862aba"
+    checker: "independent-qa-clone"
+    matrix: ".super-speckit/features/zbill-product-pivot/matrix.md"
+    purpose_status: "confirmed"
+    purpose_map: ".super-speckit\\purpose\\zbill-product-pivot\\purpose-map.md"
+    grill_status: "not_started"
+    grill_artifact: null
+    route: "milestone"
+    atlas: null
+    change_story: null
+    latest_handoff: null
+    decision_trail: ".super-speckit/features/zbill-product-pivot/decision-trail.json"
+    verification_harness: null
     static_review: null
     corrective_enforcement: null
     ui_change: true

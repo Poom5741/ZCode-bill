@@ -1,0 +1,89 @@
+{
+  "base_sha": "b1ccdc9a684e8a1c03d5c79213e565b7c608a54d",
+  "playbook": "investigation",
+  "playbook_digest": "dc66bcf6af3a074fc7f67aa5e12b93ef571a4fb4d8e17f2f1af5ae5359f42e46",
+  "intent": "Map the overgoal pivot from ZCode to ZBill (Windows-first bill-report app): locate prior ZBill work, port its product bits onto main, verify the product-mode seams, and bound the cut/extend waves so milestone routing and native planning rest on verified seams and owner-confirmed scope.",
+  "flow": "ZBill product mode rides build-time define (__ZBILL_PRODUCT__) into packages/shared env const consumed by packages/ui sidebar; bill pipeline lives in self-contained zbill-billing/ (Python venv, fixtures, xlsx+PDF); cut candidates are packages/ui purchase/marketplace/automations surfaces (wave 1) and remote-connection/data-sync/web-server remote-control modules (wave 2); the agent core (session runtime, protocol, host, 3-panel shell, document panel) is kept.",
+  "scope_rationale": "Milestone route: whole-product pivot across five UI/service modules plus a Python pipeline, with hard deletions touching many packages; exceeds normal planning depth. Deep per-wave import-graph mapping is deliberately deferred to per-wave investigations executed before each maker wave, per milestone-slice reassessment.",
+  "unknowns": [
+    "Full import graph per cut wave (per-wave investigations produce the exact keep-list)",
+    "Which provider modules the local agent runtime requires for model access vs purchasable UI (wave-1 investigation)",
+    "Document-panel archive UX shape for report history (bill-feature wave)"
+  ],
+  "unresolved_blockers": [],
+  "conventions": [
+    {
+      "id": "C1",
+      "rule": "Components access services through hooks in src/hooks; components never take services or repos directly",
+      "scope": "All new/changed UI wiring including item review and archive surfaces",
+      "source": "packages/ui/AGENTS.md",
+      "plan_application": "Review/edit and archive UI goes through hooks/store; no component-local service calls"
+    },
+    {
+      "id": "C2",
+      "rule": "Zustand state in src/store with a single owner per state; no duplicate write paths",
+      "scope": "Report archive index and item-edit draft state",
+      "source": "AGENTS.md",
+      "plan_application": "One owner for archived-report index; edits persist via the pipeline's items.json contract"
+    },
+    {
+      "id": "C3",
+      "rule": "Deleted behavior must keep typecheck/lint/architecture checks green and docs updated in the same change",
+      "scope": "Cut waves 1 and 2",
+      "source": "AGENTS.md",
+      "plan_application": "Each wave is one verified slice: code removal + route removal + doc update + checks, no dead exports left (knip)"
+    }
+  ],
+  "evidence": [
+    { "path": "packages/desktop/vite.config.ts", "digest": "1a102e9bdcd2aea794e8e966ccb32b9018b1ed66fddd94db08fcae80442fbc86" },
+    { "path": "packages/shared/src/env.ts", "digest": "4d36bf0e88f16c76d927330db12c0182b118b629b97e08fdfa42ba163446c46d" },
+    { "path": "packages/ui/src/project-sidebar/ProjectSidebarNavigation.tsx", "digest": "0b74e560acc55b9ee34cdd514d6c4c747afd14d15a68a77f13a39fe5f971faec" },
+    { "path": "mise.toml", "digest": "3ef1b11c23bbdde115845b71b6ea33530f1086655d37074a050b5df143b4fb3f" },
+    { "path": "zbill-billing/SKILL.md", "digest": "654ea6205807f8ee15488faa70daef03ef9eed97c7e6343d25555ba97475fc08" },
+    { "path": "zbill-billing/GOOGLE-PLUGINS-M2.md", "digest": "0dbeb7ad036ba2497d1b250eca56546e5b41582159a8989262acc958bedfb095" },
+    { "path": "evidence/ZBILL-M1/zbill-mode.md", "digest": "18bd49cd03c5700734a6f3e54c0e99cc12e2ce3e9d12ebb9304f10aef48b440e" },
+    { "path": ".super-speckit/purpose/ZBILL-M1/purpose-map.md", "digest": "3b7b2c34b48350b97a717bc5adb1eb68a03d760eddb9b8bc88ffa85f466bd0c5" },
+    { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a" },
+    { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260" },
+    { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" },
+    { "path": "AGENTS.md", "digest": "7996d42efbe9632e11450478465bec248264787ce5759530e5b0a8b6ccb71890" },
+    { "path": "packages/ui/AGENTS.md", "digest": "233e28d32085de1a50b5dbb04b7389a7248a2b2fd8399884f750234d0aadda89" }
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "source_step": "1",
+      "status": "completed",
+      "evidence": [
+        { "path": ".super-speckit/purpose/zbill-product-pivot/purpose-map.md", "digest": "a2faf6c05fa69a1e4a4c830a799f4b7d1484185bd42672c556a11c9d2d3ca260" },
+        { "path": "evidence/ZBILL-M1/zbill-mode.md", "digest": "18bd49cd03c5700734a6f3e54c0e99cc12e2ce3e9d12ebb9304f10aef48b440e" },
+        { "path": "zbill-billing/SKILL.md", "digest": "654ea6205807f8ee15488faa70daef03ef9eed97c7e6343d25555ba97475fc08" }
+      ]
+    },
+    {
+      "id": "S2",
+      "source_step": "2",
+      "status": "completed",
+      "evidence": [
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" }
+      ]
+    },
+    {
+      "id": "S3",
+      "source_step": "3",
+      "status": "completed",
+      "evidence": [
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" },
+        { "path": ".super-speckit/features/zbill-product-pivot/matrix.md", "digest": "e17bb44e16e5122fbf4698604899ec231347c018af7148b891554658a306df6a" }
+      ]
+    },
+    {
+      "id": "S4",
+      "source_step": "4",
+      "status": "completed",
+      "evidence": [
+        { "path": ".super-speckit/features/zbill-product-pivot/investigation-notes.md", "digest": "c65a1bedada53628f8c9bdc3e204b83a56b2f638fcb671172e7b849c6c696216" }
+      ]
+    }
+  ]
+}
