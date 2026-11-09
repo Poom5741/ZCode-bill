@@ -3,16 +3,16 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "zbill-product-pivot",
-    "stage": "maker_running; planning complete (grill 8 decisions, spec/plan/tasks, receipts, personas); T1 traced",
-    "next_action": "W1 cut execution (tasks T2-T8): delete automations route branches, plugin-store page + navigation + marketplace RPCs, coding-plan purchase stack (keep ModelProviderSection base CRUD); then dead i18n + e2e spec cleanup; checks (typecheck/lint/architecture/knip); T9 EV-fixture regression; T10 ZBill launch journey. Marketplace RPC chain is services-layer: zcodeAgentService.ts:5496/5524 -> pluginManagementService.ts -> pluginManagement.ts allowlist (no desktop-main handlers).",
+    "stage": "maker_running; W1 shell layer cut done+pushed (0497af17); T2 partial",
+    "next_action": "W1 remainder: T3 plugin-store files + services/protocol marketplace RPCs (zcodeAgentService/zcodeAgent/pluginManagementService/pluginManagement + pluginsMarketplace* protocol methods + CLI handler); T4 purchase stack (CodingPlanUpgradeDialog/CodingPlanEmbeddedWebviewDialog/CodingPlanPurchaseChoiceBanners/codingPlanPurchaseAuth + ModelProviderSection/Detail plumbing, keep provider CRUD); T5 services dead members; T6 e2e specs; T7 i18n; T8 checks+knip; T9 EV regression; T10 ZBill launch journey. NOTE: upstream-pinned files must stay pristine (savedWorkflowHubContext restored byte-for-byte after architecture unmanaged-new-file violation); fork edits go through historical-exempt or adopt.",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [
       ".super-speckit/features/zbill-product-pivot/tasks.md",
-      ".super-speckit/features/zbill-product-pivot/investigation-notes.md"
+      ".super-speckit/atlas/changes/zbill-product-pivot/change-story.md"
     ],
-    "unknowns": "Exact host-side handler set for purchase-token RPCs if any (services-layer chain traced; desktop main clean); archive UX directory name resolved during W3",
-    "updated_at": "2026-11-09T17:17:00.217277Z"
+    "unknowns": "Whether v4 gets adopted as managed module at W2 (governance call with owner); archive UX directory resolved during W3",
+    "updated_at": "2026-11-09T18:43:32.308964Z"
   },
   "history": [
     {
@@ -101,6 +101,19 @@
       ],
       "unknowns": "Wave-1/2 exact keep-lists pending per-wave import-graph investigation; chromedriver Application-Control-blocked on this host (journeys via ADE computer-use CDP, view/cancel-only on real dev instance)",
       "updated_at": "2026-11-09T16:57:48.737737Z"
+    },
+    {
+      "feature": "zbill-product-pivot",
+      "stage": "maker_running; planning complete (grill 8 decisions, spec/plan/tasks, receipts, personas); T1 traced",
+      "next_action": "W1 cut execution (tasks T2-T8): delete automations route branches, plugin-store page + navigation + marketplace RPCs, coding-plan purchase stack (keep ModelProviderSection base CRUD); then dead i18n + e2e spec cleanup; checks (typecheck/lint/architecture/knip); T9 EV-fixture regression; T10 ZBill launch journey. Marketplace RPC chain is services-layer: zcodeAgentService.ts:5496/5524 -> pluginManagementService.ts -> pluginManagement.ts allowlist (no desktop-main handlers).",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [
+        ".super-speckit/features/zbill-product-pivot/tasks.md",
+        ".super-speckit/features/zbill-product-pivot/investigation-notes.md"
+      ],
+      "unknowns": "Exact host-side handler set for purchase-token RPCs if any (services-layer chain traced; desktop main clean); archive UX directory name resolved during W3",
+      "updated_at": "2026-11-09T17:17:00.217277Z"
     }
   ]
 }
