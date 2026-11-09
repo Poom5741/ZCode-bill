@@ -3,16 +3,15 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "zbill-product-pivot",
-    "stage": "maker_running; W1 shell layer cut done+pushed (0497af17); T2 partial",
-    "next_action": "W1 remainder: T3 plugin-store files + services/protocol marketplace RPCs (zcodeAgentService/zcodeAgent/pluginManagementService/pluginManagement + pluginsMarketplace* protocol methods + CLI handler); T4 purchase stack (CodingPlanUpgradeDialog/CodingPlanEmbeddedWebviewDialog/CodingPlanPurchaseChoiceBanners/codingPlanPurchaseAuth + ModelProviderSection/Detail plumbing, keep provider CRUD); T5 services dead members; T6 e2e specs; T7 i18n; T8 checks+knip; T9 EV regression; T10 ZBill launch journey. NOTE: upstream-pinned files must stay pristine (savedWorkflowHubContext restored byte-for-byte after architecture unmanaged-new-file violation); fork edits go through historical-exempt or adopt.",
+    "stage": "maker_running; W1 T3 complete (marketplace chain end-to-end + plugin-store UI), pushed 0c6bdb8d",
+    "next_action": "W1 remainder: T4 purchase stack \u2014 CodingPlanUpgradeDialogProvider ecosystem (Root mount + MarketingTouchProvider/SessionPane/OffPeakNewTaskEntry/SettingsPage/V4ComposerToolbar consumers mapped in tasks.md), CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners, codingPlanPurchaseAuth, purchase-token state; keep ModelProviderSection base CRUD. Then T5 knip audit, T6 e2e fixture rework (addMarketplaceSourceThroughAgent retyped pending), T7 i18n, T8 checks, T9 EV regression, T10 ZBill journey.",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [
-      ".super-speckit/features/zbill-product-pivot/tasks.md",
-      ".super-speckit/atlas/changes/zbill-product-pivot/change-story.md"
+      ".super-speckit/features/zbill-product-pivot/tasks.md"
     ],
-    "unknowns": "Whether v4 gets adopted as managed module at W2 (governance call with owner); archive UX directory resolved during W3",
-    "updated_at": "2026-11-09T18:43:32.308964Z"
+    "unknowns": "CLI workspace install blocked on this host (pre-existing missing @zcode/model-option-map pkg) - CLI typecheck/test evidence limited to bootstrap-scoped tsc (edited files clean)",
+    "updated_at": "2026-11-09T21:06:03.868879Z"
   },
   "history": [
     {
@@ -114,6 +113,19 @@
       ],
       "unknowns": "Exact host-side handler set for purchase-token RPCs if any (services-layer chain traced; desktop main clean); archive UX directory name resolved during W3",
       "updated_at": "2026-11-09T17:17:00.217277Z"
+    },
+    {
+      "feature": "zbill-product-pivot",
+      "stage": "maker_running; W1 shell layer cut done+pushed (0497af17); T2 partial",
+      "next_action": "W1 remainder: T3 plugin-store files + services/protocol marketplace RPCs (zcodeAgentService/zcodeAgent/pluginManagementService/pluginManagement + pluginsMarketplace* protocol methods + CLI handler); T4 purchase stack (CodingPlanUpgradeDialog/CodingPlanEmbeddedWebviewDialog/CodingPlanPurchaseChoiceBanners/codingPlanPurchaseAuth + ModelProviderSection/Detail plumbing, keep provider CRUD); T5 services dead members; T6 e2e specs; T7 i18n; T8 checks+knip; T9 EV regression; T10 ZBill launch journey. NOTE: upstream-pinned files must stay pristine (savedWorkflowHubContext restored byte-for-byte after architecture unmanaged-new-file violation); fork edits go through historical-exempt or adopt.",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [
+        ".super-speckit/features/zbill-product-pivot/tasks.md",
+        ".super-speckit/atlas/changes/zbill-product-pivot/change-story.md"
+      ],
+      "unknowns": "Whether v4 gets adopted as managed module at W2 (governance call with owner); archive UX directory resolved during W3",
+      "updated_at": "2026-11-09T18:43:32.308964Z"
     }
   ]
 }
