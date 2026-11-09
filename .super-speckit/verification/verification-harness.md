@@ -15,6 +15,11 @@
   被 Windows Application Control 策略拒绝加载（"An Application Control policy has blocked this file"），
   `pnpm fmt:check` 无法在本机执行。这是宿主机安全策略，不得绕过；format 门禁在本 lane 如实记为
   environment-blocked，不得伪称通过。lint/typecheck/architecture 已实测 PASS（2026-11-09）。
+- **wdio Desktop E2E 在本机环境受限（2026-11-09 实测）**：chromedriver.exe（@puppeteer/browsers 下载至
+  %TEMP%）被同一 Application Control 策略拒绝执行（spawn UNKNOWN，直接运行复现 "An Application Control
+  policy has blocked this file"）。Electron 本体可运行（electron.exe --version 正常），仅驱动被拦。
+  这是宿主机安全策略，不得绕过。行为验证改由 **ade app-control（CDP，无需 chromedriver）驱动真实应用**
+  执行（即 journey_ux 已接线执行者），结果如实按 journey 证据记录，不冒充 wdio PASS。
 
 ## Test-data isolation
 
@@ -28,9 +33,11 @@
 
 - WSL: 已安装，Ubuntu，WSL 2（`wsl --status`）→ RDUX15 的 WSL 发现/连接用例可在本机真实执行。
 - Docker: 29.9.2（`docker --version`）→ Docker 远端用例可在本机真实执行。
-- SSH 客户端: OpenSSH for Windows 9.5p2 → **真实 SSH 远端主机未配置**：RDUX15-07/10/18/21 的
-  真实远程 E2E 需要用户提供测试 SSH 主机（地址+凭据或 config 条目），在此之前这些场景如实记为
-  not-verified（环境阻塞），不得用 mock PASS 冒充。
+- SSH: OpenSSH for Windows 9.5p2 → **真实 SSH 远端不再提供**（用户指示 2026-11-09 “drop the ssh thing
+  just work here local with wsl”，DT-RDUX15-02）：依赖 ZCODE_E2E_SSH_* 的用例（ssh-remote-p0、
+  settings-connection-completion、background-connection、project-device-selection 的 SSH 块、
+  existing-remote-project 等）在本 lane 不执行，其场景行如实记 not-verified（declined），
+  按 ticket “环境阻塞必须列出未验证场景” 规则列明，不得用 mock PASS 冒充。WSL 为本 lane 的真实远端目标。
 - Journey UX 执行者: **ADE computer-use surfaces**（用户指示 2026-11-08）。Electron dev build 优先
   `ade app-control`（CDP，可断言 DOM/test-id，后台无指针）；无法附加 debug 端口时回退
   `ade screen`（Windows 私有桌面 seat）。Rakazo 已跳过（config enabled=false）。

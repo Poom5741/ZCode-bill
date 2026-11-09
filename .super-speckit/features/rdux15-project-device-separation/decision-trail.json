@@ -24,6 +24,25 @@
           "digest": "849278ed2e5b60cbe72d5492c1160271d3acac51cdebdcac64d9cced709866dc"
         }
       ]
+    },
+    {
+      "id": "DT-RDUX15-02",
+      "date": "2026-11-09",
+      "decision": "Drop the real-SSH test host requirement entirely; execute RDUX15/RDUX21 verification locally on this Windows host using WSL (and Docker where applicable); SSH-transport-dependent scenarios are recorded as not-verified (environment declined) for this lane.",
+      "provenance": "Repo owner directive in ADE chat cc7b7010 ('drop the ssh thing just work here local with wsl'), 2026-11-09.",
+      "rationale": "A dedicated SSH test host was the only remaining external blocker; the owner chose local WSL execution over provisioning one. The ticket's completion threshold requires honest listing of unverified scenarios rather than mock evidence, which this decision preserves.",
+      "consequences": [
+        "verification-harness.md: SSH bullet updated — host no longer pending; SSH-dependent specs (background-connection, settings-connection-completion, project-device-selection SSH blocks, existing-remote-project, ssh-remote-*) will not run in this lane",
+        "Coverage matrix SSH rows stay not-verified with 'declined per owner 2026-11-09' instead of 'pending host'",
+        "WSL scenarios (wsl-required-update and WSL-capable specs) become the real local remote-evidence path"
+      ],
+      "supersedes": [],
+      "evidence": [
+        {
+          "path": ".super-speckit/verification/verification-harness.md",
+          "digest": "134824e5d0bfa8219617a1a4c0abd9ef56a2c6b68b4656a9309896c9af0e27a6"
+        }
+      ]
     }
   ]
 }
