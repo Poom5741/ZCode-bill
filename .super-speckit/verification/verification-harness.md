@@ -11,6 +11,10 @@
 - Web 相关验证: `pnpm dev:web`（并发启动 server+web），URL 以 dev 输出为准（`gates.app_url` 留空即"按需记录"）。
 - 单元/工程: `pnpm test:engineering`（全量）/ `pnpm test:engineering:affected`（受影响）。
 - 确定性门禁（config 已接线）: `pnpm fmt:check` / `pnpm lint` / `pnpm typecheck` / `pnpm architecture:check --changed` / `pnpm -r build`。
+- **format 门禁在本机环境受限（2026-11-09 实测）**：oxfmt 的原生绑定 `@oxfmt/binding-win32-x64-msvc`
+  被 Windows Application Control 策略拒绝加载（"An Application Control policy has blocked this file"），
+  `pnpm fmt:check` 无法在本机执行。这是宿主机安全策略，不得绕过；format 门禁在本 lane 如实记为
+  environment-blocked，不得伪称通过。lint/typecheck/architecture 已实测 PASS（2026-11-09）。
 
 ## Test-data isolation
 

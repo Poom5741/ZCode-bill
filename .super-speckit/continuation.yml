@@ -3,15 +3,29 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "maker_running (T1: gap-analyze ProjectEditor first)",
-    "next_action": "Gap-analyze packages/ui/src/project-sidebar/ProjectEditor.tsx render against REQ-01..12 (pre-screen gone? name/device/folder same-surface? Q7 confirm?); author red skeletons ONLY for unsatisfied items; then T2-T4",
+    "stage": "maker_running (T1 gap analysis DONE; next = execute RDUX15/RDUX21 E2E on Windows)",
+    "next_action": "T1 conclusion recorded: contract + E2E tests already exist (upstream v3.17.2; matrix 4644/4586; prior PASS = macOS 2026-10-15). Remaining work = re-execute on this Windows host and record honest evidence. Recipe: build desktop once (pnpm -r build or ZCODE_E2E_SKIP_BUILD flow), then ZCODE_E2E_SPEC=<spec> pnpm --filter @zcode/desktop test:e2e:serial, starting with conversation-session-project-device-selection.test.ts (RDUX15-01/02/06/07/08/09/17; its SSH parts need ZCODE_E2E_SSH_* env) and WSL/Docker-capable specs; record results into the coverage matrix with artifact IDs; SSH rows stay not-verified until user provides host or approves sshd-in-WSL setup",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
-    "evidence": [],
-    "unknowns": "SSH test host; design prototype HTML; push authority; ProjectEditor gap extent",
-    "updated_at": "2026-11-09T08:11:05.041198Z"
+    "evidence": [
+      "gap analysis: ProjectCreation.tsx/ProjectEditor.tsx render = REQ-01..12 implemented; ProjectComposerMenu addDevice finish->connectedDevice->directory flow = RDUX21 contract",
+      "gates 2026-11-09: typecheck PASS; lint PASS after ignoring .super-speckit/vendor in oxlint (2 max-lines errors were vendored PStack scripts); architecture:check --changed 0 violations; format BLOCKED (Application Control policy refuses @oxfmt/binding-win32-x64-msvc .node load)",
+      "SSH env contract: ZCODE_E2E_SSH_HOST/USERNAME/PASSWORD[/PORT] (helpers/ssh-remote-p0.ts readSSHRuntimeConfig)"
+    ],
+    "unknowns": "SSH test host OR user approval to set up sshd inside local WSL Ubuntu; push authority (~15 local commits on main); kit/tool dirs tracking decision (.agents/skills, .claude/.codex/.cursor/.opencode/.pi, .zcode, .ade currently untracked)",
+    "updated_at": "2026-11-09T09:30:00Z"
   },
   "history": [
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "maker_running (T1: gap-analyze ProjectEditor first)",
+      "next_action": "Gap-analyze packages/ui/src/project-sidebar/ProjectEditor.tsx render against REQ-01..12 (pre-screen gone? name/device/folder same-surface? Q7 confirm?); author red skeletons ONLY for unsatisfied items; then T2-T4",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "SSH test host; design prototype HTML; push authority; ProjectEditor gap extent",
+      "updated_at": "2026-11-09T08:11:05.041198Z"
+    },
     {
       "feature": "rdux15-project-device-separation",
       "stage": "planning (native spec-kit artifacts)",
@@ -35,22 +49,12 @@
     {
       "feature": "rdux15-project-device-separation",
       "stage": "maker_running (T1 partial: mapping committed 49110340)",
-      "next_action": "Locate current project-create pre-screen component (grep \u672a\u4e2d: \u5c1d\u8bd5 ProjectWizard/workspace dialog \u547d\u540d\u6216\u4ece sidebar \u9879\u76ee+\u6309\u94ae onClick \u987a\u85e4\u6478\u74dc), read it + settings add-window, then author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run them red, then T2-T4 (M1)",
+      "next_action": "Locate current project-create pre-screen component (grep 未中: 尝试 ProjectWizard/workspace dialog 命名或从 sidebar 项目+按钮 onClick 顺藤摸瓜), read it + settings add-window, then author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run them red, then T2-T4 (M1)",
       "candidate_sha": null,
       "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
       "evidence": [],
-      "unknowns": "SSH test host; Rakazo instance; design prototype HTML; push authority",
-      "updated_at": "2026-11-07T15:56:50.931503Z"
-    },
-    {
-      "feature": "rdux15-project-device-separation",
-      "stage": "maker_running (T1 partial: mapping committed 49110340)",
-      "next_action": "Locate current project-create pre-screen component (trace sidebar \u9879\u76ee+ onClick), read it + settings add-window, author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run red, then T2-T4 (M1)",
-      "candidate_sha": null,
-      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
-      "evidence": [],
-      "unknowns": "SSH test host (or approve sshd-in-WSL); design prototype HTML; push authority. Rakazo: SKIPPED per user 2026-11-08 \u2014 Journey UX executor = ADE computer-use (app-control primary, screen fallback)",
-      "updated_at": "2026-11-08T12:44:53.782275Z"
+      "unknowns": "SSH test host; Rakazo removed per user 2026-11-08 (computer-use replaces it); design prototype HTML; push authority",
+      "updated_at": "2026-11-08T00:00:00Z"
     }
   ]
 }

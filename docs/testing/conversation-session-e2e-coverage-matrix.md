@@ -6114,6 +6114,13 @@ RDUX15-01..25 + [#21](../issues/remote-connection-ux/21-chat-settings-round-trip
 按 .super-speckit/verification/verification-harness.md 能力矩阵执行（本机 WSL2 Ubuntu / Docker 29.9.2 可真实跑，
 SSH 测试主机未配置 → 相关场景在提供前如实记 not-verified）。
 
-未完成（如实记录）：RDUX15-01/02/03/06/08 的红测试骨架尚未落文件——需先读当前项目创建前置屏组件与
-选择器（investigation-notes.md 开放问题 1），按 conversation-session-ssh-remote-three-screen.test.ts
-的既有组织方式编写；不伪造用例文件。下一 maker 会话第一件事即补骨架并跑红。
+2026-11-08 勘误（替代上一段“红测试骨架未落文件”结论）：本 checkout 的 gap analysis 确认
+ProjectCreation/ProjectEditor（项目创建表单：名称+设备+文件夹一体、已添加设备下拉、状态文字、离线显式连接、
+换设备确认、添加远程设备…设置往返）与 ProjectComposerMenu 聊天路径（连接后必选目录再进入项目）已实现
+确认合同（随 v3.17.2 上游同步落地）；且 RDUX15/RDUX21 场景的 E2E 已存在（project-device-selection、
+chat-remote-folder*、chat-device-return、settings-connection-completion、background-connection、
+existing-remote-project），历史 PASS 证据为 2026-10-15 macOS（desktop-e2e-2026101511…）。骨架工作作废。
+本 lane（Windows）剩余工作＝在本机真实执行这些用例并如实记录：WSL/Docker 场景可本地跑，SSH 场景在
+提供 ZCODE_E2E_SSH_HOST/USERNAME/PASSWORD 前保持 not-verified。本 checkout 门禁现状：typecheck PASS；
+lint 在将 .super-speckit/vendor（PStack vendored 脚本，非产品代码）加入 oxlint ignorePatterns 后 PASS
+（此前 2 个 max-lines error 均来自该 vendor 树）。
