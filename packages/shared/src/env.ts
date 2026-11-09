@@ -8,6 +8,8 @@ export type ArmsRumEnv = "local" | "prod";
 // 非构建环境（如 e2e 测试的 mocha）下 define 不存在，用 typeof 检查 + fallback 避免 ReferenceError
 declare const __ZCODE_ENV__: string;
 declare const __ZCODE_PRODUCT_FLAVOR__: string;
+/** ZBill purpose-built product mode（desktop vite define 注入；未注入的 bundle 视为非 ZBill）。 */
+declare const __ZBILL_PRODUCT__: boolean;
 declare const __ZCODE_ARMS_RUM_ENDPOINT__: string;
 declare const __ZCODE_TELEMETRY_REPORT_ENDPOINT__: string;
 declare const __ZCODE_AUTO_UPDATE_ENABLED__: boolean;
@@ -40,6 +42,9 @@ export const ZCODE_PRODUCT_FLAVOR = normalizeZCodeProductFlavor(
   typeof __ZCODE_PRODUCT_FLAVOR__ !== "undefined" ? __ZCODE_PRODUCT_FLAVOR__ : undefined,
   ZCODE_ENV,
 );
+/** ZBill 产品模式：隐藏通用 coding-agent 入口（自动化、插件市场），只保留 billing 相关 Shell。 */
+export const ZBILL_PRODUCT =
+  typeof __ZBILL_PRODUCT__ !== "undefined" ? __ZBILL_PRODUCT__ === true : false;
 export const ZCODE_APP_VERSION_ENV = "ZCODE_APP_VERSION" as const;
 export const ZCODE_BUILD_COMMIT_ID_ENV = "ZCODE_BUILD_COMMIT_ID" as const;
 

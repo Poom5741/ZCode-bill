@@ -91,3 +91,7 @@ __pycache__/
 .agents/skills/super-speckit-design-first/
 .agents/skills/super-speckit-final-manual-review/
 .super-speckit/qa/journey-home/
+# ZBill local artifacts (not committed)
+zbill-billing/.venv/
+zbill-billing/output/
+output/
