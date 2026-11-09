@@ -13,8 +13,8 @@
       "pnpm installed globally (10.33.2, matches mise.toml pin)",
       "dev desktop app verified running end-to-end (host RPC logs + renderer config traces) in the first app-control session before it was replaced"
     ],
-    "unknowns": "Push authority (~20 local commits); tool-dir gitignore decision; isolated-home CDP launch (journey-launch.cmd v3 env mirror still fails userData; needs either app.getPath fix upstream, real-data journey consent, or wdio-in-container route)",
-    "updated_at": "2026-11-09T16:40:00Z"
+    "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
+    "updated_at": "2026-11-09T17:10:00Z"
   },
   "history": [
     {
@@ -38,6 +38,16 @@
       "evidence": [],
       "unknowns": "SSH test host; design prototype HTML; push authority; ProjectEditor gap extent",
       "updated_at": "2026-11-09T08:11:05.041198Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "pushed a9fe401e..df70a399 (pre-push gate green: lint/schema/architecture/engineering-affected 0 selected)",
+      "next_action": "Journey evidence via ade app-control (chromedriver is Application-Control-blocked, see harness). Recipe: 1) ade app-control launch --command 'pnpm dev:desktop:test' (pnpm now global v10.33.2); 2) wait for window (dev electron unpackaged auto-enables CDP on port 9229 via appendSwitch in src/main/index.ts:307 — argv debug ports get OVERRIDDEN by it, and ZCODE_DISABLE_FIXED_REMOTE_DEBUGGING_PORT=1 route breaks userData resolution under HOME redirect, see .super-speckit/qa/journey-launch.cmd history); 3) ade app-control connect --cdp-port 9229 (NO --force — force stops the running app); 4) drive RDUX15-01 journey: sidebar 项目+ (virtual-project-add) → assert combined form (virtual-project-name/virtual-project-device/virtual-project-status) → cancel; 5) ade app-control proof --caption ... and record in harness + matrix. NOTE: dev instance uses the user's real app data — keep journey interactions view/cancel-only unless an isolated-home launch is solved (raw HOME redirect breaks app.getPath('appData') → 'Failed to get userData path').",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
+      "updated_at": "2026-11-09T17:10:00Z"
     }
   ]
 }
