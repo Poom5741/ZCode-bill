@@ -34,10 +34,6 @@ export interface TestActions extends TaskListE2EActions {
   getChatMessageCount: () => number;
   /** E2E 通过真实 zcodeAgentService 拉取插件 overview */
   getPluginsOverview: IZCodeAgentService["getPluginsOverview"];
-  /** E2E 通过真实 zcodeAgentService 添加 marketplace */
-  addPluginMarketplace: IZCodeAgentService["addPluginMarketplace"];
-  /** E2E 通过真实 zcodeAgentService 刷新 marketplace */
-  updatePluginMarketplace: IZCodeAgentService["updatePluginMarketplace"];
   /** E2E 通过真实 zcodeAgentService 安装 marketplace plugin */
   installPlugin: IZCodeAgentService["installPlugin"];
   /** E2E 通过真实 zcodeAgentService 触发插件 discover */

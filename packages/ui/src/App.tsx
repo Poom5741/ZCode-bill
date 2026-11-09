@@ -2,7 +2,7 @@ import { PluginUiWorkspaceProvider } from "@/plugin-ui/index.js";
 /* eslint-disable max-lines -- App 当前集中编排 workspace 级状态、导航、Git 派生数据和 shell wiring；已将新增 side pane memory 桥接抽出，剩余拆分需要按 shell 边界单独重构。 */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { resolveWorkspaceKey, type GitChangeSourceId, type WorkspacePurpose } from "@zcode/shared";
+import { type GitChangeSourceId, type WorkspacePurpose } from "@zcode/shared";
 import { useZCodeStore } from "@/store/StoreProvider.js";
 import { getVisibleTaskMetas, useZCodeSessionStore } from "@/store/zcodeSessionStore.js";
 import { useTaskQueryCacheStore } from "@/store/taskQueryCacheStore.js";
@@ -21,10 +21,6 @@ import type { TaskChatMessage as TestChatMessage } from "@/lib/taskChatMessageTy
 import { useZCodeIntl } from "@/i18n/IntlProvider.js";
 import { useIsOfficeMode } from "@/hooks/useInterfaceMode.js";
 import { getPathLeaf } from "@/lib/path.js";
-import {
-  addPluginStoreOpenListener,
-  type PluginStoreOpenTarget,
-} from "@/lib/pluginStoreNavigation.js";
 import { resolveWorkspaceSwitchDraftProvider } from "@/lib/workspaceDraftProvider.js";
 import { useTestActions } from "@/test-actions.js";
 import type { TestActions } from "@/test-actions.js";
@@ -57,10 +53,8 @@ import { useAppChromeState } from "@/app-shell/useAppChromeState.js";
 import { useWorkspaceSessionReload } from "@/app-shell/useWorkspaceSessionReload.js";
 import { useWorkspaceShellLifecycle } from "@/app-shell/useWorkspaceShellLifecycle.js";
 import { useWorkspaceShellZCodeState } from "@/app-shell/useWorkspaceShellZCodeState.js";
-import { useWorkspaceMainViewSettingsExit } from "@/app-shell/useWorkspaceMainViewSettingsExit.js";
 import {
   useWorkspaceTaskNavigation,
-  type AutomationsNavigationTarget,
 } from "@/app-shell/useWorkspaceTaskNavigation.js";
 import { useTaskSidePaneMemoryBridge } from "@/app-shell/useTaskSidePaneMemoryBridge.js";
 import { resolveAppWorkspaceRpcTarget } from "@/app-shell/workspaceRpcTarget.js";
@@ -83,8 +77,6 @@ import {
 } from "@/lib/closeActiveContext.js";
 import { usePaneLayoutStore } from "@/v4/paneLayoutStore.js";
 import { useWorkbenchGroupStore } from "@/v4/workbenchGroupStore.js";
-import type { SavedWorkflowHubTarget } from "@/v4/savedWorkflowHubContext.js";
-import type { SavedWorkflowsOpenTarget } from "@/settings/saved-workflows/SavedWorkflowsSection.js";
 import type { AssistantPreviewCardsAutoOpenRequest } from "@/lib/assistantPreviewCards.js";
 import { startMemoryDiagnosticsLogger } from "@/lib/memoryDiagnostics.js";
 
@@ -841,9 +833,6 @@ export function App({
       },
       getChatMessageCount: () => testMessages?.length ?? 0,
       getPluginsOverview: (params) => services.zcodeAgentService.getPluginsOverview(params),
-      addPluginMarketplace: (params) => services.zcodeAgentService.addPluginMarketplace(params),
-      updatePluginMarketplace: (params) =>
-        services.zcodeAgentService.updatePluginMarketplace(params),
       installPlugin: (params) => services.zcodeAgentService.installPlugin(params),
       listPlugins: (params) => services.zcodeAgentService.listPlugins(params),
       getPluginReferenceCatalog: (params) =>
@@ -862,40 +851,13 @@ export function App({
   );
   useTestActions(testActions);
   const [workspaceMainView, setWorkspaceMainView] = useState<WorkspaceMainView>("chat");
-  const [openAutomationId, setOpenAutomationId] = useState<string | null>(null);
-  const [openAutomationTab, setOpenAutomationTab] = useState<NonNullable<
-    AutomationsNavigationTarget["automationTab"]
-  > | null>(null);
-  const [pluginStoreOpenVersion, setPluginStoreOpenVersion] = useState(0);
   const handleNavigateToTaskMain = useCallback(() => {
     setWorkspaceMainView("chat");
   }, []);
-  const { preserveNextSettingsExit } = useWorkspaceMainViewSettingsExit({
-    isWorkspaceVisible,
-    workspaceMainView,
-    onExitSettings: handleNavigateToTaskMain,
-  });
-  const handleNavigateToAutomationsMain = useCallback((target: AutomationsNavigationTarget) => {
-    setOpenAutomationId(target.automationId ?? null);
-    setOpenAutomationTab(target.automationTab ?? null);
-    setWorkspaceMainView("automations");
-  }, []);
-  const handleNavigateToPluginStoreMain = useCallback(() => {
-    setPluginStoreOpenVersion((version) => version + 1);
-    preserveNextSettingsExit();
-    setWorkspaceMainView("plugin-store");
-  }, [preserveNextSettingsExit]);
-  const handleOpenAutomationConsumed = useCallback(() => {
-    setOpenAutomationId(null);
-    setOpenAutomationTab(null);
-  }, []);
-  // 中枢深链（「已保存」芯片 → 那个工作流的详情页）：中枢定位后由它回调清空。
-  const [openWorkflow, setOpenWorkflow] = useState<SavedWorkflowsOpenTarget | null>(null);
-  const handleOpenWorkflowConsumed = useCallback(() => setOpenWorkflow(null), []);
+  // Wave-1 删除了 automations/plugin-store 主视图（ZBill 裁剪）：入口、路由与市场 RPC 一并移除；
+  // useWorkspaceMainViewSettingsExit 是插件市场时代的主视图退出补偿，随市场一起删除。
   const {
     handleSelectTask,
-    handleOpenAutomations,
-    handleOpenPluginStore,
     handleTaskNavBack,
     handleTaskNavForward,
     canGoBack,
@@ -905,50 +867,9 @@ export function App({
   } = useWorkspaceTaskNavigation({
     intl,
     workspaceAbsPath,
-    workspaceIdentity,
     activateTabByPath,
     onNavigateToTask: handleNavigateToTaskMain,
-    onNavigateToAutomations: handleNavigateToAutomationsMain,
-    onNavigateToPluginStore: handleNavigateToPluginStoreMain,
   });
-  // 完成卡「已保存」芯片的落点（docs/dynamic-workflow/transcript-and-notifications.md「Saving the
-  // run, and running it again」）：走「自动化」入口的同一条导航（进历史、切主视图），落在「工作流」
-  // 标签，再由深链把中枢定位到那一页。项目档按 workspaceKey 找组，全局档只要名字。
-  const handleOpenSavedWorkflowInHub = useCallback(
-    (target: SavedWorkflowHubTarget) => {
-      setOpenWorkflow(
-        target.scope === "global"
-          ? { scope: "global", name: target.name }
-          : {
-              scope: "project",
-              name: target.name,
-              workspaceKey: resolveWorkspaceKey({
-                workspacePath: target.workspacePath,
-                ...(target.workspaceIdentity
-                  ? { workspaceIdentity: target.workspaceIdentity }
-                  : {}),
-              }),
-            },
-      );
-      handleOpenAutomations(undefined, "workflow");
-    },
-    [handleOpenAutomations],
-  );
-  const handleOpenPluginStoreForScope = useCallback(
-    (_target: PluginStoreOpenTarget = {}) => {
-      // 管理范围由市场内视图持有，重复打开只重置市场导航。
-      if (workspaceMainView === "plugin-store") {
-        setPluginStoreOpenVersion((version) => version + 1);
-        return;
-      }
-      handleOpenPluginStore();
-    },
-    [handleOpenPluginStore, workspaceMainView],
-  );
-  useEffect(
-    () => addPluginStoreOpenListener(handleOpenPluginStoreForScope),
-    [handleOpenPluginStoreForScope],
-  );
   const handleSelectAdjacentConversation = useCallback(
     (direction: "previous" | "next") => {
       runVisibleWorkspaceCommand(() => {
@@ -993,9 +914,9 @@ export function App({
   const handleSelectNextConversation = useCallback(() => {
     handleSelectAdjacentConversation("next");
   }, [handleSelectAdjacentConversation]);
-  const handlePrimaryNavigationBack =
-    workspaceMainView === "plugin-store" ? handleNavigateToTaskMain : handleTaskNavBack;
-  const canPrimaryNavigationBack = workspaceMainView === "plugin-store" || canTaskNavBack;
+  // Wave-1 删除了 plugin-store 主视图：主导航返回键不再有市场分支，直接跟随任务导航。
+  const handlePrimaryNavigationBack = handleTaskNavBack;
+  const canPrimaryNavigationBack = canTaskNavBack;
   const shellPanelIds = useMemo(() => ["sidebar", "content"], []);
 
   useAppKeyboard({
@@ -1179,16 +1100,7 @@ export function App({
           services={services}
           workspaceReadOnlyReason={workspaceReadOnlyReason}
           workspaceMainView={workspaceMainView}
-          pluginStoreOpenVersion={pluginStoreOpenVersion}
-          openAutomationId={openAutomationId}
-          openAutomationTab={openAutomationTab}
-          openWorkflow={openWorkflow}
-          onOpenWorkflowConsumed={handleOpenWorkflowConsumed}
-          onOpenSavedWorkflowInHub={handleOpenSavedWorkflowInHub}
           onWorkspaceMainViewChange={setWorkspaceMainView}
-          onOpenAutomationConsumed={handleOpenAutomationConsumed}
-          handleOpenAutomations={handleOpenAutomations}
-          handleOpenPluginStore={handleOpenPluginStoreForScope}
           onConnectRemote={onConnectRemote}
           onSelectRemoteProject={onSelectRemoteProject}
           onCancelRemoteProject={onCancelRemoteProject}

@@ -51,3 +51,27 @@ flowchart LR
 | Automations/plugin-store are route-conditional | proven | App.tsx / WorkspaceShellLayout.tsx digests in investigation receipt |
 | Report archive UX shape | assumed (bounded) | maker work resolves directory + panel integration; no purpose conflict |
 | Host-side marketplace/purchase handler inventory | unknown (bounded) | task T1 traces host handlers during maker work |
+
+## Wave-1 shell-layer cut (2026-11-10, commit in progress)
+
+Removed at route/type/prop level (typecheck-clean through packages/ui):
+- WorkspaceMainView narrowed to "chat" (packages/ui/src/app-shell/types.ts) — compiler
+  enumerated every remaining reference.
+- App.tsx: automations/plugin-store states, handlers, props, pluginStoreNavigation listener,
+  marketplace test-actions deleted; saved-workflow deep-link state deleted.
+- WorkspaceShellLayout.tsx: automations/plugin-store main-view branches (mobile + desktop)
+  cut to the chat main; run-history/artifact/draft-plugin-UI callbacks deleted; composer
+  plugin preview passes no-op onOpen (office mode boundary kept); terminal guard simplified
+  (was always-true after the cut).
+- useWorkspaceTaskNavigation.ts: producers removed; stale automations/plugin-store nav
+  entries skip-and-continue (persisted histories age out safely).
+- useWorkspaceMainViewSettingsExit.ts deleted (plugin-store-era exit compensation, fully inert).
+- saved-workflow hub: openWorkflow handler removed from the context (chip degrades to static
+  saved marker per the context's designed absence mode); navigateToRun kept (再次运行 → 新会话).
+  Decision: chat-side save controls stay (chat dynamic-workflow feature, not automations
+  management surface); their "open in hub" landing is gone — recorded limitation, owner may
+  restore a landing page or remove save controls at slice reassessment.
+
+Still open in W1: T3 (plugin-store files + services/protocol marketplace RPCs), T4 (purchase
+stack), T5 (services dead members), T6 (e2e specs), T7 (i18n), T8 (checks), T9 (regression),
+T10 (journey).

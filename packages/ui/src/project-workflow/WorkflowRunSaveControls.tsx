@@ -134,22 +134,8 @@ export function useWorkflowRunSaveSlots(host: WorkflowRunSaveSlotsHost): Workflo
 
   const leading =
     entry === undefined ? null : (
-      <WorkflowRunSavedChip
-        entry={entry}
-        label={format("chat.toolCall.workflow.saveRun.chip")}
-        {...(hub === null
-          ? {}
-          : {
-              hint: format("chat.toolCall.workflow.saveRun.chip.hint"),
-              onOpen: () =>
-                hub.openWorkflow({
-                  name: entry.name,
-                  scope: entry.scope,
-                  workspacePath: host.workspacePath,
-                  ...(host.workspaceIdentity ? { workspaceIdentity: host.workspaceIdentity } : {}),
-                }),
-            })}
-      />
+      // Wave-1 删除 automations 中枢页：芯片不再带 onOpen（无落点），退化为纯已保存标记。
+      <WorkflowRunSavedChip entry={entry} label={format("chat.toolCall.workflow.saveRun.chip")} />
     );
 
   if (host.canSave !== true) return { leading, trailing: null };

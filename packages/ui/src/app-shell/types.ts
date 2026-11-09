@@ -16,8 +16,6 @@ import type {
   UserInfo,
 } from "@zcode/shared";
 import type { IFeedbackService, IServiceAccessor } from "@zcode/services";
-import type { SavedWorkflowsOpenTarget } from "@/settings/saved-workflows/SavedWorkflowsSection.js";
-import type { SavedWorkflowHubTarget } from "@/v4/savedWorkflowHubContext.js";
 import type { WebRemoteControlWorkspaceSwitcherApi } from "@/root/types.js";
 import type { WebRemoteControlTerminalTransportState } from "@/root/types.js";
 import type { BrowserNavigationRequest, RecentClosedSidePaneTab } from "@/hooks/useAppPanels.js";
@@ -45,7 +43,6 @@ import type {
 } from "@/v4/legacyChatViewTypes.js";
 import type { ComposerMentionPrefill } from "@/store/zcodeSessionStoreTypes.js";
 import type { TaskFindDialogProps } from "@/quickpick/TaskFindDialog.js";
-import type { AutomationsNavigationTab, OpenAutomationsMain } from "@/lib/taskNavigationHistory.js";
 import type { SidePaneFullViewController } from "@/side-pane-full-view/contract.js";
 
 export interface WorkspaceShellZCodeState {
@@ -208,26 +205,12 @@ export interface GitChangeSummary {
   removed: number;
 }
 
-export type WorkspaceMainView = "chat" | "automations" | "plugin-store";
+export type WorkspaceMainView = "chat";
 
 export interface WorkspaceShellLayoutProps extends Omit<AppProps, "baseFeedbackService"> {
   workspaceReadOnlyReason?: string;
   workspaceMainView: WorkspaceMainView;
-  pluginStoreOpenVersion: number;
-  openAutomationId: string | null;
-  openAutomationTab: AutomationsNavigationTab | null;
-  /** 中枢深链：落到某个已保存工作流的详情页；定位后由 `onOpenWorkflowConsumed` 清空。 */
-  openWorkflow: SavedWorkflowsOpenTarget | null;
-  onOpenWorkflowConsumed: () => void;
-  /**
-   * 完成卡「已保存」芯片 → 中枢那一页（docs/dynamic-workflow/transcript-and-notifications.md
-   * 「Saving the run, and running it again」）：切到自动化主视图的「工作流」标签并设深链。
-   */
-  onOpenSavedWorkflowInHub: (target: SavedWorkflowHubTarget) => void;
   onWorkspaceMainViewChange: (view: WorkspaceMainView) => void;
-  onOpenAutomationConsumed: () => void;
-  handleOpenAutomations: OpenAutomationsMain;
-  handleOpenPluginStore: () => void;
   workspaceShellZCodeState: WorkspaceShellZCodeState;
   theme: Theme;
   isMacFullscreen: boolean;

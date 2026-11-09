@@ -6,7 +6,6 @@ import {
   canGoForward as navCanGoForward,
   isAutomationsNavEntry,
   isPluginStoreNavEntry,
-  type AutomationsNavigationTab,
 } from "@/lib/taskNavigationHistory.js";
 import { shouldBlockTaskSelectionDuringModelRestart } from "@/lib/taskSwitchGuard.js";
 import { logger } from "@/logger.js";
@@ -27,29 +26,16 @@ import { isWorkspaceTab } from "@/store/tabStore.js";
 import { bumpTaskListMembershipVersion } from "@/v4/taskListMembershipVersion.js";
 import { ensureTaskNavigationWorkspace } from "@/app-shell/taskNavigationWorkspace.js";
 
-export interface AutomationsNavigationTarget {
-  workspacePath: string;
-  workspaceIdentity?: string;
-  automationId?: string;
-  automationTab?: AutomationsNavigationTab;
-}
-
 export function useWorkspaceTaskNavigation({
   intl,
   workspaceAbsPath,
-  workspaceIdentity,
   activateTabByPath,
   onNavigateToTask,
-  onNavigateToAutomations,
-  onNavigateToPluginStore,
 }: {
   intl: { formatMessage: (descriptor: { id: string }) => string };
   workspaceAbsPath: string;
-  workspaceIdentity?: string;
   activateTabByPath: (workspacePath: string, options?: { workspaceIdentity?: string }) => boolean;
   onNavigateToTask?: () => void;
-  onNavigateToAutomations?: (target: AutomationsNavigationTarget) => void;
-  onNavigateToPluginStore?: (target: Omit<AutomationsNavigationTarget, "automationId">) => void;
 }) {
   // 跨 workspace 选择会先同步切换 tab，但本次 React render 捕获的 ambient
   // services 仍可能属于旧 remote attachment。local 目标必须固定从 window base attachment
@@ -58,8 +44,6 @@ export function useWorkspaceTaskNavigation({
   const tabStoreApi = useTabStoreApi();
   const setActiveTaskId = useZCodeSessionStore((s) => s.setActiveTaskId);
   const taskNavHistory = useZCodeSessionStore((s) => s.taskNavHistory);
-  const taskNavPushAutomations = useZCodeSessionStore((s) => s.taskNavPushAutomations);
-  const taskNavPushPluginStore = useZCodeSessionStore((s) => s.taskNavPushPluginStore);
   const taskNavGoBack = useZCodeSessionStore((s) => s.taskNavGoBack);
   const taskNavGoForward = useZCodeSessionStore((s) => s.taskNavGoForward);
   const removeTaskFromNavHistory = useZCodeSessionStore((s) => s.removeTaskFromNavHistory);
@@ -205,32 +189,8 @@ export function useWorkspaceTaskNavigation({
     [activateTabByPath, intl, onNavigateToTask, baseServices, tabStoreApi, setActiveTaskId],
   );
 
-  const handleOpenAutomations = useCallback(
-    (automationId?: string, automationTab?: AutomationsNavigationTab) => {
-      const normalizedAutomationId = automationId?.trim() || undefined;
-      // Automations 过去只切换 WorkspaceShellLayout 的本地视图，完全绕过
-      // 浏览器式导航历史，导致顶部前进/后退无法返回或恢复该页面。这里把它作为
-      // workspace 身份隔离的正式导航目标入栈；历史回放只消费条目，不会再次入栈。
-      taskNavPushAutomations(
-        workspaceAbsPath,
-        workspaceIdentity,
-        normalizedAutomationId,
-        automationTab,
-      );
-      onNavigateToAutomations?.({
-        workspacePath: workspaceAbsPath,
-        ...(workspaceIdentity ? { workspaceIdentity } : {}),
-        ...(normalizedAutomationId ? { automationId: normalizedAutomationId } : {}),
-        ...(automationTab ? { automationTab } : {}),
-      });
-    },
-    [onNavigateToAutomations, taskNavPushAutomations, workspaceAbsPath, workspaceIdentity],
-  );
-
-  const handleOpenPluginStore = useCallback(() => {
-    taskNavPushPluginStore(workspaceAbsPath, workspaceIdentity);
-    onNavigateToPluginStore?.({ workspacePath: workspaceAbsPath, workspaceIdentity });
-  }, [onNavigateToPluginStore, taskNavPushPluginStore, workspaceAbsPath, workspaceIdentity]);
+  // Wave-1 删除 automations/plugin-store 主视图后不再产生这两类导航条目；
+  // handleOpenAutomations / handleOpenPluginStore 已随入口一起移除。
 
   const handleTaskNavBack = useCallback(() => {
     const currentWorkspaceState = useZCodeSessionStore
@@ -258,32 +218,11 @@ export function useWorkspaceTaskNavigation({
     const taskMetaByEntityKey = useTaskQueryCacheStore.getState().taskMetaByEntityKey;
     while (entry) {
       const currentEntry = entry;
-      if (isAutomationsNavEntry(currentEntry)) {
-        activateTabByPath(
-          currentEntry.workspacePath,
-          currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : undefined,
-        );
-        onNavigateToAutomations?.({
-          workspacePath: currentEntry.workspacePath,
-          ...(currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : {}),
-          ...(currentEntry.automationId ? { automationId: currentEntry.automationId } : {}),
-          ...(currentEntry.automationTab ? { automationTab: currentEntry.automationTab } : {}),
-        });
-        return;
-      }
-      if (isPluginStoreNavEntry(currentEntry)) {
-        activateTabByPath(
-          currentEntry.workspacePath,
-          currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : undefined,
-        );
-        onNavigateToPluginStore?.(currentEntry);
-        return;
+      // Wave-1 删除 automations/plugin-store 主视图：历史里残留的这类条目只消费不入栈，
+      // 跳过后继续回退，避免死条目阻断任务历史导航。
+      if (isAutomationsNavEntry(currentEntry) || isPluginStoreNavEntry(currentEntry)) {
+        entry = taskNavGoBack();
+        continue;
       }
       const navWorkspaceState = useZCodeSessionStore
         .getState()
@@ -312,8 +251,6 @@ export function useWorkspaceTaskNavigation({
     activateTabByPath,
     handleSelectTask,
     intl,
-    onNavigateToAutomations,
-    onNavigateToPluginStore,
     removeTaskFromNavHistory,
     taskNavGoBack,
     workspaceAbsPath,
@@ -344,32 +281,11 @@ export function useWorkspaceTaskNavigation({
     const taskMetaByEntityKey = useTaskQueryCacheStore.getState().taskMetaByEntityKey;
     while (entry) {
       const currentEntry = entry;
-      if (isAutomationsNavEntry(currentEntry)) {
-        activateTabByPath(
-          currentEntry.workspacePath,
-          currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : undefined,
-        );
-        onNavigateToAutomations?.({
-          workspacePath: currentEntry.workspacePath,
-          ...(currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : {}),
-          ...(currentEntry.automationId ? { automationId: currentEntry.automationId } : {}),
-          ...(currentEntry.automationTab ? { automationTab: currentEntry.automationTab } : {}),
-        });
-        return;
-      }
-      if (isPluginStoreNavEntry(currentEntry)) {
-        activateTabByPath(
-          currentEntry.workspacePath,
-          currentEntry.workspaceIdentity
-            ? { workspaceIdentity: currentEntry.workspaceIdentity }
-            : undefined,
-        );
-        onNavigateToPluginStore?.(currentEntry);
-        return;
+      // Wave-1 删除 automations/plugin-store 主视图：历史里残留的这类条目只消费不入栈，
+      // 跳过后继续前进（与 handleTaskNavBack 同一语义）。
+      if (isAutomationsNavEntry(currentEntry) || isPluginStoreNavEntry(currentEntry)) {
+        entry = taskNavGoForward();
+        continue;
       }
       const navWorkspaceState = useZCodeSessionStore
         .getState()
@@ -397,8 +313,6 @@ export function useWorkspaceTaskNavigation({
     activateTabByPath,
     handleSelectTask,
     intl,
-    onNavigateToAutomations,
-    onNavigateToPluginStore,
     removeTaskFromNavHistory,
     taskNavGoForward,
     workspaceAbsPath,
@@ -416,8 +330,6 @@ export function useWorkspaceTaskNavigation({
 
   return {
     handleSelectTask,
-    handleOpenAutomations,
-    handleOpenPluginStore,
     handleTaskNavBack,
     handleTaskNavForward,
     canGoBack,

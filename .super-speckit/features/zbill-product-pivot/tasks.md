@@ -12,11 +12,20 @@ matrix; every REQ row needs its verification before the slice closes.
       pluginManagementService.ts:23/25/:181/:187 → pluginManagement.ts:64/:70/:101/:103
       (operation allowlist). Purchase e2e helpers confirmed under
       packages/desktop/test/e2e/helpers/coding-plan-upgrade-*.ts (+ codingPlanUpgradeMockServer.test.ts).
-- [ ] T2 Delete automations surface: workspaceMainView "automations" route branches,
-      AutomationsPage component graph, run-history navigation (WorkspaceShellLayout
-      :1527-1536), onOpenAutomations wiring end to end.
-- [ ] T3 Delete plugin-store surface: PluginStorePage, pluginStoreNavigation lib,
-      plugin-store route branches, marketplace management RPCs (T1 list).
+- [x] T2 (shell layer, 2026-11-10) automations surface removed: WorkspaceMainView narrowed to
+      "chat" (types.ts), App.tsx states/handlers/props for automations+plugin-store deleted,
+      WorkspaceShellLayout automations/plugin-store main-view branches (mobile + desktop) cut,
+      useWorkspaceTaskNavigation producers removed (stale nav entries skip-and-continue),
+      useWorkspaceMainViewSettingsExit.ts deleted (plugin-store-era exit compensation),
+      saved-workflow hub openWorkflow removed (chip degrades to static saved marker;
+      navigateToRun kept), composer palette plugin preview passes no-op.
+      Remaining for T2: v4 onOpenAutomationsMain plumbing (SessionPane/V4ChatPane/
+      V4WorkspaceChatArea/WorkbenchPane — inert, button hidden) + AutomationsSection.tsx +
+      AutomationsMainBreadcrumbFrame.tsx + AutomationsPageTitleSwitch.tsx file deletions.
+- [ ] T3 Delete plugin-store surface files + services marketplace RPCs (zcodeAgentService /
+      zcodeAgent / pluginManagementService / pluginManagement) + protocol methods
+      (pluginsMarketplaceAdd/Remove/Update) + CLI handler side; pluginStoreNavigation.ts,
+      PluginStorePage.tsx deletions.
 - [ ] T4 Delete coding-plan purchase surface: CodingPlanUpgradeDialog,
       CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners,
       codingPlanPurchaseAuth.js, purchase-token refresh state; keep provider base CRUD.

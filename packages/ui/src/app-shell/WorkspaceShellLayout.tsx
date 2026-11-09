@@ -1,6 +1,3 @@
-import type { DraftPluginUiOpenRequest } from "@/plugin-ui/contract.js";
-import { usePaneLayoutStore } from "@/v4/paneLayoutStore.js";
-import { useWorkbenchGroupStore } from "@/v4/workbenchGroupStore.js";
 /* eslint-disable max-lines -- workspace shell 当前集中编排 sidebar、chat、terminal 和 browser pane 的布局联动，先保持单文件收口，避免为满足行数限制打散关键布局状态。*/
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type {
@@ -26,10 +23,7 @@ import {
   type SidePaneFullViewFloating,
   type SidePaneFullViewHostMode,
 } from "@/side-pane-full-view/index.js";
-import {
-  SavedWorkflowHubProvider,
-  type SavedWorkflowHubTarget,
-} from "@/v4/savedWorkflowHubContext.js";
+import { SavedWorkflowHubProvider } from "@/v4/savedWorkflowHubContext.js";
 import {
   WorkflowRunOpenProvider,
   type WorkflowRunOpenTarget,
@@ -53,14 +47,10 @@ import { useIsOfficeMode } from "@/hooks/useInterfaceMode.js";
 import { GitBranchSwitcher } from "@/GitBranchSwitcher.js";
 import { ScopedErrorBoundary } from "@/ErrorBoundary.js";
 
-import { AUTOMATIONS_TOAST_ANCHOR_ID, AutomationsSection } from "@/settings/AutomationsSection.js";
 import type {
   SavedWorkflowLaunchTarget,
-  SavedWorkflowsOpenArtifactParams,
   SavedWorkflowsOpenRunParams,
 } from "@/settings/saved-workflows/SavedWorkflowsSection.js";
-import { AutomationsMainBreadcrumbFrame } from "@/settings/AutomationsMainBreadcrumbFrame.js";
-import { PluginStorePage } from "@/settings/PluginStorePage.js";
 import { TaskFindDialog } from "@/quickpick/TaskFindDialog.js";
 import { WebRemoteControlMobileShell } from "@/WebRemoteControlMobileShell.js";
 import { resolveTopOverlayLeadingPaddingClass, WorkspaceHeader } from "@/WorkspaceHeader.js";
@@ -279,16 +269,7 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   services,
   workspaceReadOnlyReason,
   workspaceMainView,
-  pluginStoreOpenVersion,
-  openAutomationId,
-  openAutomationTab,
-  openWorkflow,
-  onOpenWorkflowConsumed,
-  onOpenSavedWorkflowInHub,
   onWorkspaceMainViewChange,
-  onOpenAutomationConsumed,
-  handleOpenAutomations,
-  handleOpenPluginStore,
   onConnectRemote,
   onSelectRemoteProject,
   onCancelRemoteProject,
@@ -1420,44 +1401,11 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   const showChatMainView = useCallback(() => {
     onWorkspaceMainViewChange("chat");
   }, [onWorkspaceMainViewChange]);
-  const handleOpenDraftPluginUi = useCallback(
-    (request: DraftPluginUiOpenRequest) => {
-      if (!isDesktop || workspaceReadOnlyReason || workspaceRemoteSessionId) return;
-      const store = useZCodeSessionStore.getState();
-      const draft = store.getWorkspaceState(workspaceAbsPath, workspaceIdentity);
-      useWorkbenchGroupStore.getState().deactivateActiveGroup();
-      usePaneLayoutStore.getState().resetToPrimaryPane();
-      // 返回已有根草稿，保留项目和输入；不能将当前正式会话当作插件目标。
-      if (draft.activeTaskId !== null)
-        store.startDraft(workspaceAbsPath, undefined, workspaceIdentity, {
-          projectId: draft.draftProjectId,
-          taskGroupId: draft.draftTaskGroupId,
-        });
-      store.requestPluginUiOpen(request);
-      showChatMainView();
-    },
-    [
-      isDesktop,
-      workspaceReadOnlyReason,
-      workspaceRemoteSessionId,
-      workspaceAbsPath,
-      workspaceIdentity,
-      showChatMainView,
-    ],
-  );
-  const primaryNavigationBack =
-    workspaceMainView === "plugin-store" ? showChatMainView : handleTaskNavBack;
-  const canPrimaryNavigationBack = workspaceMainView === "plugin-store" || canTaskNavBack;
-  useEffect(() => {
-    if (
-      isWebRemoteControlShell &&
-      (workspaceMainView === "automations" || workspaceMainView === "plugin-store")
-    ) {
-      // 修复原因：手机远控复用桌面 shell 时可能保留上一次主视图状态；
-      // 远控不承载 Automations，必须立即回落到 continuous/replayable 边界之外的聊天页。
-      onWorkspaceMainViewChange("chat");
-    }
-  }, [isWebRemoteControlShell, onWorkspaceMainViewChange, workspaceMainView]);
+  // Wave-1 删除了 automations/plugin-store 主视图（ZBill 裁剪）：AutomationsSection /
+  // PluginStorePage / AutomationsMainBreadcrumbFrame 及其专属回调（草稿插件 UI、运行历史落点）
+  // 一并移除；handleOpenPluginStore 的唯一入口（插件市场）不存在，office-mode 预览传 no-op。
+  const primaryNavigationBack = handleTaskNavBack;
+  const canPrimaryNavigationBack = canTaskNavBack;
   const handleCreateTaskInChat = useCallback(
     (request?: Parameters<typeof onCreateTask>[0]) => {
       // workspaceReadOnlyReason 判定的是活动 workspace；当 request 显式带 targetWorkspace 时
@@ -1492,18 +1440,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   useLayoutEffect(() => {
     shellWorkbenchBindingRef.current = shellWorkbenchBinding;
   }, [shellWorkbenchBinding]);
-  const handleCreateAutomationInChat = useCallback(
-    (prompt: string, targetWorkspace?: { workspacePath: string; workspaceIdentity?: string }) => {
-      // 带 target 时跳过活动 workspace 只读检查，交由 handleCreateTaskInChat / root 动作在
-      // target 上校验（docs/dynamic-workflow/launch.md「The detail page」）；无 target 时形状不变。
-      if (!targetWorkspace && workspaceReadOnlyReason) return;
-      handleCreateTaskInChat({
-        initialPrompt: prompt,
-        ...(targetWorkspace ? { targetWorkspace } : {}),
-      });
-    },
-    [handleCreateTaskInChat, workspaceReadOnlyReason],
-  );
   // 工作流「运行」现由中枢直接启动（docs/dynamic-workflow/launch.md）：GUI 建空会话 +
   // 发 startSavedWorkflow 命令，不再合成对话文案。本层只在 accepted 后把会话切到前台。
   const handleSelectTaskInChat = useCallback(
@@ -1567,13 +1503,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   );
   // 中枢直接启动 accepted 后切到新会话（run 卡已在顶部）：复用运行历史那条导航，
   // target 恒带工作流所属项目坐标（不变式 7），remoteSessionId 决定连接 endpoint。
-  // 「已保存」芯片的落点：交给 App 切主视图并设深链（与「自动化」入口同一条导航历史）。
-  const handleOpenSavedWorkflowInHub = useCallback(
-    (target: SavedWorkflowHubTarget) => {
-      onOpenSavedWorkflowInHub(target);
-    },
-    [onOpenSavedWorkflowInHub],
-  );
   const handleNavigateToLaunchedRun = useCallback(
     (target: SavedWorkflowLaunchTarget, sessionId: string) => {
       handleSelectTaskInChat(
@@ -1651,45 +1580,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
       });
     },
     [handleOpenSavedWorkflowRun, handleSelectTaskInChat, workspaceTabs],
-  );
-  // 中枢的产物 chip：与「查看实例」逐字同构（同一条「先回到发起它的会话」的路径），
-  // 只是终点是 `workflow-artifact` tab 而不是 run 详情页。
-  const handleOpenSavedWorkflowArtifact = useCallback(
-    (params: SavedWorkflowsOpenArtifactParams) => {
-      const targetWorkspacePath = params.workspacePath || workspaceAbsPath;
-      const targetWorkspaceIdentity =
-        params.workspaceIdentity ?? (workspaceIdentity?.trim() ? workspaceIdentity : undefined);
-      const targetRemoteSessionId = workspaceTabs.find(
-        (tab) =>
-          tab.workspacePath === targetWorkspacePath &&
-          (!targetWorkspaceIdentity || tab.workspaceIdentity === targetWorkspaceIdentity),
-      )?.remoteSessionId;
-      handleSelectTaskInChat(
-        targetWorkspacePath,
-        params.sessionId,
-        targetWorkspaceIdentity,
-        targetRemoteSessionId,
-      );
-      handleOpenWorkflowArtifact({
-        workspacePath: targetWorkspacePath,
-        ...(targetWorkspaceIdentity ? { workspaceIdentity: targetWorkspaceIdentity } : {}),
-        ...(targetRemoteSessionId ? { remoteSessionId: targetRemoteSessionId } : {}),
-        parentSessionId: params.sessionId,
-        runId: params.runId,
-        artifactId: params.artifactId,
-        ...(params.title === undefined ? {} : { title: params.title }),
-        // 中枢的 chip 载荷带得到 contentType（html 产物据它直接开浏览器 tab）；`sourcePath`
-        // 那份载荷没有，由 `handleOpenWorkflowArtifact` 自己查 journal 补。
-        ...(params.contentType === undefined ? {} : { contentType: params.contentType }),
-      });
-    },
-    [
-      handleOpenWorkflowArtifact,
-      handleSelectTaskInChat,
-      workspaceAbsPath,
-      workspaceIdentity,
-      workspaceTabs,
-    ],
   );
   const handlePaneActiveSessionChange = useCallback(
     (
@@ -1814,7 +1704,9 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
       >
         {isOfficeMode && !isWebRemoteControlShell ? (
           <WorkspacePluginPreview
-            onOpen={handleOpenPluginStore}
+            // Wave-1 删除了插件市场主视图：预览的「打开市场」入口不复存在，传 no-op 占位；
+            // office-mode 是否整体保留在后续 wave 决策。
+            onOpen={() => undefined}
             onSelectPlugin={handleSelectComposerPlugin}
             workspacePath={workspaceAbsPath}
             workspaceIdentity={workspaceIdentity}
@@ -1840,7 +1732,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
     [
       isOfficeMode,
       workspaceRemoteSessionId,
-      handleOpenPluginStore,
       handleSelectComposerPlugin,
       allowRemoteWorkspace,
       activeWorkspacePurpose,
@@ -2155,10 +2046,8 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
   // 修复原因：Draft 之前维护一套独立轻量 header，导致 side pane、caption 安全区和拖拽入口
   // 与 Task Header 分叉。桌面端统一复用 WorkspaceHeader，只由 variant 裁剪 task 专属内容；
   // 手机远控无 active task 时仍不渲染桌面 chrome，继续遵守 replayable overlay 边界。
-  const shouldRenderMainViewHeader =
-    workspaceMainView !== "automations" && workspaceMainView !== "plugin-store";
-  const shouldRenderWorkspaceHeader =
-    shouldRenderMainViewHeader && (activeTaskId !== null || isDesktop);
+  // Wave-1 删除 automations/plugin-store 主视图后，主视图恒为 chat，header 恒渲染。
+  const shouldRenderWorkspaceHeader = activeTaskId !== null || isDesktop;
   // 修复原因：ErrorBoundary resetKeys 的数组如果每次 render 都重新创建，
   // 即使 workspace/task 没变化也会在 React DevTools Components 轨道里持续表现为子树 props 变化。
   const workspaceOnlyResetKeys = useMemo(() => [workspaceKey], [workspaceKey]);
@@ -2225,10 +2114,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
       goBackShortcutLabel={goBackShortcutLabel}
       goForwardShortcutLabel={goForwardShortcutLabel}
       onOpenCommandCenter={handleOpenCommandCenter}
-      onOpenAutomations={handleOpenAutomations}
-      automationsActive={workspaceMainView === "automations"}
-      onOpenPluginStore={handleOpenPluginStore}
-      pluginStoreActive={workspaceMainView === "plugin-store"}
       // 桌面没有 mobile 导航动作；内联包装曾让右侧开关穿透侧栏 memo，重复渲染全部项目。
       onWebRemoteTaskOpen={
         mobile
@@ -2335,86 +2220,7 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
         }
         chatOverlay={workspaceMainView === "chat" ? renderChatFindDialog() : undefined}
         chatContent={
-          workspaceMainView === "automations" && !isWebRemoteControlShell ? (
-            <main
-              id={AUTOMATIONS_TOAST_ANCHOR_ID}
-              className="flex h-full min-h-0 flex-1 flex-col bg-background"
-            >
-              <AutomationsMainBreadcrumbFrame
-                isDesktop={Boolean(isDesktop)}
-                sectionLabel={intl.formatMessage({
-                  id: "settings.automations.title",
-                })}
-                ariaLabel={intl.formatMessage({
-                  id: "automations.breadcrumbLabel",
-                })}
-              >
-                <div
-                  // 修复原因：不同 Automations tab 的内容高度不同，滚动条出现/消失会改变
-                  // mx-auto 内容列的可用宽度，造成整页左右弹动；预留稳定槽位保持居中基准不变。
-                  className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]"
-                >
-                  <ScopedErrorBoundary
-                    scope="automations-main"
-                    resetKeys={workspaceOnlyResetKeys}
-                    variant="panel"
-                    className="min-h-full"
-                  >
-                    <div className="mx-auto flex w-full max-w-5xl flex-col px-4 py-4 md:px-6 md:py-6">
-                      <AutomationsSection
-                        workspacePath={workspaceAbsPath}
-                        workspaceIdentity={workspaceIdentity}
-                        onCreateViaChat={handleCreateAutomationInChat}
-                        onNavigateToLaunchedRun={handleNavigateToLaunchedRun}
-                        onOpenWorkflowRun={handleOpenSavedWorkflowRun}
-                        onOpenWorkflowArtifact={handleOpenSavedWorkflowArtifact}
-                        openAutomationId={openAutomationId}
-                        openAutomationTab={openAutomationTab}
-                        onOpenAutomationConsumed={onOpenAutomationConsumed}
-                        openWorkflow={openWorkflow}
-                        onOpenWorkflowConsumed={onOpenWorkflowConsumed}
-                        onOpenSession={({ sessionId, workspacePath, workspaceIdentity }) =>
-                          handleSelectTaskInChat(workspacePath, sessionId, workspaceIdentity)
-                        }
-                      />
-                    </div>
-                  </ScopedErrorBoundary>
-                </div>
-              </AutomationsMainBreadcrumbFrame>
-            </main>
-          ) : workspaceMainView === "plugin-store" && !isWebRemoteControlShell ? (
-            <main className="flex h-full min-h-0 flex-1 flex-col bg-background">
-              <AutomationsMainBreadcrumbFrame
-                isDesktop={Boolean(isDesktop)}
-                sectionLabel={intl.formatMessage({
-                  id: "workspace.openPluginsSettings",
-                })}
-                ariaLabel={intl.formatMessage({
-                  id: "settings.breadcrumbLabel",
-                })}
-              >
-                <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
-                  <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 md:px-6 md:py-6">
-                    <PluginStorePage
-                      isDesktop={isDesktop}
-                      isMacDesktop={isMacDesktop}
-                      isWindowsDesktop={isWindowsDesktop}
-                      isWebRemoteControl={isWebRemoteControlShell}
-                      key={`plugin-store:${pluginStoreOpenVersion}`}
-                      workspacePath={workspaceAbsPath}
-                      workspaceIdentity={workspaceIdentity}
-                      // Bug 根因：独立插件页曾绕过切回聊天页的包装回调，任务虽被创建，
-                      // 视图仍停在插件详情，用户看到“立即试用”与示例 Prompt 点击无反应。
-                      onCreateTask={handleCreateTaskInChat}
-                      onOpenDraftUi={handleOpenDraftPluginUi}
-                      sessionId={activeTaskId}
-                      remoteSessionId={workspaceRemoteSessionId}
-                    />
-                  </div>
-                </div>
-              </AutomationsMainBreadcrumbFrame>
-            </main>
-          ) : (
+          (
             <div className="relative flex h-full min-h-0 min-w-0 flex-1 flex-col">
               {/* Bugfix: 手机远控聊天页中间层必须继续提供 flex 高度链。
                 只有 h-full 的普通 block 会让 ChatView 的 flex-1 失效，草稿空态贴顶且内部滚动被外层裁掉。 */}
@@ -2453,7 +2259,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
                   onRefreshGit={handleRefreshGit}
                   onOpenGitReview={handleOpenGitReview}
                   onOpenBrowserUrl={handleOpenBrowserUrl}
-                  onOpenAutomationsMain={handleOpenAutomations}
                   onOpenCodeViewer={handleOpenCodeViewer}
                   onAutoOpenAssistantPptx={
                     isDesktop && !isWebRemoteControlShell ? handleAutoOpenAssistantPptx : undefined
@@ -2492,10 +2297,13 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
     // 完成卡上那两个壳级落点（docs/dynamic-workflow/transcript-and-notifications.md「Saving the
     // run, and running it again」）：芯片开到中枢那一页、「再次运行」启动后切到新会话。只包桌面
     // 这一支——手机远控壳本来就不提供中枢，那边芯片是纯文字。
-    <SavedWorkflowHubProvider
-      openWorkflow={handleOpenSavedWorkflowInHub}
-      navigateToRun={handleNavigateToLaunchedRun}
-    >
+  // Wave-1 删除 automations 中枢页后，「已保存」芯片不再传 onOpen（唯一消费者
+  // WorkflowRunSaveControls 已去掉该 prop，芯片退化为纯已保存标记）。hub 的 openWorkflow
+  // 是上游文件的接口成员，这里以 no-op 满足签名；navigateToRun 保留（再次运行 → 新会话）。
+  <SavedWorkflowHubProvider
+    openWorkflow={() => undefined}
+    navigateToRun={handleNavigateToLaunchedRun}
+  >
       <div
         ref={workspaceShellRef}
         data-workspace-shell="true"
@@ -2776,92 +2584,7 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
                         </Button>
                       ) : null}
                       <div className="min-h-0 flex-1 overflow-hidden">
-                        {workspaceMainView === "automations" && !isWebRemoteControlShell ? (
-                          <main
-                            id={AUTOMATIONS_TOAST_ANCHOR_ID}
-                            className="flex h-full min-h-0 flex-1 flex-col bg-background"
-                          >
-                            <AutomationsMainBreadcrumbFrame
-                              isDesktop={Boolean(isDesktop)}
-                              sectionLabel={intl.formatMessage({
-                                id: "settings.automations.title",
-                              })}
-                              ariaLabel={intl.formatMessage({
-                                id: "automations.breadcrumbLabel",
-                              })}
-                            >
-                              <div
-                                // 修复原因：不同 Automations tab 的内容高度不同，滚动条出现/消失会改变
-                                // mx-auto 内容列的可用宽度，造成整页左右弹动；预留稳定槽位保持居中基准不变。
-                                className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]"
-                              >
-                                <ScopedErrorBoundary
-                                  scope="automations-main"
-                                  resetKeys={workspaceOnlyResetKeys}
-                                  variant="panel"
-                                  className="min-h-full"
-                                >
-                                  <div className="mx-auto flex w-full max-w-5xl flex-col px-4 py-4 md:px-6 md:py-6">
-                                    <AutomationsSection
-                                      workspacePath={workspaceAbsPath}
-                                      workspaceIdentity={workspaceIdentity}
-                                      onCreateViaChat={handleCreateAutomationInChat}
-                                      onNavigateToLaunchedRun={handleNavigateToLaunchedRun}
-                                      onOpenWorkflowRun={handleOpenSavedWorkflowRun}
-                                      onOpenWorkflowArtifact={handleOpenSavedWorkflowArtifact}
-                                      openAutomationId={openAutomationId}
-                                      openAutomationTab={openAutomationTab}
-                                      onOpenAutomationConsumed={onOpenAutomationConsumed}
-                                      openWorkflow={openWorkflow}
-                                      onOpenWorkflowConsumed={onOpenWorkflowConsumed}
-                                      onOpenSession={({
-                                        sessionId,
-                                        workspacePath,
-                                        workspaceIdentity,
-                                      }) =>
-                                        handleSelectTaskInChat(
-                                          workspacePath,
-                                          sessionId,
-                                          workspaceIdentity,
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                </ScopedErrorBoundary>
-                              </div>
-                            </AutomationsMainBreadcrumbFrame>
-                          </main>
-                        ) : workspaceMainView === "plugin-store" && !isWebRemoteControlShell ? (
-                          <main className="flex h-full min-h-0 flex-1 flex-col bg-background">
-                            <AutomationsMainBreadcrumbFrame
-                              isDesktop={Boolean(isDesktop)}
-                              sectionLabel={intl.formatMessage({
-                                id: "workspace.openPluginsSettings",
-                              })}
-                              ariaLabel={intl.formatMessage({
-                                id: "settings.breadcrumbLabel",
-                              })}
-                            >
-                              <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
-                                <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 md:px-6 md:py-6">
-                                  <PluginStorePage
-                                    isDesktop={isDesktop}
-                                    isMacDesktop={isMacDesktop}
-                                    isWindowsDesktop={isWindowsDesktop}
-                                    isWebRemoteControl={isWebRemoteControlShell}
-                                    key={`plugin-store:${pluginStoreOpenVersion}`}
-                                    workspacePath={workspaceAbsPath}
-                                    workspaceIdentity={workspaceIdentity}
-                                    onCreateTask={handleCreateTaskInChat}
-                                    onOpenDraftUi={handleOpenDraftPluginUi}
-                                    sessionId={activeTaskId}
-                                    remoteSessionId={workspaceRemoteSessionId}
-                                  />
-                                </div>
-                              </div>
-                            </AutomationsMainBreadcrumbFrame>
-                          </main>
-                        ) : (
+                        {(
                           <main className="relative flex h-full min-h-0 flex-1 flex-col overflow-hidden">
                             {renderChatFindDialog()}
                             <ScopedErrorBoundary
@@ -2910,7 +2633,6 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
                                 onOpenGitReview={handleOpenGitReview}
                                 onPaneActiveSessionChange={handlePaneActiveSessionChange}
                                 onOpenBrowserUrl={handleOpenBrowserUrl}
-                                onOpenAutomationsMain={handleOpenAutomations}
                                 onOpenCodeViewer={handleOpenCodeViewer}
                                 onAutoOpenAssistantPptx={
                                   isDesktop && !isWebRemoteControlShell
@@ -2946,8 +2668,9 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
                       </div>
                     </section>
                   </ResizablePanel>
-                  {isWebRemoteControlShell ||
-                  (workspaceMainView !== "automations" && workspaceMainView !== "plugin-store") ? (
+                  {/* Wave-1 删除 automations/plugin-store 主视图后终端不再被主视图切换卸载，
+                      原先的 isWebRemoteControlShell/主视图守卫恒为真，直接渲染。 */}
+                  {(
                     <AnimatedTerminalPanel
                       frameClassName={cn(
                         isSidePaneVisible
@@ -2974,12 +2697,12 @@ const WorkspaceShellLayoutContent = memo(function WorkspaceShellLayoutComponent(
                       onClose={() => setIsTerminalOpen(false)}
                       onOpenBrowserUrl={handleOpenBrowserUrl}
                     />
-                  ) : null}
+                  )}
                 </ResizablePanelGroup>
               </SidePaneFullViewConversationHost>
             </ResizablePanel>
-            {/* Bugfix：Browser Guest Host 必须与主视图路由解耦，避免 automations/plugin
-                    切换时卸载 Guest；截图请求期间由上层临时展开真实面板承载可合成的 WebContents。 */}
+            {/* Bugfix：Browser Guest Host 必须与主视图路由解耦，避免主视图切换
+                    时卸载 Guest；截图请求期间由上层临时展开真实面板承载可合成的 WebContents。 */}
             {sidePanePanel}
           </ResizablePanelGroup>
         </div>
