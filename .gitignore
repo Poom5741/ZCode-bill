@@ -75,3 +75,19 @@ packages/desktop/resources/macos-window-bounds/
 __pycache__/
 *.pyc
 .zcode-runtime
+
+# 机器本地的 AI/工具集成目录与运行时状态（ADE lane、各 agent 工具脚手架、
+# Super-SpecKit QA journey 隔离 home）。工具随环境而异，不属于仓库内容；
+# 交付物只提交 .super-speckit 下的 receipts/artifacts（journey-home 是隔离运行态）。
+.ade/
+.zcode/
+.claude/
+.codex/
+.cursor/
+.opencode/
+.pi/
+.agents/skills/ask-super-speckit/
+.agents/skills/super-speckit/
+.agents/skills/super-speckit-design-first/
+.agents/skills/super-speckit-final-manual-review/
+.super-speckit/qa/journey-home/
