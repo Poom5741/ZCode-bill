@@ -29,3 +29,15 @@
 3. Chat menu remote-entry i18n key ("新建远程连接…" wording per ticket).
 4. `packages/ui/src/app-shell/types.ts:82` draft handoff type (创建项目后的当前草稿交接) — read fully
    when designing draft ownership (ticket decision 9: single draft owner).
+
+## Update (2026-11-09): ProjectCreation/ProjectEditor gap-analysis entry point
+
+packages/ui/src/project-sidebar/ProjectCreation.tsx 委托 ProjectEditor 且已接线部分 RDUX15 合同：
+- 设备下拉数据源 = management snapshot 的已添加设备（Q4 数据源就位，:98-114）
+- completion:"device-management" + eturnTarget{kind:"add-device"} 草稿往返（Q10 部分，:250-275）
+- onBrowseExisting: 在线直接浏览/离线 connectDevice（Q6, :244-246）
+- 后台取消解除等待、原草稿保持（:247-248）
+
+下一步（T1 前置）：对照 ProjectEditor 渲染层逐条 gap-analyze REQ-01..12（前置屏是否已删？名称/设备/
+目录是否同屏？Q7 确认？），红测试只写 ProjectEditor 尚不满足的条目——否则基线错误。上游 sync v3.17.2
+可能已带部分实现；票据「未实施」结论需按组件现状修订。

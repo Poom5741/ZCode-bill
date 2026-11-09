@@ -3,13 +3,13 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "maker_running (T1 partial: mapping committed 49110340)",
-    "next_action": "Locate current project-create pre-screen component (trace sidebar \u9879\u76ee+ onClick), read it + settings add-window, author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run red, then T2-T4 (M1)",
+    "stage": "maker_running (T1: gap-analyze ProjectEditor first)",
+    "next_action": "Gap-analyze packages/ui/src/project-sidebar/ProjectEditor.tsx render against REQ-01..12 (pre-screen gone? name/device/folder same-surface? Q7 confirm?); author red skeletons ONLY for unsatisfied items; then T2-T4",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [],
-    "unknowns": "SSH test host (or approve sshd-in-WSL); design prototype HTML; push authority. Rakazo: SKIPPED per user 2026-11-08 \u2014 Journey UX executor = ADE computer-use (app-control primary, screen fallback)",
-    "updated_at": "2026-11-08T12:44:53.782275Z"
+    "unknowns": "SSH test host; design prototype HTML; push authority; ProjectEditor gap extent",
+    "updated_at": "2026-11-09T08:11:05.041198Z"
   },
   "history": [
     {
@@ -41,6 +41,16 @@
       "evidence": [],
       "unknowns": "SSH test host; Rakazo instance; design prototype HTML; push authority",
       "updated_at": "2026-11-07T15:56:50.931503Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "maker_running (T1 partial: mapping committed 49110340)",
+      "next_action": "Locate current project-create pre-screen component (trace sidebar \u9879\u76ee+ onClick), read it + settings add-window, author red skeletons RDUX15-01/02/03/06/08 modeled on conversation-session-ssh-remote-three-screen.test.ts, run red, then T2-T4 (M1)",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [],
+      "unknowns": "SSH test host (or approve sshd-in-WSL); design prototype HTML; push authority. Rakazo: SKIPPED per user 2026-11-08 \u2014 Journey UX executor = ADE computer-use (app-control primary, screen fallback)",
+      "updated_at": "2026-11-08T12:44:53.782275Z"
     }
   ]
 }
