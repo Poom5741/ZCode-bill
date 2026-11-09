@@ -6114,6 +6114,15 @@ RDUX15-01..25 + [#21](../issues/remote-connection-ux/21-chat-settings-round-trip
 按 .super-speckit/verification/verification-harness.md 能力矩阵执行（本机 WSL2 Ubuntu / Docker 29.9.2 可真实跑，
 SSH 测试主机未配置 → 相关场景在提供前如实记 not-verified）。
 
+2026-11-09 真实应用 journey 证据（RDUX15-01/02/03/09，reviewer＝ADE lane agent 经 CDP 直驱，
+chromedriver 被策略拦截后的替代执行面；view/cancel-only，未创建项目）：侧栏「项目+」直接打开
+合并表单（virtual-project-name / virtual-project-device / 目录浏览同屏，标题 Create project，
+无本地/远程预选屏）；设备下拉实测 3 项＝This computer · 已添加设备 DESKTOP-9JPTJ7S（带状态文字
+"Needs attention"）· Add remote device…（与 Q4/Q8/Q10 合同一致）；Esc 取消后表单关闭、无保存。
+证据：.super-speckit/qa/rdux15-journey/01-05*.png（proof 柜已登记）+ journey-rdux15-01.mjs。
+范围注：已有项目入口（virtual-project-existing）仅在选中远程设备时出现，与实现一致，本轮默认
+本地设备未触发；未执行 wdio 断言矩阵（chromedriver 环境阻塞见 harness）。
+
 2026-11-08 勘误（替代上一段“红测试骨架未落文件”结论）：本 checkout 的 gap analysis 确认
 ProjectCreation/ProjectEditor（项目创建表单：名称+设备+文件夹一体、已添加设备下拉、状态文字、离线显式连接、
 换设备确认、添加远程设备…设置往返）与 ProjectComposerMenu 聊天路径（连接后必选目录再进入项目）已实现

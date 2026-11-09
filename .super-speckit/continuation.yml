@@ -3,8 +3,8 @@
   "authority": "shared-repository-continuation",
   "current": {
     "feature": "rdux15-project-device-separation",
-    "stage": "maker_running (T2 journey-evidence setup; wdio E2E policy-blocked)",
-    "next_action": "Journey evidence via ade app-control (chromedriver is Application-Control-blocked, see harness). Recipe: 1) ade app-control launch --command 'pnpm dev:desktop:test' (pnpm now global v10.33.2); 2) wait for window (dev electron unpackaged auto-enables CDP on port 9229 via appendSwitch in src/main/index.ts:307 — argv debug ports get OVERRIDDEN by it, and ZCODE_DISABLE_FIXED_REMOTE_DEBUGGING_PORT=1 route breaks userData resolution under HOME redirect, see .super-speckit/qa/journey-launch.cmd history); 3) ade app-control connect --cdp-port 9229 (NO --force — force stops the running app); 4) drive RDUX15-01 journey: sidebar 项目+ (virtual-project-add) → assert combined form (virtual-project-name/virtual-project-device/virtual-project-status) → cancel; 5) ade app-control proof --caption ... and record in harness + matrix. NOTE: dev instance uses the user's real app data — keep journey interactions view/cancel-only unless an isolated-home launch is solved (raw HOME redirect breaks app.getPath('appData') → 'Failed to get userData path').",
+    "stage": "maker_running (T2 journey evidence: RDUX15-01/02/03/09 PASS on real app)",
+    "next_action": "Journey RDUX15-01/02/03/09 recorded PASS in matrix (6117 area, commit pending push). Next: WSL add-window journey (settings → remote devices → WSL section, RDUX15-04/05 scope on this host), then remaining view-only journeys (chat entry, settings round-trip view states). Keep view/cancel-only on the real dev instance (9229), one-session rule: launch pnpm dev:desktop:test via app-control, connect via direct CDP driver .super-speckit/qa/journey-rdux15-01.mjs pattern (app-control session port mismatch due to swallowed debug flag).",
     "candidate_sha": null,
     "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
     "evidence": [
@@ -14,7 +14,7 @@
       "dev desktop app verified running end-to-end (host RPC logs + renderer config traces) in the first app-control session before it was replaced"
     ],
     "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
-    "updated_at": "2026-11-09T17:10:00Z"
+    "updated_at": "2026-11-09T18:00:00Z"
   },
   "history": [
     {
@@ -48,6 +48,19 @@
       "evidence": [],
       "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
       "updated_at": "2026-11-09T17:10:00Z"
+    },
+    {
+      "feature": "rdux15-project-device-separation",
+      "stage": "journey RDUX15-01/02/03/09 real-app PASS (form contract, dropdown contents, cancel)",
+      "next_action": "Journey RDUX15-01/02/03/09 recorded PASS in matrix (6117 area, commit pending push). Next: WSL add-window journey (settings → remote devices → WSL section, RDUX15-04/05 scope on this host), then remaining view-only journeys (chat entry, settings round-trip view states). Keep view/cancel-only on the real dev instance (9229), one-session rule: launch pnpm dev:desktop:test via app-control, connect via direct CDP driver .super-speckit/qa/journey-rdux15-01.mjs pattern (app-control session port mismatch due to swallowed debug flag).",
+      "candidate_sha": null,
+      "worktree": "C:\\Users\\FiveM\\projects\\ZCode-bill",
+      "evidence": [
+        ".super-speckit/qa/rdux15-journey/01-05*.png",
+        "journey-rdux15-01.mjs"
+      ],
+      "unknowns": "Tool-dir gitignore done (df70a399); remaining: isolated-home CDP launch for journeys (journey-launch.cmd v3 userData issue) — or consent to run journeys on the real dev instance view/cancel-only",
+      "updated_at": "2026-11-09T18:00:00Z"
     }
   ]
 }
