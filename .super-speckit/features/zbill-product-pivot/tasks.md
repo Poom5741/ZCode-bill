@@ -48,11 +48,17 @@ matrix; every REQ row needs its verification before the slice closes.
       pluginStoreNavigation.ts KEPT — frozen consumer MarketingTouchProvider (PINNED, no
       historical record) imports requestPluginStoreOpen; request/event is a no-op broadcast
       after shell-cut listener removal.
-- [ ] T4 Delete coding-plan purchase surface: CodingPlanUpgradeDialog +
-      CodingPlanUpgradeDialogProvider ecosystem (consumers mapped 2026-11-10: Root mount,
-      MarketingTouchProvider, SessionPane :325/:1947, OffPeakNewTaskEntry, SettingsPage :77/:636,
-      V4ComposerToolbar :99/:471), CodingPlanEmbeddedWebviewDialog, CodingPlanPurchaseChoiceBanners,
-      codingPlanPurchaseAuth.js, purchase-token refresh state; keep provider base CRUD.
+- [x] T4 (entry neutralization, 2026-11-10) purchase surface unreachable: provider neutered
+      (openCodingPlanUpgrade = documented no-op returning false; frozen MarketingTouchProvider
+      keeps compiling), CodingPlanUpgradeDialog.tsx + codingPlanUpgradeLoginRecovery.ts deleted,
+      CodingPlanEntryButton gate neutered to always-ready (quota banners/sidebar degrade to
+      plain buttons), SettingsPage automations branch removed, automations orphans deleted
+      (AutomationsSection/AutomationsMainBreadcrumbFrame/AutomationsPageTitleSwitch/
+      automationsPageTabMemory). Root typecheck EXIT=0; lint 0 errors; architecture 0.
+      Remaining T4-deep (orphaned upstream files, unreachable at runtime): CodingPlanEmbeddedWebviewDialog.tsx,
+      codingPlanPurchaseAuth.ts, CodingPlanPurchaseChoiceBanners + purchase-token plumbing in
+      ModelProviderSection/Detail — removal requires editing upstream-pinned settings files
+      (historical-exempt so editable, but large surgery) — schedule with W2 module adoption.
 - [ ] T5 Audit packages/services/src/coding-plan-subscription/* and usage-stats purchase
       providers: delete members with no remaining callers (knip-verified).
 - [ ] T6 Delete/rewrite e2e specs covering deleted surfaces (marketing-touch-*,

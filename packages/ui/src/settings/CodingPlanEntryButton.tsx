@@ -1,19 +1,15 @@
 import type { ComponentProps } from "react";
 import { Button } from "@/components/ui/button.js";
-import { useZCodeIntl } from "@/i18n/IntlProvider.js";
-import { useOptionalCodingPlanUpgradeDialog } from "@/settings/CodingPlanUpgradeDialogProvider.js";
 
-export function useCodingPlanEntryGate() {
-  const dialog = useOptionalCodingPlanUpgradeDialog();
-  const { intl } = useZCodeIntl();
-  const status = dialog?.inventory?.status ?? "ready";
-  const label =
-    status === "ready"
-      ? undefined
-      : intl.formatMessage({
-          id: status === "loading" ? "purchase.entry.loading" : "purchase.entry.retry",
-        });
-  return { status, label, retry: dialog?.inventory?.retry };
+// Wave-1（ZBill 裁剪）：购买入口闸门（套餐清单查询）已下线；闸门恒为 ready，
+// CodingPlanEntryButton 退化为普通按钮。调用方（配额横幅/侧栏用量等）保持编译与交互完整。
+// 返回类型保留三态联合，调用方的 loading/error 分支无需同步改动。
+export function useCodingPlanEntryGate(): {
+  status: "ready" | "loading" | "error";
+  label: string | undefined;
+  retry: (() => void) | undefined;
+} {
+  return { status: "ready", label: undefined, retry: undefined };
 }
 
 /** 各入口共享同一查询状态；失败时按钮只重试，不继续执行购买动作。 */
